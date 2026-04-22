@@ -1,4 +1,4 @@
-# Plan for fine-tuning model unsloth/Qwen2.5-7B-Instruct-bnb-4bit for VLSP 2023 Benchmarks VLLMs
+# Plan for fine-tuning model unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit for VLSP 2023 Benchmarks VLLMs
 
 * **QLoRA là mặc định**
 * **HF Hub = model registry + eval archive**
@@ -21,7 +21,7 @@ Thiết lập mốc xuất phát rõ ràng trước khi fine-tune.
 
 ### Việc cần làm
 
-* Dùng đúng model đã chốt: `unsloth/Qwen2.5-7B-Instruct-bnb-4bit`
+* Dùng đúng model đã chốt: `unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit`
 * Chạy baseline inference/evaluation **không fine-tune**
 * Đánh giá theo đúng protocol benchmark gốc:
 

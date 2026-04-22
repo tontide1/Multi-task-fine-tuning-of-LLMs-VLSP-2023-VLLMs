@@ -6,7 +6,7 @@ Khóa cấu hình baseline và xác nhận pipeline eval chạy đúng cho toàn
 
 ## Checklist
 
-- [ ] Chốt model baseline: `unsloth/Qwen2.5-7B-Instruct-bnb-4bit` (không fine-tune).
+- [ ] Chốt model baseline: `unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit` (không fine-tune).
 - [ ] Chốt config inference dùng chung: seed, temperature/top_p (hoặc greedy), max_new_tokens, batch size.
 - [ ] Chốt môi trường chạy và dependency (python + package versions) để tái lập.
 - [ ] Xác nhận đầy đủ 4 nhóm benchmark:
