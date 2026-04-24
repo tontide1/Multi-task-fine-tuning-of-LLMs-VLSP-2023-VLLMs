@@ -1,0 +1,31 @@
+{
+  "results": {
+    "wikipediaqa_vi": {
+      "acc": 0.3975,
+      "acc_stderr": 0.010945628277499404,
+      "acc_norm": 0.4185,
+      "acc_norm_stderr": 0.011033573531383031
+    }
+  },
+  "versions": {
+    "wikipediaqa_vi": 0
+  },
+  "config": {
+    "model": "hf-causal",
+    "model_args": "pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,load_in_4bit=True,dtype=float16,trust_remote_code=True",
+    "num_fewshot": 5,
+    "batch_size": "16",
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "no_cache": false,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "description_dict": {}
+  }
+}
+
+// hf-causal (pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,load_in_4bit=True,dtype=float16,trust_remote_code=True), limit: None, provide_description: False, num_fewshot: 5, batch_size: 16
+// |     Task     |Version| Metric |Value |   |Stderr|
+// |--------------|------:|--------|-----:|---|-----:|
+// |wikipediaqa_vi|      0|acc     |0.3975|±  |0.0109|
+// |              |       |acc_norm|0.4185|±  |0.0110|

@@ -1,0 +1,84 @@
+{
+  "results": {
+    "exams_dialy_vi": {
+      "acc": 0.28,
+      "acc_stderr": 0.06414269805898185,
+      "acc_norm": 0.3,
+      "acc_norm_stderr": 0.06546536707079771
+    },
+    "exams_hoahoc_vi": {
+      "acc": 0.2,
+      "acc_stderr": 0.05714285714285715,
+      "acc_norm": 0.22,
+      "acc_norm_stderr": 0.059178043363451366
+    },
+    "exams_lichsu_vi": {
+      "acc": 0.16,
+      "acc_stderr": 0.05237229365663817,
+      "acc_norm": 0.28,
+      "acc_norm_stderr": 0.06414269805898185
+    },
+    "exams_sinhhoc_vi": {
+      "acc": 0.3,
+      "acc_stderr": 0.06546536707079771,
+      "acc_norm": 0.32,
+      "acc_norm_stderr": 0.06663945022680343
+    },
+    "exams_toan_vi": {
+      "acc": 0.4,
+      "acc_stderr": 0.06998542122237651,
+      "acc_norm": 0.42,
+      "acc_norm_stderr": 0.07050835816716038
+    },
+    "exams_van_vi": {
+      "acc": 0.34,
+      "acc_stderr": 0.0676726816132972,
+      "acc_norm": 0.34,
+      "acc_norm_stderr": 0.0676726816132972
+    },
+    "exams_vatly_vi": {
+      "acc": 0.24,
+      "acc_stderr": 0.0610118757258932,
+      "acc_norm": 0.34,
+      "acc_norm_stderr": 0.0676726816132972
+    }
+  },
+  "versions": {
+    "exams_dialy_vi": 0,
+    "exams_hoahoc_vi": 0,
+    "exams_lichsu_vi": 0,
+    "exams_sinhhoc_vi": 0,
+    "exams_toan_vi": 0,
+    "exams_van_vi": 0,
+    "exams_vatly_vi": 0
+  },
+  "config": {
+    "model": "hf-causal",
+    "model_args": "pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,trust_remote_code=True,load_in_4bit=True",
+    "num_fewshot": 5,
+    "batch_size": "8",
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "no_cache": false,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "description_dict": {}
+  }
+}
+// hf-causal (pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,trust_remote_code=True,load_in_4bit=True), limit: None, provide_description: False, num_fewshot: 5, batch_size: 8
+// |      Task      |Version| Metric |Value|   |Stderr|
+// |----------------|------:|--------|----:|---|-----:|
+// |exams_dialy_vi  |      0|acc     | 0.28|±  |0.0641|
+// |                |       |acc_norm| 0.30|±  |0.0655|
+// |exams_hoahoc_vi |      0|acc     | 0.20|±  |0.0571|
+// |                |       |acc_norm| 0.22|±  |0.0592|
+// |exams_lichsu_vi |      0|acc     | 0.16|±  |0.0524|
+// |                |       |acc_norm| 0.28|±  |0.0641|
+// |exams_sinhhoc_vi|      0|acc     | 0.30|±  |0.0655|
+// |                |       |acc_norm| 0.32|±  |0.0666|
+// |exams_toan_vi   |      0|acc     | 0.40|±  |0.0700|
+// |                |       |acc_norm| 0.42|±  |0.0705|
+// |exams_van_vi    |      0|acc     | 0.34|±  |0.0677|
+// |                |       |acc_norm| 0.34|±  |0.0677|
+// |exams_vatly_vi  |      0|acc     | 0.24|±  |0.0610|
+// |                |       |acc_norm| 0.34|±  |0.0677|
