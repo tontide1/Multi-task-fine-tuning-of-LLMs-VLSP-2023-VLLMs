@@ -56,12 +56,12 @@ def extract_answer_letter(explanation):
         return None
     text = str(explanation).strip()
     patterns = [
-    r"Chọn\s+đáp\s+án\s*:?\s*([ABCD])\b",
-    r"Đáp\s*án\s*cần\s*chọn\s*là\s*:?\s*([ABCD])\b",
-    r"Đáp\s*án\s*đúng\s*là\s*:?\s*([ABCD])\b",
-    r"Đáp\s*án\s*đúng\s*:?\s*([ABCD])\b",
-    r"Đáp\s*án\s*:?\s*([ABCD])\b",
-    r"Ta\s+chọn\s+([ABCD])\b",
+        r"Chọn\s+đáp\s+án\s*:?\s*([ABCD])\b",
+        r"Đáp\s*án\s*cần\s*chọn\s*là\s*:?\s*([ABCD])\b",
+        r"Đáp\s*án\s*đúng\s*là\s*:?\s*([ABCD])\b",
+        r"Đáp\s*án\s*đúng\s*:?\s*([ABCD])\b",
+        r"Đáp\s*án\s*:?\s*([ABCD])\b",
+        r"Ta\s+chọn\s+([ABCD])\b",
     ]
     for p in patterns:
         m = re.search(p, text, flags=re.IGNORECASE)
@@ -121,21 +121,66 @@ def main():
 
 
     # ===========================================================================
-    # 4. answer_letter distribution & validity
+    # 4. Schema validation
+    # ===========================================================================
+
+    print("=== [4] Schema validation ===")
+
+    required_metadata_fields = ["task", "source", "source_dataset", "sample_id", "difficulty", "split", "language"]
+    invalid_records = []
+
+    for i, rec in enumerate(records):
+        errors = []
+
+        # Validate messages structure
+        if not isinstance(rec.get("messages"), list):
+            errors.append("messages is not a list")
+        elif len(rec["messages"]) != 2:
+            errors.append(f"messages has {len(rec['messages'])} elements, expected 2")
+        else:
+            if rec["messages"][0].get("role") != "user":
+                errors.append(f"first message role is '{rec['messages'][0].get('role')}', expected 'user'")
+            if rec["messages"][1].get("role") != "assistant":
+                errors.append(f"second message role is '{rec['messages'][1].get('role')}', expected 'assistant'")
+            if not str(rec["messages"][0].get("content", "")).strip():
+                errors.append("user content is empty")
+            if not str(rec["messages"][1].get("content", "")).strip():
+                errors.append("assistant content is empty")
+
+        # Validate metadata fields
+        metadata = rec.get("metadata", {})
+        for field in required_metadata_fields:
+            if field not in metadata:
+                errors.append(f"missing metadata field: {field}")
+
+        if errors:
+            invalid_records.append({"index": i, "sample_id": metadata.get("sample_id", "unknown"), "errors": errors})
+
+    print(f"   Total records: {len(records)}")
+    print(f"   Invalid records: {len(invalid_records)}")
+    if len(invalid_records) > 0:
+        print(f"   Sample of invalid records (first 5):")
+        for inv in invalid_records[:5]:
+            print(f"     - sample_id={inv['sample_id']}: {', '.join(inv['errors'])}")
+    print()
+
+
+    # ===========================================================================
+    # 5. answer_letter distribution & validity
     # ===========================================================================
 
     valid_answers = {"A", "B", "C", "D"}
-    answer_format_ok = df["assistant_content"].str.match(r"^\u0110áp án: [ABCD]$", na=False)
+    answer_format_ok = df["assistant_content"].str.match(r"^Đáp án: [ABCD]$", na=False)
     invalid_mask = ~answer_format_ok
-    print(f"=== [4] Invalid assistant answer format rows: {invalid_mask.sum()} ===\n")
+    print(f"=== [5] Invalid assistant answer format rows: {invalid_mask.sum()} ===\n")
     if invalid_mask.sum() > 0:
         print(df.loc[invalid_mask, ["sample_id", "assistant_content"]].head(20).to_string())
 
     # ===========================================================================
-    # 5. Re-check hllj pipeline trực tiếp từ HF
+    # 6. Re-check hllj pipeline trực tiếp từ HF
     # ===========================================================================
 
-    print("=== [5] Re-checking hllj/vi_grade_school_math_mcq pipeline ===")
+    print("=== [6] Re-checking hllj/vi_grade_school_math_mcq pipeline ===")
 
     df_hllj_raw = pd.read_json("hf://datasets/hllj/vi_grade_school_math_mcq/vietjack.json")
 
@@ -153,7 +198,11 @@ def main():
 
     print(f"   Raw page rows       : {len(df_hllj_raw)}")
     print(f"   After explode       : {len(df_hllj_flat)}")
-    print(f"   Non-null problems   : {df_hllj_flat['question'].notna().sum()}")
+    # Check if question column exists before accessing
+    if 'question' in df_hllj_flat.columns:
+        print(f"   Non-null problems   : {df_hllj_flat['question'].notna().sum()}")
+    else:
+        print(f"   Non-null problems   : N/A (column 'question' not found)")
     print(f"   Has 4 choices       : {hllj_has_4_choices.sum()}")
     print(f"   Has parsed answer   : {hllj_has_answer.sum()}")
     print(f"   Pass both (4 + ans) : {(hllj_has_4_choices & hllj_has_answer).sum()}")
@@ -163,7 +212,12 @@ def main():
     df_hllj_failed = df_hllj[df_hllj["answer_letter"].isna()].copy()
     print(f"   Rows missing answer_letter: {len(df_hllj_failed)}")
     print("   Sample (5 rows) of missing:")
-    print(df_hllj_failed[["question", "choices", "explanation"]].head(5).to_string())
+    # Check available columns before trying to access
+    available_cols = [col for col in ["question", "choices", "explanation"] if col in df_hllj_failed.columns]
+    if available_cols:
+        print(df_hllj_failed[available_cols].head(5).to_string())
+    else:
+        print("   No columns available for display")
     print()
 
     # choice prefix check trên df_hllj intermediate (trước khi clean)
@@ -186,10 +240,10 @@ def main():
 
 
     # ===========================================================================
-    # 6. Choice prefix check trên df cuối (đọc lại từ JSONL)
+    # 7. Choice prefix check trên df cuối (đọc lại từ JSONL)
     # ===========================================================================
 
-    print("=== [6] Choice prefix check on final JSONL ===")
+    print("=== [7] Choice prefix check on final JSONL ===")
 
     # Extract choice lines từ user_content
     prefix_pattern = r"^\s*[A-Da-d]\s*[\.)\:\-]\s*"
@@ -197,10 +251,13 @@ def main():
     def extract_choices_from_user(user_content: str):
         lines = user_content.split("\n")
         choices = {}
+        choice_pattern = re.compile(r"^\s*([A-D])\s*[\.)\:\-]\s*(.+)$")
         for line in lines:
-            for label in ["A", "B", "C", "D"]:
-                if line.startswith(f"{label}. "):
-                    choices[f"choice_{label}"] = line[3:]
+            match = choice_pattern.match(line)
+            if match:
+                label = match.group(1).upper()
+                text = match.group(2).strip()
+                choices[f"choice_{label}"] = text
         return choices
 
     bad_prefix_count = 0
@@ -217,7 +274,8 @@ def main():
 
     def count_choice_lines(user_content: str) -> int:
         lines = user_content.splitlines()
-        return sum(bool(re.match(r"^[ABCD]\. .+", line)) for line in lines)
+        choice_pattern = re.compile(r"^\s*[A-D]\s*[\.)\:\-]\s*.+$")
+        return sum(bool(choice_pattern.match(line)) for line in lines)
 
     df["num_choice_lines"] = df["user_content"].apply(count_choice_lines)
     bad_choice_count = (df["num_choice_lines"] != 4).sum()
@@ -228,10 +286,10 @@ def main():
     print()
 
     # ===========================================================================
-    # 7. Sample spot-check
+    # 8. Sample spot-check
     # ===========================================================================
 
-    print("=== [7] Random sample (5 records from hllj) ===")
+    print("=== [8] Random sample (5 records from hllj) ===")
     hllj_records = [r for r in records if r["metadata"]["source_dataset"] == "hllj/vi_grade_school_math_mcq"]
     random.seed(42)
     sample = random.sample(hllj_records, min(5, len(hllj_records)))

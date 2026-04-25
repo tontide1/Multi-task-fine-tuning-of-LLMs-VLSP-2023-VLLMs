@@ -12,3 +12,5 @@
 - Use conda for primary
 - "conda activate nlp" is a command to activate enviroment named "nlp"
 - python version is 3.12
+
+r"Chọn\s+đáp\s+án\s*:?\s*([ABCD])\b"

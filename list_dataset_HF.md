@@ -1,32 +1,65 @@
+## 1) `exams_mcq_seed.jsonl`
 
-| Bucket                  | Nguồn nên lấy trước                                                         | Vì sao lấy trước                                                                                                                                                                                                                                                                                   | Cách convert tối giản về schema của bạn                                                                                                                         |
-| ----------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `exams_mcq`             | `roshansk23/Vietnam_HighSchool_Exam_Dataset`                                | Gần nhất với bucket này: 6,663 câu hỏi MCQ tiếng Việt, level `high school`, phủ 8 môn, có sẵn `question`, `options`, `answer`. ([Hugging Face][1])                                                                                                                                                 | `user.content = "Câu hỏi: ...\nA. ...\nB. ...\nC. ...\nD. ..."`, `assistant.content = "Đáp án: X"`; `metadata.task = "exams_mcq"`, `source = "public"`          |
-| `exams_mcq`             | `hllj/vi_grade_school_math_mcq`                                             | 2.73k mẫu, tiếng Việt, đã là multiple-choice với `question`, `choices`, `answer`; dùng tốt để bổ sung nhánh Toán. Dataset card cũng lưu ý còn mẫu chưa sạch hoàn toàn, nên cần QC sau khi lấy. ([Hugging Face][2])                                                                                 | Convert thẳng `question + choices + answer`; bỏ `explanation` khỏi train vòng đầu nếu bạn chỉ muốn format đáp án ngắn                                           |
-| `wiki_mcq`              | `SEACrowd/okapi_m_mmlu`                                                     | Có ngôn ngữ `vie`, là bản multilingual của MMLU, phủ 57 task nhiều nhánh kiến thức; hợp nhất cho general-knowledge MCQ. ([Hugging Face][3])                                                                                                                                                        | Giữ các sample tiếng Việt, map từng câu hỏi và 4 lựa chọn vào format MCQ chuẩn của bạn                                                                          |
-| `wiki_mcq`              | `cais/mmlu` hoặc nguồn MMLU-equivalent trên HF khi cần thêm volume          | Dùng như nguồn phụ nếu phần tiếng Việt chưa đủ; nhưng vì đây không phải tiếng Việt gốc, chỉ nên dùng sau khi đã ưu tiên nguồn tiếng Việt trước. Việc này là suy luận từ tính chất multilingual của `okapi_m_mmlu` và mục tiêu bucket của bạn. ([Hugging Face][3])                                  | Chỉ dùng cho vòng sau hoặc để sinh synthetic; không ưu tiên batch đầu                                                                                           |
-| `comprehension_mcq`     | `SEACrowd/uit_viwikiqa`                                                     | 23,074 QA pairs dựa trên 5,109 passages từ 174 bài Wikipedia tiếng Việt; rất gần bucket đọc hiểu có passage. Lưu ý dataset này có điều khoản chỉ dùng cho non-commercial research và không được redistribute. ([Hugging Face][4])                                                                  | `user.content = "Đoạn văn: ...\nCâu hỏi: ...\nA. ...\nB. ...\nC. ...\nD. ..."`; vì dataset không phải MCQ sẵn, bạn dùng answer thật + 3 distractor để build MCQ |
-| `comprehension_mcq`     | `ShynBui/Vietnamese_Reading_Comprehension_Dataset`                          | 53,845 rows, có `context`, `question`, `answer`, `answer_start`; rất tiện làm seed cho reading comprehension. Nhưng dataset card ghi rõ có dữ liệu dịch bằng Google Translate, nên cần QC ngôn ngữ mạnh hơn. ([Hugging Face][5])                                                                   | Dùng `context + question + answer` để sinh MCQ; ưu tiên giữ mẫu tiếng Việt tự nhiên, loại câu dịch máy gượng                                                    |
-| `instruction_retention` | `bkai-foundation-models/vi-alpaca`                                          | 50,006 instruction samples tiếng Việt, đúng mục đích giữ instruct behavior; card mô tả đây là bộ Vietnamese Alpaca được tạo theo hướng Self-Instruct. ([Hugging Face][6])                                                                                                                          | Map `instruction + input` vào `user.content`, `output` vào `assistant.content`; `metadata.task = "instruction_retention"`                                       |
-| `instruction_retention` | `lamhieu/alpaca_multiturns_dialogue_vi`                                     | 12.7k rows, đã ở dạng `messages`; rất gần schema chat của bạn nên convert nhẹ nhất. Card cũng nói rõ nó được format lại để dễ dùng với chat template/unsloth. ([Hugging Face][7])                                                                                                                  | Giữ 1–2 turn đầu nếu bạn muốn format ngắn gọn; hoặc flatten thành một cặp `user` / `assistant` đơn giản                                                         |
-| `cloze_lm_retention`    | `VTSNLP/vietnamese_curated_dataset`                                         | 12.2M rows text tiếng Việt đã được curate từ C4, OSCAR, Wikipedia, news; phù hợp nhất để rút subset nhỏ rồi convert thành cloze/next-word samples. ([Hugging Face][8])                                                                                                                             | Cắt câu hoặc đoạn ngắn, che 1 từ cuối / 1 span ngắn để tạo prompt cloze; `assistant` trả từ hoặc completion ngắn                                                |
-| `cloze_lm_retention`    | `vietgpt/wikipedia_vi` hoặc corpus Wikipedia tiếng Việt tương đương trên HF | Dùng như nguồn phụ sạch, trung tính, dễ chuyển sang cloze LM; nên lấy sau `VTSNLP/vietnamese_curated_dataset` nếu bạn cần thêm volume. Phần này nối tiếp shortlist trước đó, nhưng trong lượt này tôi chưa fetch lại card của riêng dataset này nên xem như lựa chọn phụ, chưa phải lựa chọn số 1. | Convert giống trên: lấy text sạch, cắt câu, tạo cloze ngắn                                                                                                      |
+Dùng 2 nguồn:
 
-Nếu chỉ chốt **batch đầu tiên để bắt đầu nhanh**, tôi đề nghị lấy đúng 7 nguồn này trước:
-`roshansk23/Vietnam_HighSchool_Exam_Dataset`, `hllj/vi_grade_school_math_mcq`, `SEACrowd/okapi_m_mmlu`, `SEACrowd/uit_viwikiqa`, `ShynBui/Vietnamese_Reading_Comprehension_Dataset`, `bkai-foundation-models/vi-alpaca`, `VTSNLP/vietnamese_curated_dataset`. Nhóm này đã phủ đủ 5 bucket của plan, trong đó `lamhieu/alpaca_multiturns_dialogue_vi` là nguồn phụ rất tiện để bổ sung `instruction_retention`. ([Hugging Face][1])
+* **`roshansk23/Vietnam_HighSchool_Exam_Dataset`**
+  Vai trò: nguồn `exams_mcq` chính cho đề thi THPT kiểu MCQ. Dataset này có khoảng **6,663** mẫu, 8 môn, với các field quan trọng như `question`, `options`, `answer`. ([Hugging Face][1])
 
-Để bám sát plan của bạn và không over-engineering, tôi chốt thứ tự ưu tiên lấy dữ liệu như sau:
+* **`hllj/vi_grade_school_math_mcq`**
+  Vai trò: bổ sung thêm MCQ Toán tiếng Việt. Dataset này có khoảng **2,733** mẫu, với schema rất tiện cho bạn: `question`, `choices`, `answer`, `explanation`. Card cũng nói rõ dữ liệu chưa clean hoàn toàn, nên vẫn cần QC sau khi convert. ([Hugging Face][2])
 
-1. `exams_mcq`: `roshansk23` → `hllj`
-2. `wiki_mcq`: `SEACrowd/okapi_m_mmlu`
-3. `comprehension_mcq`: `SEACrowd/uit_viwikiqa` → `ShynBui`
-4. `instruction_retention`: `vi-alpaca` → `alpaca_multiturns_dialogue_vi`
-5. `cloze_lm_retention`: `VTSNLP/vietnamese_curated_dataset` ([Hugging Face][1])
+## 2) `wiki_mcq_seed.jsonl`
+
+Dùng 1 nguồn:
+
+* **`lighteval/okapi_mmlu`** với config **`vi`** trong notebook
+  Vai trò: nguồn `wiki_mcq` / general-knowledge MCQ. Dataset `lighteval/okapi_mmlu` là bản parquet, có schema phù hợp gồm `question`, `choices`, `answer`, `subject`, `id`, nên dùng được ngay thay cho bản script-based trước đó. ([Hugging Face][3])
+
+## 3) `comprehension_seed_raw.jsonl`
+
+Dùng 2 nguồn:
+
+* **`taidng/UIT-ViQuAD2.0`**
+  Vai trò: nguồn chính cho reading comprehension tiếng Việt sau khi thay `uit_viwikiqa`. Dataset này là **extractive QA**, format parquet, có khoảng **39,569** mẫu với các field `context`, `question`, `answers`, `is_impossible`, `plausible_answers`. Trong notebook, bạn đang lọc bỏ các mẫu `is_impossible=True`. ([Hugging Face][4])
+
+* **`ShynBui/Vietnamese_Reading_Comprehension_Dataset`**
+  Vai trò: nguồn comprehension bổ sung để tăng volume. Dataset này có khoảng **53,845** mẫu, với các field `context`, `question`, `answer`, `answer_start`. Card ghi rõ nó được tổng hợp từ internet/SQuAD/wiki và có phần dịch bằng Google Translate, nên dùng được nhưng cần QC ngôn ngữ kỹ hơn. ([Hugging Face][5])
+
+## 4) `instruction_retention_seed.jsonl`
+
+Dùng 2 nguồn:
+
+* **`bkai-foundation-models/vi-alpaca`**
+  Vai trò: giữ hành vi instruct tiếng Việt. Đây là bộ Vietnamese Alpaca khoảng **50K** instruction samples, được xây theo hướng Self-Instruct/Alpaca. ([Hugging Face][6])
+
+* **`lamhieu/alpaca_multiturns_dialogue_vi`**
+  Vai trò: bổ sung chat-style retention. Dataset này ở dạng `messages`, có khoảng **12.7k** mẫu, rất tiện để lấy cặp `user -> assistant` đầu tiên. ([Hugging Face][7])
+
+## 5) `cloze_lm_retention_seed.jsonl`
+
+Dùng 1 nguồn:
+
+* **`VTSNLP/vietnamese_curated_dataset`**
+  Vai trò: nguồn text corpus để tạo `cloze_lm_retention`. Dataset này rất lớn, khoảng **12.17 triệu** rows, tiếng Việt, được curate từ nhiều nguồn như C4, OSCAR, Wikipedia và news. Trong notebook bạn chỉ đang sample một subset nhỏ để convert sang prompt cloze. ([Hugging Face][8])
+
+## 6) Dataset đã bỏ / không dùng nữa
+
+* **`SEACrowd/uit_viwikiqa`**
+  Hiện tại **không dùng** trong notebook nữa. Lý do là dataset này không kéo thẳng được trong flow hiện tại; card của nó ghi rõ đây là local dataset và phải lấy riêng từ homepage. Vì vậy nó đã được thay bằng `taidng/UIT-ViQuAD2.0`. ([Hugging Face][4])
+
+## 7) Tóm tắt ngắn gọn theo bucket
+
+* `exams_mcq` → `roshansk23/...` + `hllj/...`
+* `wiki_mcq` → `lighteval/okapi_mmlu` (`vi`)
+* `comprehension_seed_raw` → `taidng/UIT-ViQuAD2.0` + `ShynBui/...`
+* `instruction_retention` → `bkai.../vi-alpaca` + `lamhieu/...`
+* `cloze_lm_retention` → `VTSNLP/vietnamese_curated_dataset`
+
 
 [1]: https://huggingface.co/datasets/roshansk23/Vietnam_HighSchool_Exam_Dataset?utm_source=chatgpt.com "roshansk23/Vietnam_HighSchool_Exam_Dataset · Datasets at Hugging Face"
 [2]: https://huggingface.co/datasets/hllj/vi_grade_school_math_mcq?utm_source=chatgpt.com "hllj/vi_grade_school_math_mcq · Datasets at Hugging Face"
-[3]: https://huggingface.co/datasets/SEACrowd/okapi_m_mmlu?utm_source=chatgpt.com "SEACrowd/okapi_m_mmlu · Datasets at Hugging Face"
-[4]: https://huggingface.co/datasets/SEACrowd/uit_viwikiqa?utm_source=chatgpt.com "SEACrowd/uit_viwikiqa · Datasets at Hugging Face"
+[3]: https://huggingface.co/datasets/lighteval/okapi_mmlu?utm_source=chatgpt.com "lighteval/okapi_mmlu · Datasets at Hugging Face"
+[4]: https://huggingface.co/datasets/taidng/UIT-ViQuAD2.0?utm_source=chatgpt.com "taidng/UIT-ViQuAD2.0 · Datasets at Hugging Face"
 [5]: https://huggingface.co/datasets/ShynBui/Vietnamese_Reading_Comprehension_Dataset?utm_source=chatgpt.com "ShynBui/Vietnamese_Reading_Comprehension_Dataset · Datasets at Hugging Face"
 [6]: https://huggingface.co/datasets/bkai-foundation-models/vi-alpaca?utm_source=chatgpt.com "bkai-foundation-models/vi-alpaca · Datasets at Hugging Face"
 [7]: https://huggingface.co/datasets/lamhieu/alpaca_multiturns_dialogue_vi?utm_source=chatgpt.com "lamhieu/alpaca_multiturns_dialogue_vi · Datasets at Hugging Face"
