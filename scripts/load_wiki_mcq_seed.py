@@ -214,12 +214,18 @@ def main():
     from datasets import load_dataset
 
     # Determine output directory relative to repo root
-    out_dir = Path(__file__).parent.parent / "seed_exports"
+    repo_root = Path(__file__).parent.parent
+    out_dir = repo_root / "seed_exports"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     out_jsonl = out_dir / "wiki_mcq_seed.jsonl"
     out_rejects_jsonl = out_dir / "wiki_mcq_seed_rejects.jsonl"
     out_report_json = out_dir / "wiki_mcq_seed_report.json"
+
+    # Repo-relative paths used inside the JSON report so it is reproducible
+    # and does not leak the local home directory.
+    out_jsonl_rel = out_jsonl.relative_to(repo_root)
+    out_rejects_jsonl_rel = out_rejects_jsonl.relative_to(repo_root)
 
     # ===========================================================================
     # 1. Load dataset từ HF
@@ -350,8 +356,8 @@ def main():
         "answer_distribution": {str(k): int(v) for k, v in sorted(answer_counter.items())},
         "split_distribution": {str(k): int(v) for k, v in split_counter.items()},
         "top_subjects": {str(k): int(v) for k, v in top_subjects.items()},
-        "output_jsonl": str(out_jsonl),
-        "rejects_jsonl": str(out_rejects_jsonl),
+        "output_jsonl": str(out_jsonl_rel),
+        "rejects_jsonl": str(out_rejects_jsonl_rel),
     }
 
     with open(out_report_json, "w", encoding="utf-8") as f:

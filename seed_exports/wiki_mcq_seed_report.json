@@ -71,6 +71,6 @@
     "business_ethics": 116,
     "medical_genetics": 116
   },
-  "output_jsonl": "/home/tontide1/coding/nlp_project/Multi-task-fine-tuning-of-LLMs-VLSP-2023-VLLMs/seed_exports/wiki_mcq_seed.jsonl",
-  "rejects_jsonl": "/home/tontide1/coding/nlp_project/Multi-task-fine-tuning-of-LLMs-VLSP-2023-VLLMs/seed_exports/wiki_mcq_seed_rejects.jsonl"
+  "output_jsonl": "seed_exports/wiki_mcq_seed.jsonl",
+  "rejects_jsonl": "seed_exports/wiki_mcq_seed_rejects.jsonl"
 }
