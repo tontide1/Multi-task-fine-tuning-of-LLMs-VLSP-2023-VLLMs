@@ -12,8 +12,8 @@ alwaysApply: true
 - **Verify First:** Prove your changes work via direct reads, checks, or tests before finishing.
 - **Keep It Simple:** Do not over-engineer. Write straightforward solutions.
 
-## Enviroment
+## Environment
 
 - Use conda for primary
-- "conda activate nlp" is a command to activate enviroment named "nlp"
+- "conda activate nlp" is a command to activate environment named "nlp"
 - python version is 3.12
