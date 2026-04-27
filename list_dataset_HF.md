@@ -3,7 +3,9 @@
 > | Seed file | Trạng thái | Ghi chú |
 > |---|---|---|
 > | `seed_exports/exams_mcq_seed.jsonl` | **Đã build** | xuất bởi `scripts/load_exams_mcq_seed.py` |
-> | `seed_exports/wiki_mcq_seed.jsonl` | **Đã build** | xuất bởi `scripts/load_wiki_mcq_seed.py` |
+> | `seed_exports/wiki_mcq_seed.jsonl` | **Đã build** | seed thô đã clean schema (xuất bởi `scripts/load_wiki_mcq_seed.py`) |
+> | `seed_exports/wiki_mcq_seed_clean.jsonl` | **Đã build** | seed sạch đã whitelist subject, dùng cho stage-2 public seed |
+> | `seed_exports/wiki_mcq_seed_dropped.jsonl` | **Đã build** | archive audit/drop |
 > | `seed_exports/comprehension_seed_raw.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
 > | `seed_exports/instruction_retention_seed.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
 > | `seed_exports/cloze_lm_retention_seed.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
