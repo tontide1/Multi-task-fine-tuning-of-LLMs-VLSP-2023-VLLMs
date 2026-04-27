@@ -23,8 +23,3 @@
     "description_dict": {}
   }
 }
-// hf-causal (pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,load_in_4bit=True,dtype=float16,trust_remote_code=True), limit: None, provide_description: False, num_fewshot: 0, batch_size: 16
-// |   Task   |Version|Metric| Value |   |Stderr|
-// |----------|-------|------|------:|---|-----:|
-// |lambada_vi|       |ppl   |23.1631|±  |0.5886|
-// |          |       |acc   | 0.3110|±  |0.0046|
