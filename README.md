@@ -69,12 +69,6 @@ Ghi chú file seed cho `wiki_mcq`:
 - `seed_exports/wiki_mcq_seed_clean.jsonl`: seed sạch đã whitelist subject, dùng cho stage-2 public seed
 - `seed_exports/wiki_mcq_seed_dropped.jsonl`: archive audit/drop
 
-Ghi chú file seed cho `wiki_mcq`:
-
-- `seed_exports/wiki_mcq_seed.jsonl`: seed thô đã clean schema
-- `seed_exports/wiki_mcq_seed_clean.jsonl`: seed sạch đã whitelist subject, dùng cho stage-2 public seed
-- `seed_exports/wiki_mcq_seed_dropped.jsonl`: archive audit/drop
-
 ### 3. Chạy baseline (cần GPU T4 hoặc tương đương)
 
 Mở `notebooks/baseline-vlsp-2023.ipynb` trên Colab. Notebook cài `ViLLM-Eval`

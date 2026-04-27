@@ -136,6 +136,6 @@
     "hard_english_artifact": 573,
     "duplicate_choices_or_invalid_choice_format": 42
   },
-  "output_clean_jsonl": "../seed_exports/wiki_mcq_seed_clean.jsonl",
-  "output_dropped_jsonl": "../seed_exports/wiki_mcq_seed_dropped.jsonl"
+  "output_clean_jsonl": "seed_exports/wiki_mcq_seed_clean.jsonl",
+  "output_dropped_jsonl": "seed_exports/wiki_mcq_seed_dropped.jsonl"
 }
