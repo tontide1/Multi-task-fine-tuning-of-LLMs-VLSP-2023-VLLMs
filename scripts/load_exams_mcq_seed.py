@@ -241,7 +241,8 @@ def main():
     df_hllj["subject"] = "Toán"
     df_hllj["source_dataset"] = "hllj/vi_grade_school_math_mcq"
     df_hllj["sample_id"] = df_hllj["id"].astype(str) + "_" + df_hllj.index.astype(str)
-    # grade đã có từ raw data
+    # Preserve raw grade when available; ensure the merged schema always has grade.
+    df_hllj["grade"] = df_hllj["grade"] if "grade" in df_hllj.columns else pd.NA
 
     print(f"   hllj flat rows: {len(df_hllj)}")
 
