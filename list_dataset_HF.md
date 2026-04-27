@@ -1,3 +1,13 @@
+> **Trạng thái build seed (cập nhật cùng repo, để ý khi đọc):**
+>
+> | Seed file | Trạng thái | Ghi chú |
+> |---|---|---|
+> | `seed_exports/exams_mcq_seed.jsonl` | **Đã build** | xuất bởi `scripts/load_exams_mcq_seed.py` |
+> | `seed_exports/wiki_mcq_seed.jsonl` | **Đã build** | xuất bởi `scripts/load_wiki_mcq_seed.py` |
+> | `seed_exports/comprehension_seed_raw.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
+> | `seed_exports/instruction_retention_seed.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
+> | `seed_exports/cloze_lm_retention_seed.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
+
 ## 1) `exams_mcq_seed.jsonl`
 
 Dùng 2 nguồn:
