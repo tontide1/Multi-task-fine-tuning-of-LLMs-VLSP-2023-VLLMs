@@ -20,54 +20,29 @@ DataFrames (hllj_flat) để tiện so sánh với notebook gốc.
 import json
 import random
 import re
+import sys
 from pathlib import Path
 
 import pandas as pd
 from dotenv import load_dotenv
 
+# Allow running this script directly (e.g. `python scripts/recheck_exams_mcq_seed.py`)
+# by ensuring the repo root is on sys.path so `scripts.load_exams_mcq_seed` resolves.
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+# Reuse the canonical helpers from the loader so QC stays in sync with ETL.
+from scripts.load_exams_mcq_seed import (  # noqa: E402
+    clean_choice_text,
+    extract_answer_letter,
+    has_choice_prefix,
+)
+
 load_dotenv()
 
 pd.set_option("display.max_colwidth", None)
 pd.set_option("display.width", 1000)
-
-
-# ===========================================================================
-# Helper (copy từ load script để recheck độc lập)
-# ===========================================================================
-
-def has_choice_prefix(x):
-    if pd.isna(x):
-        return False
-    return bool(re.match(r"^\s*[A-Da-d]\s*[\.)\:\-]\s*", str(x), flags=re.IGNORECASE))
-
-
-def clean_choice_text(x):
-    if pd.isna(x):
-        return None
-    text = str(x).strip()
-    text = text.replace("\u00a0", " ")
-    text = re.sub(r"\s+", " ", text).strip()
-    text = re.sub(r"^\s*[A-Da-d]\s*[\.)\:\-]\s*", "", text).strip()
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
-
-def extract_answer_letter(explanation):
-    if pd.isna(explanation):
-        return None
-    text = str(explanation).strip()
-    patterns = [
-        r"Chọn\s+đáp\s+án\s*:?\s*([ABCD])\b",
-        r"Đáp\s*án\s*cần\s*chọn\s*là\s*:?\s*([ABCD])\b",
-        r"Đáp\s*án\s*đúng\s*là\s*:?\s*([ABCD])\b",
-        r"Đáp\s*án\s*đúng\s*:?\s*([ABCD])\b",
-        r"Đáp\s*án\s*:?\s*([ABCD])\b",
-        r"Ta\s+chọn\s+([ABCD])\b",
-    ]
-    for p in patterns:
-        m = re.search(p, text, flags=re.IGNORECASE)
-        if m:
-            return m.group(1).upper()
-    return None
 
 
 
