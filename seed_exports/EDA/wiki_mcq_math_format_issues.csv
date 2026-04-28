@@ -1,0 +1,1996 @@
+row_idx,source_id,subject,answer,flags,text
+4,high_school_mathematics/test/166,high_school_mathematics,B,"caret_power,unbalanced_dollar","Tìm $(2^{20} + 2^{20} + 2^{20} +2^{21}) \div 2^{17}$.
+20
+40
+0
+10"
+40,high_school_statistics/test/5,high_school_statistics,D,unbalanced_dollar,"Hiệu trưởng của một trường đang quan tâm đến việc ước tính thu nhập trung bình mỗi gia đình của học sinh của cô ấy. Cô ấy chọn ngẫu nhiên một mẫu học sinh và thu thập thông tin về thu nhập của gia đình họ. Khoảng tin cậy 95 phần trăm được tính toán từ dữ liệu này cho giá trị thu nhập trung bình mỗi gia đình là ($35,095, $45,005). Câu nào sau đây cung cấp diễn giải tốt nhất cho khoảng tin cậy này?
+95 phần trăm học sinh trong trường của cô Hiệu trưởng đến từ các gia đình có thu nhập nằm trong khoảng từ $35,095 đến $45,005.
+Có khả năng 95% rằng các gia đình của tất cả các học sinh trong trường này có thu nhập từ $35,095 đến $45,005.
+Nếu chúng ta lấy một mẫu khác có kích thước giống nhau và tính toán một khoảng tin cậy 95 phần trăm, chúng ta có 95% cơ hội để thu được khoảng cách ($35,095, $45,005).
+Có khả năng 95% rằng thu nhập trung bình mỗi gia đình trong trường nằm trong khoảng từ $35,095 đến $45,005."
+79,high_school_mathematics/test/160,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar","Biết rằng một hình chữ nhật có chiều dài $3x$ inch và chiều rộng $x + 5$ inch có tính chất là diện tích và chu vi bằng nhau, giá trị của $x$ là bao nhiêu?
+1
+5
+\frac{10}{3}
+\frac{3}{10}"
+85,abstract_algebra/test/37,abstract_algebra,B,caret_power,"Phân định xem đa thức trong Z[x] có thoả Eisenstein để là không giả thức trên Q hay không. x^2 - 12
+Có, với p=2.
+Có, với p=3.
+Có, với p=5.
+Không."
+97,high_school_mathematics/test/154,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar","Biểu diễn $0.1\overline{7}$ dưới dạng phân số thông thường.
+\frac{8}{45}
+\frac{8}{5}
+\frac{8}{7}
+\frac{8}{33}"
+107,abstract_algebra/test/62,abstract_algebra,C,markdown_table_pipe,"Tuyên bố 1 | Mỗi nhóm phần bất kỳ của mỗi vòng đơn là một vòng đơn. Tuyên bố 2 | Một lý thuyết N trong một vòng R có 1 là tất cả R nếu và chỉ nếu 1 thuộc N.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+121,high_school_mathematics/test/200,high_school_mathematics,C,unbalanced_dollar,"Grady đi xe đạp nhanh hơn em trai Noah $60\%$. Nếu Grady đi được $12$ dặm nhiều hơn Noah trong hai giờ, thì Noah đi xe đạp với vận tốc bao nhiêu dặm mỗi giờ?
+32
+20
+10
+7.2"
+126,high_school_mathematics/test/119,high_school_mathematics,B,"caret_power,unbalanced_dollar","Giả sử $ a, b $ và $ c $ là các số nguyên dương thỏa mãn $(a + b + c)^3 - a^3 - b^3 - c^3 = 150$. Tìm $a + b + c$.
+16
+6
+12
+150"
+129,high_school_mathematics/test/172,high_school_mathematics,B,"caret_power,unbalanced_dollar","Dãy Fibonacci là dãy 1, 1, 2, 3, 5, $\ldots$ trong đó mỗi số là tổng của hai số trước đó. Dư thừa khi phần tử thứ $100^{\mathrm{th}}$ của dãy này chia cho 4 là bao nhiêu?
+2
+3
+4
+5"
+134,abstract_algebra/test/50,abstract_algebra,D,markdown_table_pipe,"Phiên bản 1 | Mọi nhóm giải được đều có bội số là lũy thừa của số nguyên tố. Phiên bản 2 | Mọi nhóm có bội số là lũy thừa của số nguyên tố đều giải được.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+136,abstract_algebra/test/65,abstract_algebra,C,markdown_table_pipe,"Phát biểu 1 | Mọi trường cũng là một vòng tròn. Phát biểu 2 | Mọi vòng tròn đều có một bản địa tích luỹ.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+143,abstract_algebra/test/82,abstract_algebra,A,markdown_table_pipe,"Phát biểu 1 | Với mỗi số nguyên dương n, có một nhóm tuần hoàn bậc n. Phát biểu 2 | Mỗi nhóm tuần hoàn hữu hạn đều chứa một phần tử của mọi bậc mà chia hết cho bậc của nhóm.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+146,high_school_mathematics/test/8,high_school_mathematics,C,raw_latex_frac,"Chúng ta tung một xúc xắc 6 mặt công bằng 5 lần. Xác suất để chúng ta thu được số 6 trong tối đa 2 lần tung là bao nhiêu?
+\frac{125}{648}
+\frac{25}{648}
+\frac{625}{648}
+\frac{1}{648}"
+178,high_school_chemistry/test/170,high_school_chemistry,C,caret_power,"Hằng số cân bằng, Kc, cho sự phân li của HI thành khí hydro và hơi iodine là 21 ở một nhiệt độ nhất định. Tại nồng độ 15 gam HI khí được đưa vào một bình thủy tinh 12,0 L và để đạt trạng thái cân bằng, nồng độ của hơi iodine là bao nhiêu?
+4,58 mol/L
+0.00687 mol L-1
+4,4 × 10^-3 M
+9,76 × 10^-3 M"
+239,high_school_mathematics/test/211,high_school_mathematics,C,raw_latex_frac,"Số lượng sơn mà David cần để phủ một khối lập phương tỉ lệ thuận với diện tích bề mặt. Nếu David có thể phủ hoàn toàn một khối lập phương cạnh 2 feet với chính xác 16 quarts sơn, thì khối lập phương nào lớn nhất (theo độ dài cạnh tính bằng feet) mà David có thể phủ được với 169 quarts sơn?
+\frac{13}{4}
+8
+\frac{13}{2}
+13"
+261,abstract_algebra/test/76,abstract_algebra,C,"markdown_table_pipe,subscript_underscore","Phát biểu 1 | S_n không Abel với mọi n >= 3. Phát biểu 2 | Nếu a là m chuyển vòng và b là n chuyển vòng, thì |ab| = lcm(m,n).
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+304,abstract_algebra/test/10,abstract_algebra,C,markdown_table_pipe,"Tuyên bố 1 | Nếu H là một nhóm con của G và a thuộc G thì |aH| = |Ha|. Tuyên bố 2 | Nếu H là một nhóm con của G và a và b thuộc G, thì aH và Hb là giống nhau hoặc rời nhau.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+333,high_school_mathematics/test/43,high_school_mathematics,C,"caret_power,unbalanced_dollar","Tìm các thừa số của $36-9x^2$.
+(6-3x)(6+3x)
+(-3x+6)(3x+6)
+9(2-x)(2+x)
+3(2+x)^2"
+358,high_school_mathematics/test/56,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Tìm $b$ nếu $\log_{b}343=-\frac{3}{2}$.
+3
+\frac{1}{49}
+\frac{1}{7}
+7"
+368,high_school_mathematics/test/35,high_school_mathematics,D,unbalanced_dollar,"Giả sử đồ thị của $y=f(x)$ bao gồm các điểm $(1,5),$ $(2,3),$ và $(3,1)$. Dựa vào thông tin này, có hai điểm phải nằm trên đồ thị của $y=f(f(x))$. Nếu chúng ta gọi những điểm đó là $(a,b)$ và $(c,d),$ thì $ab+cd$ bằng bao nhiêu?
+15
+5
+9
+17"
+380,high_school_mathematics/test/106,high_school_mathematics,B,unbalanced_dollar,"Tính có bao nhiêu số nguyên trong đoạn từ $-200$ đến $200$ cùng dư $5$ modulo $13$?
+30
+31
+60
+45"
+409,abstract_algebra/test/1,abstract_algebra,C,subscript_underscore,"Cho p = (1, 2, 5, 4)(2, 3) trong S_5. Tìm chỉ số của <p> trong S_5.
+8
+2
+24
+120"
+442,high_school_chemistry/test/137,high_school_chemistry,A,caret_power,"Khối lượng của một phân tử cholesterol (C27H46O, khối lượng phân tử = 386) là bao nhiêu?
+6.41 × 10^-22 g
+1.5 × 10^-21 g
+1.38 × 10^-21 g
+3 × 10^-23 g"
+458,high_school_physics/test/39,high_school_physics,A,caret_power,"Một vật mang điện tích là –1 C. Vật đó chứa bao nhiêu điện tử thừa?
+6.25 × 10^18
+8.00 × 10^18
+1.60 × 10^19
+3.20 × 10^19"
+462,abstract_algebra/test/26,abstract_algebra,C,markdown_table_pipe,"Phát biểu 1 | Mỗi nhóm có độ bộ của 42 đều có một nhóm con bình thường có độ bộ là 7. Phát biểu 2 | Mỗi nhóm có độ bộ của 42 đều có một nhóm con bình thường có độ bộ là 8.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+477,astronomy/test/58,astronomy,C,multiple_underscores,"Khi đi du lịch từ phía Bắc của Hoa Kỳ vào Canada, bạn sẽ thấy sao Bắc Đẩu (Polaris) đang trở nên _________.
+Sáng hơn
+Tối hơn
+Cao hơn trên bầu trời
+Thấp hơn trên bầu trời"
+548,high_school_mathematics/test/135,high_school_mathematics,B,unbalanced_dollar,"John đang chơi một trò chơi trong đó anh ta cố gắng đạt được số lớn nhất có thể. Anh ta phải đặt các ký hiệu +, $\times$, và - (cộng, nhân và trừ) vào những chỗ trống sau đây, sử dụng mỗi ký hiệu đúng một lần:\[2 \underline{\hphantom{8}} 4 \underline{\hphantom{8}} 6 \underline{\hphantom{8}} 8.\] John không thể sử dụng dấu ngoặc đơn hay sắp xếp lại các số. Số lớn nhất có thể John có thể đạt được là bao nhiêu?
+22
+46
+100
+99"
+561,abstract_algebra/test/43,abstract_algebra,C,markdown_table_pipe,"Tuyên bố 1 | Mọi miền nguyên với đặc tính 0 đều vô hạn. Tuyên bố 2 | Mọi miền nguyên với đặc tính nguyên tố đều hữu hạn.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+597,abstract_algebra/test/29,abstract_algebra,A,markdown_table_pipe,"Tuyên bố 1 | Hình ảnh đồng cấu của một nhóm vòng là một nhóm vòng. Tuyên bố 2 | Hình ảnh đồng cấu của một nhóm Abelian là một nhóm Abelian.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+628,abstract_algebra/test/17,abstract_algebra,C,subscript_underscore,"Tính tích trong nhóm được cho. (2,3)(3,5) trong Z_5 x Z_9
+(1,1)
+(3,1)
+(1,6)
+(3,6)"
+632,high_school_mathematics/test/28,high_school_mathematics,C,"caret_power,raw_latex_frac,raw_latex_sqrt,unbalanced_dollar","Miền giá trị của hàm số $f(x)=\frac{x+6}{\sqrt{x^2-3x-4}}$ là gì?
+(-4,4)
+[0,4]
+(-vô cực, -1) U (4, vô cực)
+(-vô cực, -1) U (-1, 4) U (4, vô cực)"
+643,high_school_mathematics/test/12,high_school_mathematics,D,"caret_power,unbalanced_dollar","Tìm phần dư của phép chia $2^{87}+3$ cho $7$ là bao nhiêu?
+0
+1
+2
+4"
+701,high_school_mathematics/test/82,high_school_mathematics,C,caret_power,"Tìm phần dư khi 25^1059 được chia cho 23.
+11
+13
+8
+5"
+710,abstract_algebra/test/74,abstract_algebra,D,"caret_power,markdown_table_pipe","Phát biểu 1 | Nếu a và b là các phần tử của một nhóm và a không bằng b, thì a^2 không bằng b^2. Phát biểu 2 | Tập hợp các xoay trong một nhóm hai mặt là một chuỗi con tuần hoàn.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+716,elementary_mathematics/test/40,elementary_mathematics,B,unbalanced_dollar,"Gia đình Sojourn đi nghỉ. Họ bắt đầu với $2000. Nếu họ tiêu $150 mỗi ngày, biểu thức nào biểu diễn số tiền họ còn lại sau x ngày?
+1850x
+2000 −150x
+150x
+2000 +150x"
+719,abstract_algebra/test/12,abstract_algebra,A,subscript_underscore,"Tìm thứ tự của nhóm thương theo nhóm con (Z_11 x Z_15)/(<1, 1>)
+1
+2
+5
+11"
+747,high_school_mathematics/test/54,high_school_mathematics,C,raw_latex_frac,"Ông Patrick đang chuẩn bị một bài kiểm tra đúng/sai gồm 5 câu hỏi cho lớp học của mình. Ông ta tung đồng xu trước khi viết câu hỏi đầu tiên. Nếu xuất hiện mặt ngửa, ông viết một câu khẳng định đúng và nếu mặt sấp, ông viết một câu phủ định sai. Ông tiếp tục như vậy cho đến khi viết xong tất cả năm câu hỏi. Xác suất của việc trả lời đúng chuỗi câu hỏi TFTFT là bao nhiêu? Trả lời dưới dạng phân số tối giản.
+\frac{1}{6}
+\frac{1}{64}
+\frac{1}{32}
+\frac{1}{2}"
+751,elementary_mathematics/test/246,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Marcus đã tiêu $3.25 để rửa xe của anh ấy. Nếu 1 đồng xu 25 cents vận hành trạm rửa xe trong 60 giây, thì anh ấy mất bao lâu để rửa xe của mình?
+10 phút
+13 phút
+16 phút
+32.5 phút"
+755,abstract_algebra/test/78,abstract_algebra,D,markdown_table_pipe,"Phát biểu 1 | Đối với n > 1, tập hợp {1,2, ..., n-1} là một nhóm theo phép nhân modulo n. Phát biểu 2 | Tồn tại một số nguyên x sao cho 63x mod 100 = 1.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+774,high_school_mathematics/test/15,high_school_mathematics,D,"raw_latex_sqrt,unbalanced_dollar","Một con kiến bò thẳng từ điểm $(-4,6)$ đến gốc tọa độ, và sau đó tiếp tục di chuyển thẳng đến điểm $(4,3)$. Con kiến đi được khoảng cách bao nhiêu?
+16
+2\sqrt{2}
+5
+5+2\sqrt{13}"
+817,elementary_mathematics/test/304,elementary_mathematics,A,"unbalanced_dollar,unbalanced_dollar_count","Sân tập golf của một sân golf tính giá $4.00 cho một xô chứa 40 quả bóng golf. Ở mức giá này, một xô chứa 100 quả bóng golf sẽ giá bao nhiêu?
+$10.00
+$10.50
+$13.50
+$16.00"
+819,elementary_mathematics/test/261,elementary_mathematics,D,caret_power,"Thể tích, V, của một hình lập phương có độ dài cạnh, s, có thể được xác định bằng công thức V = s^3. Thể tích, tính bằng đơn vị cm3, của một hình lập phương có cạnh dài 2.3 centimet là bao nhiêu?
+5.29
+6.9
+8.027
+12.167"
+831,high_school_mathematics/test/17,high_school_mathematics,B,"caret_power,unbalanced_dollar","Đa thức được tạo ra từ sự mở rộng của $(x^2 + 5x + 6)^2 + (px + q)(x^3 + 7x^2 + 3x)$ có bậc là $2$. Tìm $p+q$.
+-2
+-4
+-1
+1"
+846,elementary_mathematics/test/19,elementary_mathematics,A,caret_power,"Đơn giản hóa (2 + 5)^2 − 42.
+7
+16
+30
+33"
+867,abstract_algebra/test/99,abstract_algebra,C,markdown_table_pipe,"Tuyên bố 1 | Mọi lý tưởng trong một nhóm vòng là một nhóm con của vòng. Tuyên bố 2 | Mọi nhóm con của mọi nhóm vòng là một lý tưởng của vòng.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+905,high_school_mathematics/test/89,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Định nghĩa $f(x)=\frac{1+x}{1-x}$ và $g(x)=\frac{-2}{x+1}$. Tìm giá trị của \[g(f(g(f(\dotsb g(f(12)) \dotsb ))))\] trong đó hàm $f$ được áp dụng 8 lần và hàm $g$ được áp dụng 8 lần, xen kẽ giữa hai hàm này.
+12
+8
+4
+0"
+920,astronomy/test/80,astronomy,C,caret_power,"Giá trị số đúng và đơn vị của hằng số Boltzmann là gì?
+1.38 × 10−21 m^3 · kg · s^−2 · K^−1
+1.38 × 10−22 m^2 · kg · s^−3 · K^−1
+1.38 × 10−23 m^2 · kg · s^−2 · K^−1
+1.38 × 10−24 m^2 · kg · s^−2 · K^−2"
+947,abstract_algebra/test/89,abstract_algebra,C,markdown_table_pipe,"Tuyên bố 1 | Mọi hoán vị là một hàm một một. Tuyên bố 2 | Mọi hàm số là một hoán vị nếu và chỉ nếu nó là một một.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+981,high_school_mathematics/test/161,high_school_mathematics,B,"caret_power,unbalanced_dollar","Một khoản đầu tư 4000 đô la tăng với tỷ lệ là 320*e^(0.08t) đô la mỗi năm sau t năm. Giá trị của nó sau 10 năm là xấp xỉ
+$4,902
+$8,902
+$7,122
+$12,902"
+997,high_school_physics/test/65,high_school_physics,D,caret_power,"Trong phòng thí nghiệm, điện tích trên một giọt dầu được đo. Dữ liệu nào sau đây rất không có khả năng đúng?
+6,4 × 10^-19 C
+8,0 × 10^-19 C
+4,8 × 10^-19 C
+2,4 × 10^-19 C"
+1005,high_school_mathematics/test/4,high_school_mathematics,C,unbalanced_dollar,"Giả sử $f(x)$ là một hàm có tính chất sau: Đối với tất cả số thực $a$ và $b$ sao cho $a<b$, phần của đồ thị của $y=f(x)$ giữa $x=a$ và $x=b$ nằm dưới đoạn thẳng nối từ $(a,f(a))$ và $(b,f(b))$. (Một hàm có tính chất này được gọi là nghiêng chặt.) Cho biết $f(x)$ đi qua điểm $(-2,5)$ và $(2,9)$, khoảng giá trị có thể của $f(1)$ là gì? Trả lời bằng cách sử dụng dạng khoảng giá trị.
+(-vô cực, 10)
+(-vô cực, 9)
+(-vô cực, 8)
+(-vô cực, 7)"
+1008,high_school_mathematics/test/150,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Có ba số thực $x$ không thuộc miền xác định của hàm số $$f(x) = \frac{1}{1+\frac{1}{1+\frac 1x}}.$$ Tổng của ba số đó là bao nhiêu?
+1
+0
+-1.5
+-1"
+1060,abstract_algebra/test/36,abstract_algebra,D,subscript_underscore,"Tính tích trong nhóm. (20)(-8) trong Z_26
+0
+1
+11
+22"
+1064,high_school_mathematics/test/44,high_school_mathematics,C,"caret_power,unbalanced_dollar","Để đặt viên đá lát đầu tiên trong con đường, Alex bắt đầu tại thùng đá lát, đi bộ ba bước, đặt đá và trở lại thùng. Đối với mỗi viên đá tiếp theo, Alex đi bộ thêm hai bước mỗi chiều. Alex sẽ đặt 50 viên đá đầu tiên trong con đường. Sau khi trở lại từ thùng đá lát sau khi đặt viên đá thứ $50^ ext{th}$, tổng khoảng cách mà Alex đã đi là bao nhiêu, tính bằng feet?
+100
+90950
+5200
+50"
+1079,abstract_algebra/test/2,abstract_algebra,D,"caret_power,subscript_underscore","Tìm tất cả các giá trị bằng 0 trong trường hữu hạn được chỉ định của đa thức được cho với các hệ số trong trường đó. x^5 + 3x^3 + x^2 + 2x trong Z_5
+0
+1
+0,1
+0,4"
+1109,elementary_mathematics/test/357,elementary_mathematics,B,caret_power,"Đơn giản hóa 5^3. Sử dụng máy tính, giấy bút hoặc tính trong đầu.
+15
+125
+8
+53"
+1130,elementary_mathematics/test/231,elementary_mathematics,C,"unbalanced_dollar,unbalanced_dollar_count","Cửa hàng tạp hóa bán một túi gồm 5 quả chanh với giá $2.00. Giá của một quả chanh trong túi là bao nhiêu?
+$2.50
+$0.60
+$0.40
+$0.10"
+1134,high_school_mathematics/test/10,high_school_mathematics,D,unbalanced_dollar,"Số nguyên dương $x$ và $y$ có tích bằng 56 và $x < y$. Bảy lần nghịch đảo số nguyên nhỏ hơn cộng với 14 lần nghịch đảo số nguyên lớn hơn bằng 4. Giá trị của $x$ là bao nhiêu?
+13
+14
+1
+2"
+1192,high_school_mathematics/test/269,high_school_mathematics,B,"caret_power,unbalanced_dollar","Khi biểu thức $-2x^2-20x-53$ được viết dưới dạng $a(x+d)^2+e$, trong đó $a$, $d$, và $e$ là các hằng số, tổng của $a$, $d$ và $e$ là bao nhiêu?
+-80
+0
+6
+53"
+1220,high_school_mathematics/test/116,high_school_mathematics,C,"caret_power,raw_latex_frac","Tính tổng\[\frac{1}{2^1} + \frac{2}{2^2} + \frac{3}{2^3} + \cdots + \frac{k}{2^k} + \cdots \]
+\infty
+1
+2
+4"
+1249,elementary_mathematics/test/302,elementary_mathematics,C,unbalanced_dollar,"Giá của một cổ phiếu của công ty XYZ vào đầu tuần là $24.75. Trong vòng năm ngày tiếp theo, cổ phiếu đã tăng $2.50 vào thứ Hai, giảm $3.25 vào thứ Ba, giảm $0.75 vào thứ Tư, tăng $1.25 vào thứ Năm và tăng $4.75 vào thứ Sáu. Giá cổ phiếu là bao nhiêu vào cuối ngày Thứ Sáu?
+$12.25
+$25.75
+$29.25
+$37.25"
+1253,high_school_statistics/test/134,high_school_statistics,D,unbalanced_dollar,"Mối quan hệ giữa giá bán của một chiếc xe hơi (tính theo đơn vị $1,000) và tuổi của nó (tính theo năm) được ước tính từ mẫu ngẫu nhiên các chiếc xe của một mẫu cụ thể. Mối quan hệ được cho bởi công thức sau: Giá bán = 15,9 - 0,983 (tuổi) Chúng ta có thể kết luận điều gì sau đây từ công thức này?
+Đối với mỗi năm, giá bán của xe giảm khoảng 9,83 phần trăm.
+Một chiếc xe mới có giá trung bình là $9,830.
+Đối với mỗi năm, giá bán xe giảm khoảng $1,590.
+Đối với mỗi năm, giá bán xe giảm khoảng $983."
+1284,elementary_mathematics/test/70,elementary_mathematics,C,unbalanced_dollar,"Mỗi tạp chí có giá 2.99 đô la và mỗi cuốn sách có giá 6.99 đô la tại gian hàng báo cũ Old Town. Tổng chi phí của 4 tạp chí và 3 cuốn sách là bao nhiêu?
+$20.93
+$28.93
+$32.93
+$48.93"
+1352,abstract_algebra/test/13,abstract_algebra,C,"caret_power,subscript_underscore","Đa thức x^3 + 2x^2 + 2x + 1 có thể phân tích thành nhân tử tuyến tính trong Z_7[x]. Tìm phân tích này.
+(x − 2)(x + 2)(x − 1)
+(x + 1)(x + 4)(x − 2)
+(x + 1)(x − 4)(x − 2)
+(x - 1)(x − 4)(x − 2)"
+1395,high_school_chemistry/test/202,high_school_chemistry,B,caret_power,"Trong quá trình nghiên cứu phản ứng A → 2B, một nhà hóa học xây dựng một số đồ thị. Đồ thị của [A] so với thời gian và đồ thị của ln [A] so với thời gian đều là những đường cong; tuy nhiên, đồ thị của 1/[A] so với thời gian lại là đường thẳng. Điều này ngụ ý rằng định luật tốc độ là
+Tốc độ = k[A]
+Tốc độ = k[A]^2
+Tốc độ = k[A]^0
+Tốc độ = k[A]^-1"
+1398,high_school_mathematics/test/51,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar","Giả sử đồ thị của một hàm, $y=f(x)$, có tính chất nếu nó được dịch sang phải $20$ đơn vị, thì đồ thị kết quả là giống với đồ thị ban đầu của $y=f(x)$. Tìm giá trị $a$ dương nhỏ nhất sao cho nếu đồ thị của $y=f\left(\frac x5\right)$ được dịch $a$ đơn vị sang phải, chúng ta biết rằng đồ thị kết quả giống với đồ thị ban đầu của $y=f\left(\frac x5\right)$?
+100
+4
+5
+20"
+1423,high_school_mathematics/test/239,high_school_mathematics,A,caret_power,"Giá trị lớn nhất của hàm số f (x) = xe^{–x} là
+1/e
+e
+1
+-1"
+1453,abstract_algebra/test/38,abstract_algebra,C,subscript_underscore,"Tìm phần tử sinh trong trường hữu hạn Z_7.
+1
+2
+3
+4"
+1477,high_school_mathematics/test/130,high_school_mathematics,A,"subscript_underscore,unbalanced_dollar","Tính $\log_3 81$.
+4
+0.25
+-1
+27"
+1482,elementary_mathematics/test/172,elementary_mathematics,C,unbalanced_dollar,"Mai kiếm được $5.50 mỗi giờ làm việc tại công việc sau giờ học của cô ấy. Cô ấy phải làm bao nhiêu giờ để kiếm được $132?
+16
+20
+24
+28"
+1487,high_school_mathematics/test/49,high_school_mathematics,B,"caret_power,unbalanced_dollar","Nếu $f(x) = 8x^3 - 6x^2 - 4x + 5$, tìm giá trị của $f( -2)$.
+5
+-75
+-64
+-24"
+1492,high_school_mathematics/test/198,high_school_mathematics,D,"caret_power,unbalanced_dollar","Giả sử $x-3$ và $y+3$ đều chia hết cho $7$. Tìm số nguyên dương nhỏ nhất $n$ để $x^2+xy+y^2+n$ chia hết cho $7$.
+2
+6
+4
+5"
+1495,high_school_mathematics/test/103,high_school_mathematics,D,"caret_power,unbalanced_dollar","Độ dài cạnh huyền của một tam giác vuông là 10 inch và một góc bằng $45^{\circ}$. Diện tích tam giác là bao nhiêu inch vuông?
+10
+45
+125
+25"
+1510,high_school_mathematics/test/36,high_school_mathematics,C,unbalanced_dollar,"Tính $\dbinom{85}{82}$.
+252
+4680
+98770
+101170"
+1543,abstract_algebra/test/7,abstract_algebra,D,markdown_table_pipe,"Phát biểu 1 | Một ánh xạ homomorphism giữa các nhóm vòng là một một khi và chỉ khi hạt nhân bằng {0}. Phát biểu 2 | Q là một lý thuyết trong R.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+1548,high_school_mathematics/test/156,high_school_mathematics,D,unbalanced_dollar,"Trên mỗi mặt của một khối lập phương được viết sáu số nguyên dương. Mỗi đỉnh được ghi nhãn với tích của ba số trên mặt kề đỉnh đó. Nếu tổng các số trên các đỉnh bằng $1001$, thì tổng các số viết trên các mặt là bao nhiêu?
+18
+13
+1001
+31"
+1611,elementary_mathematics/test/45,elementary_mathematics,B,unbalanced_dollar,"Nếu 3 lon lê có giá $2.37 thì bạn có thể mua được bao nhiêu lon lê với $9.48?
+3 lon lê
+12 lon lê
+36 lon lê
+13 lon lê"
+1627,high_school_chemistry/test/51,high_school_chemistry,A,caret_power,"Fe(OH)3 có Ksp = 1.6 × 10^-39. Hãy tính nồng độ mol của hợp chất này?
+8.8 × 10^-11 M
+2.0 × 10^-10 M
+7.4 × 10^-14 mol/L
+9.4 × 10^-6 mol/L"
+1650,elementary_mathematics/test/193,elementary_mathematics,D,caret_power,"Đơn giản hóa −4 + 7 • 3^2. Sử dụng máy tính, giấy viết chì hoặc tính nhẩm.
+437
+27
+289
+59"
+1658,elementary_mathematics/test/301,elementary_mathematics,C,caret_power,"Cặp biểu thức nào dưới đây tương đương với nhau?
+7(2x) và 9x
+3x + 5x và 15x
+4(2x — 6) và 8x — 24
+x+x+x+x và x^4"
+1668,high_school_mathematics/test/141,high_school_mathematics,B,"caret_power,unbalanced_dollar","Giả sử với một số $a,b,c$, chúng ta có $a+b+c = 1$, $ab+ac+bc = abc = -4$. Tìm $a^3+b^3+c^3$?
+0
+1
+112
+12"
+1689,abstract_algebra/test/9,abstract_algebra,C,"caret_power,subscript_underscore","Tìm tất cả các số không trong trường hữu hạn được chỉ định của đa thức cho trước có hệ số trong trường đó. x^3 + 2x + 2 tại Z_7
+1
+2
+2,3
+6"
+1692,high_school_mathematics/test/92,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Tìm $-\dfrac{1}{-3}\cdot\cfrac{1}{~\frac{1}{-3}~}.$
+1
+-1
+0
+2"
+1700,high_school_mathematics/test/190,high_school_mathematics,C,raw_latex_frac,"Ben lắc bốn con xúc xắc 20 mặt, có mỗi mặt được đánh số từ 1 đến 20. Xác suất để đúng đúng hai con xúc xắc chỉ hiện số chẵn là bao nhiêu?
+\frac{5}{24}
+\frac{5}{16}
+\frac{3}{8}
+\frac{5}{8}"
+1720,high_school_mathematics/test/52,high_school_mathematics,B,unbalanced_dollar,"Có bao nhiêu số riêng biệt có thể tạo ra bằng cách tạo phân số với $2,3,4$ hoặc $6$ trong tử số và $2,3,4$ hoặc $6$ trong mẫu số?
+1
+9
+2
+10"
+1761,high_school_mathematics/test/178,high_school_mathematics,A,raw_latex_frac,"Nếu tôi tung 5 xúc xắc 6 mặt tiêu chuẩn và nhân số trên mỗi mặt của từng xúc xắc, xác suất cho kết quả là một số hợp số là bao nhiêu?
+\frac{485}{486}
+\frac{16}{7776}
+\frac{4}{7776}
+\frac{2}{7776}"
+1773,abstract_algebra/test/45,abstract_algebra,C,markdown_table_pipe,"Phiên bản 1 | Đối với bất kỳ hai nhóm G và G' nào, luôn tồn tại một ánh xạ đồng nhóm từ G sang G'. Phiên bản 2 | Mọi ánh xạ đồng nhóm đều là một ánh xạ một-một.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+1792,abstract_algebra/test/84,abstract_algebra,D,markdown_table_pipe,"Cho A và B là các tập hợp, f: A -> B và g: B -> A là các hàm sao cho với mọi a \in A, g(f(a)) = a. Tuyên bố 1 | Hàm g phải tất yếu là ánh xạ một phía. Tuyên bố 2 | Hàm g phải tất yếu là ánh xạ trên.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+1794,abstract_algebra/test/80,abstract_algebra,B,"markdown_table_pipe,subscript_underscore","Phát biểu 1 | Tích trực tiếp ngoài của các nhóm tuần hoàn là tuần hoàn. Phát biểu 2 | Tích trực tiếp ngoài của D_3 và D_4 đồng cấu với D_12.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+1823,high_school_physics/test/8,high_school_physics,A,caret_power,"Hộp có khối lượng m trượt trên một bề mặt nằm ngang với vận tốc ban đầu v0. Nó không cảm nhận bất kỳ lực nào khác ngoài trọng lực và lực từ bề mặt. Nếu hệ số ma sát động giữa hộp và bề mặt là μ, đường đi của hộp trước khi dừng lại là bao nhiêu?
+v0^2/(2μg)
+v0^2/(μg)
+2v0^2/(μg)
+mv0^2/(μg)"
+1833,high_school_mathematics/test/40,high_school_mathematics,B,unbalanced_dollar,"Nếu $888x + 889y = 890$ và $891x + 892y = 893$, giá trị của $x - y$ là bao nhiêu?
+1
+-3
+-1
+3"
+1850,abstract_algebra/test/96,abstract_algebra,B,"caret_power,subscript_underscore","Tìm tất cả các số 0 trong trường hữu hạn chỉ định của đa thức đã cho với các hệ số trong trường đó. x^2 + 1 trong Z_2
+0
+1
+0,1
+2"
+1861,high_school_chemistry/test/190,high_school_chemistry,A,caret_power,"Một phản ứng bậc một có nửa đời là 34 phút. Hằng số tốc độ của phản ứng là bao nhiêu?
+3.4 × 10^-4 s-1
+2.04 × 10^-2 s-1
+2.9 × 10^-1 min-1
+34 phút"
+1887,abstract_algebra/test/73,abstract_algebra,B,subscript_underscore,"Tìm đặc trưng của vòng Z_3 x Z_3.
+0
+3
+12
+30"
+1895,conceptual_physics/test/33,conceptual_physics,D,caret_power,"Phương trình E = mc^2 cho biết rằng năng lượng
+bằng khối lượng di chuyển với tốc độ ánh sáng được lập phương.
+bằng khối lượng chuyển động.
+cơ bản khác với khối lượng.
+và khối lượng là tương quan chặt chẽ."
+1903,astronomy/test/5,astronomy,C,caret_power,"Một sao chổi có khối lượng m va vào Trái đất (khối lượng M bán kính R) với tốc độ va chạm tối thiểu. Biểu thức nào cho tổng năng lượng được giải phóng trong va chạm?
+m*v
+0.5*m/(R^3)
+0.5*m*(2GM/R)
+0.6*G(M^2)/R"
+1911,abstract_algebra/test/90,abstract_algebra,D,markdown_table_pipe,"Phát biểu 1 | Nếu một nhóm hữu hạn có bậc là n thì nhóm đó chứa một nhóm con có bậc d cho mọi ước số d dương của n. Phát biểu 2 | Nếu a thuộc một nhóm hữu hạn thì |a| chia hết cho |G|.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+1931,astronomy/test/82,astronomy,A,multiple_underscores,"Trái đất đã dần trở nên ấm lên trong vài thập kỷ qua. Dựa trên rất nhiều bằng chứng, các nhà khoa học kết luận rằng sự ấm lên này là do ________.
+các hoạt động của con người đang tăng nồng độ khí nhà kính trong bầu khí quyển của Trái đất
+sự thật là các chính trị gia của chúng ta phun ra rất nhiều hơi nóng
+việc con người thải ra các hóa chất gọi là CFC vào tầng bình lưu
+sự gia tăng của các vụ cháy rừng trong những năm gần đây"
+1950,elementary_mathematics/test/139,elementary_mathematics,C,unbalanced_dollar,"Chris bán hoa hồng với giá $16.99 một bó. Vào cuối ngày anh ấy đã thu được $339.80. Anh ấy đã bán bao nhiêu bó hoa hồng?
+22
+18
+20
+16"
+1975,high_school_mathematics/test/218,high_school_mathematics,A,raw_latex_frac,"John có năm người con. Xác suất có ít nhất một nửa số trẻ là con gái là bao nhiêu? (Chúng ta có thể giả sử cơ hội con trai và con gái sinh ra là bằng nhau)
+\frac{1}{2}
+\frac{1}{4}
+\frac{1}{8}
+\frac{3}{5}"
+2040,high_school_physics/test/24,high_school_physics,D,caret_power,"Một đôi cực điện gồm một cặp điểm tích luỹ bằng nhau nhưng trái dấu có cường độ là 4,0 nC và cách nhau 2,0 cm. Trường điện tại điểm ở giữa các điểm tích luỹ là bao nhiêu?
+0
+9,0 × 10^4 N/C
+1,8 × 10^5 N/C
+7,2 × 10^5 N/C"
+2045,abstract_algebra/test/47,abstract_algebra,B,"caret_power,subscript_underscore","Tìm tất cả các giá trị c trong Z_3 sao cho Z_3[x]/(x^3 + x^2 + c) là một trường.
+0
+2
+1
+3"
+2102,high_school_mathematics/test/118,high_school_mathematics,A,"caret_power,unbalanced_dollar","Một số $x$ bằng $2^{15}\cdot3^6$. Bình phương của số nào bằng $x$?
+288
+27
+125
+121"
+2111,high_school_chemistry/test/195,high_school_chemistry,B,caret_power,"Có bao nhiêu môl propan (C3H8) trong 6.2 gam propan?
+14.1 mol
+1.4 × 10^-1 mol
+71 mol
+7.1 mol"
+2125,abstract_algebra/test/67,abstract_algebra,C,caret_power,"Một tập con H của nhóm (G,*) là một nhóm nếu
+a,b thuộc H => a * b thuộc H
+a thuộc H => a^-1 thuộc H
+a,b thuộc H=> a * b^-1 thuộc H
+H chứa phần tử đơn vị"
+2163,high_school_mathematics/test/30,high_school_mathematics,C,unbalanced_dollar,"Chữ số đơn vị của tích $1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9$ là gì?
+1
+2
+0
+5"
+2201,high_school_mathematics/test/98,high_school_mathematics,C,"caret_power,raw_latex_frac,unbalanced_dollar","Giá trị của $N$ là bao nhiêu để thỏa mãn $\frac{4^{(3^3)}}{(4^3)^3} = 2^N$?
+9
+27
+36
+34"
+2202,high_school_chemistry/test/133,high_school_chemistry,D,caret_power,"Ba mẫu 25,00 mL khoảng 0,10 M phenol, C6H5OH, Ka = 1,0 x 10^-10 đã được lấy ra khỏi một container và đặt trong các cốc đo 250 mL riêng lẻ. Các mẫu đã được chuẩn độ với dung dịch kali hydroxide tiêu chuẩn, KOH. Cresol đỏ là chất bán tham chiếu được sử dụng trong chuẩn độ. Các mẫu tối đa cần dung dịch chuẩn độ 31,75, 32,38 và 41,75 mL. Điều gì sau đây có thể giải thích tại sao một trong các mẫu cần nhiều dung dịch bazơ hơn để đạt tới điểm tối đa?
+Chất bán tham chiếu được thêm vào quá muộn.
+Sử dụng sai chất bán tham chiếu.
+Cốc đo chứa chất bazơ bị nhiễm bẩn.
+Cốc đo chứa chất axit bị nhiễm bẩn."
+2224,high_school_mathematics/test/177,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Tính xác suất để một số nguyên được chọn ngẫu nhiên trong tập hợp $$\{1,2,3,\ldots,100\}$$ chia hết cho 2 và không chia hết cho 3. Biểu diễn kết quả dưới dạng phân số tối giản.
+\frac{31}{66}
+\frac{17}{66}
+\frac{17}{31}
+\frac{17}{50}"
+2251,high_school_mathematics/test/85,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Đơn giản hoá $\frac{k-3}{2} + 3k+1+\frac{3k+1}{2}$.
+3k+1
+5k
+3k
+1"
+2295,high_school_mathematics/test/131,high_school_mathematics,B,"caret_power,raw_latex_frac,unbalanced_dollar","Viết lại biểu thức $6j^2 - 4j + 12$ dưới dạng $c(j+p)^2+q$ ,trong đó $c$, $p$ và $q$ là các hằng số. Tìm giá trị của $\frac{q}{p}$?
+3
+-34
+-38
+11"
+2345,high_school_mathematics/test/186,high_school_mathematics,D,"raw_latex_frac,subscript_underscore,unbalanced_dollar","Tính giá trị của $\log_8 2$.
+\frac{1}{4}
+4
+3
+\frac{1}{3}"
+2354,high_school_physics/test/149,high_school_physics,D,caret_power,"Gravitron là một trò chơi hội chợ có hình dạng giống như một cái hộp trụ. Người chơi đứng trong trò chơi đó sát vào tường và sau đó nó bắt đầu quay. Cuối cùng, khi tốc độ quay nhanh đến mức sàn có thể được gỡ bỏ mà không ai ngã. Cho số hệ số ma sát giữa quần áo của một người và tường là μ, tốc độ tiếp tuyến là v, và bán kính của trò chơi là R, khối lượng lớn nhất mà một người có thể an toàn đi trên trò chơi này là gì?
+μv^2/(rg)
+r^2v^2/(μg)
+rg/(μv^2)
+Không có phương án nào đúng."
+2363,high_school_mathematics/test/183,high_school_mathematics,C,"caret_power,raw_latex_sqrt,unbalanced_dollar","Phương trình bậc hai $2x^2+5x+12=19-7x$ có hai nghiệm. Tìm hiệu dương của hai nghiệm đó là bao nhiêu?
+2
+\sqrt{2}
+5\sqrt{2}
+5"
+2368,high_school_mathematics/test/168,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Một tam giác vuông có độ dài 2 cạnh là $6$ và $b$, và độ dài của cạnh huyền là $c$. Chu vi của tam giác là $18$. Tính $c$.
+18
+\frac{15}{2}
+8
+6"
+2383,high_school_mathematics/test/213,high_school_mathematics,D,"raw_latex_frac,raw_latex_sqrt,unbalanced_dollar","Tìm $x$, biết rằng \[\dfrac{\sqrt{x}}{x\sqrt{3}+\sqrt{2}} = \dfrac{1}{2x\sqrt{6}+4}.\]
+\frac{3}{4}
+\frac{1}{4}
+\frac{1}{2}
+\frac{1}{8}"
+2401,high_school_mathematics/test/67,high_school_mathematics,B,unbalanced_dollar,"Giả sử $f(x)$ là đa thức bậc $6$ và $g(x)$ là đa thức bậc $3$. Nếu $h(x)$ cũng là đa thức sao cho $f(g(x)) + g(h(x)) + h(f(x))$ là một đa thức bậc $36$, thì bậc của đa thức $h$ là bao nhiêu?
+72
+6
+18
+12"
+2405,high_school_chemistry/test/13,high_school_chemistry,A,caret_power,"Phản ứng giữa Br2 (g) với Cl2 (g) để tạo thành BrCl (g) có hằng số cân bằng là 15,0 ở một nhiệt độ nhất định. Nếu 10,0 gam BrCl ban đầu có trong một lọ phản ứng có dung tích 15,0 lít, nồng độ BrCl ở trạng thái cân bằng sẽ là bao nhiêu?
+3,8 × 10^-3 mol/L
+5,77 × 10^-3 mol/L
+1,97 × 10^-3 M
+9,9 × 10^-4 M"
+2443,high_school_mathematics/test/2,high_school_mathematics,A,caret_power,"Một số nguyên dương n được gọi là “mạnh” nếu đối với mọi yếu tố nguyên tố p của n, p^2 cũng là một yếu tố của n. Một ví dụ về số mạnh là
+392
+336
+300
+297"
+2459,abstract_algebra/test/20,abstract_algebra,A,"markdown_table_pipe,subscript_underscore","Tuyên bố 1 | Với các nhóm G và H hữu hạn, |G + H| = |G||H|. (G + H là tích trực tiếp nội.) Tuyên bố 2 | Nếu r chia hết cho m và s chia hết cho n thì Z_m + Z_n có một nhóm con đồng cấu với Z_r + Z_s.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2464,high_school_mathematics/test/256,high_school_mathematics,D,unbalanced_dollar,"Nếu $725x + 727y = 1500$ và $729x+ 731y = 1508$, giá trị của $x - y$ là gì?
+725
+-2
+2
+-48"
+2473,abstract_algebra/test/95,abstract_algebra,C,markdown_table_pipe,"Câu 1 | Nếu H là một tổ hợp con của G và a thuộc G thì aH là một tổ hợp con của G khi và chỉ khi a thuộc H. Câu 2 | Nếu H là một tổ hợp con của G và a và b thuộc G thì aH = bH khi và chỉ khi ab thuộc H.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2476,high_school_mathematics/test/260,high_school_mathematics,D,raw_latex_sqrt,"Tính diện tích của tam giác có độ dài đường cao lần lượt là 10, 12 và 15.
+56\sqrt{15}
+240\sqrt{7}
+60\sqrt{7}
+240\sqrt{7}/7"
+2477,abstract_algebra/test/83,abstract_algebra,C,markdown_table_pipe,"Phát biểu 1 | Nếu một nhóm có một phần tử có bậc là 10, thì nó có các phần tử có bậc là 1, 2 và 5. Phát biểu 2 | Nếu một nhóm có một phần tử có bậc 2 và một phần tử có bậc 3, thì nó có một phần tử có bậc 6.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2502,high_school_statistics/test/199,high_school_statistics,A,markdown_table_pipe,"Hai sự kiện A và B mỗi sự kiện có xác suất khác không. Nếu A và B là độc lập, câu nào sau đây là đúng?
+P(A và B) = P(A) · P(B)
+A và B có thể hoặc không phụ thuộc lẫn nhau.
+A và B phải phụ thuộc lẫn nhau.
+P(A| B) = P(B| A)"
+2507,high_school_mathematics/test/121,high_school_mathematics,A,raw_latex_frac,"Juan quay một con súc sắc bình thường với 8 mặt được đánh số từ 1 đến 8. Sau đó, Amal quay một con súc sắc bình thường 6 mặt. Xác suất để tích của hai lần quay là một bội số của 3 là bao nhiêu?
+\frac{1}{2}
+\frac{1}{4}
+\frac{1}{144}
+\frac{1}{288}"
+2511,high_school_mathematics/test/184,high_school_mathematics,C,"caret_power,unbalanced_dollar","Tổng $1^2 + 2^2 + 3^2 + 4^2 + \cdots + n^2 = n(n+1)(2n+1) \div 6$. Giá trị của biểu thức $21^2 + 22^2 + \cdots + 40^2$ là gì?
+41
+22140
+19270
+2870"
+2535,abstract_algebra/test/34,abstract_algebra,A,markdown_table_pipe,"Câu 1 | Nếu T: V -> W là một phép toán tuyến tính và dim(V) < dim(W) < 1, thì T phải là một ứng đầu. Câu 2 | Giả sử dim(V) = n và T: V -> V là một phép toán tuyến tính. Nếu T là ứng đầu, thì nó là một ánh xạ song ánh.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2566,high_school_mathematics/test/25,high_school_mathematics,C,unbalanced_dollar,"Ký hiệu $5!$ có nghĩa là $5\cdot 4\cdot 3\cdot 2\cdot 1$. Tìm ước số lẻ lớn nhất của $5!$ ?
+5
+3
+15
+31"
+2596,high_school_mathematics/test/148,high_school_mathematics,D,"caret_power,raw_latex_frac,unbalanced_dollar","Nếu ta biểu diễn $3x^2 + x - 4$ dưới dạng $a(x - h)^2 + k$, thì $k$ bằng bao nhiêu?
+-\frac{7}{12}
+-7
+49
+-\frac{49}{12}"
+2664,high_school_statistics/test/158,high_school_statistics,B,unbalanced_dollar,"Trong một khu vực đô thị, những nhà văn kỹ thuật có mức lương hàng năm gần như là phân phối chuẩn với giá trị trung bình là $55,800. Tứ phân vị lương đầu tiên là $48,815. Độ lệch chuẩn là bao nhiêu?
+$6,984
+$10,356
+$10,476
+$13,968"
+2666,elementary_mathematics/test/296,elementary_mathematics,D,caret_power,"Viết 11 • 11 • 11 • 11 • 11 • 11 • 11 • 11 bằng lũy thừa.
+11 • 8
+88^3
+8^11
+11^8"
+2672,astronomy/test/119,astronomy,D,caret_power,"Khoảng cách giữa Trái Đất và sao Altair lớn hơn một triệu lần so với khoảng cách giữa Trái Đất và Mặt Trời. Altair cách Trái Đất bao nhiêu?
+9,3 x 10^13 mét
+9,3 x 10^10 mét
+1,5 x 10^14 mét
+1,5 x 10^17 mét"
+2683,elementary_mathematics/test/14,elementary_mathematics,C,unbalanced_dollar,"Tùy chọn nào là mua hàng tiết kiệm nhất?
+10 thanh xà phòng với giá $23.20
+16 thanh xà phòng với giá $36.48
+13 thanh xà phòng với giá $29.51
+12 thanh xà phòng với giá $27.60"
+2691,abstract_algebra/test/59,abstract_algebra,A,"caret_power,markdown_table_pipe","Phiên bản 1 | Nếu H và K là các tập con của G và H hoặc K là một nhóm con bình thường của G, thì HK là một nhóm con của G. Phiên bản 2 | Tất cả nhóm có thứ tự p^2 nơi p là số nguyên tố đều là nhóm Abel.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2736,high_school_physics/test/144,high_school_physics,D,caret_power,"Một điện cực gồm một cặp điểm có điện tích bằng nhau và ngược chiều, có cường độ là 4.0 nC cách nhau 2.0 cm. Cường độ trường điện tại điểm chính giữa hai điểm điện tích đó là bao nhiêu?
+0
+9.0 × 10^4 V/m
+1.8 × 10^5 V/m
+7.2 × 10^5 V/m"
+2751,high_school_mathematics/test/59,high_school_mathematics,C,"caret_power,unbalanced_dollar","Giải phương trình để tìm tổng của tất cả các giá trị có thể của $x$ khi $3^{x^2+4x+4}=9^{x+2}$.
+1
+2
+-2
+0"
+2782,abstract_algebra/test/14,abstract_algebra,C,subscript_underscore,"Tìm thứ tự tối đa có thể của một phần tử trong S_n cho n = 10.
+6
+12
+30
+105"
+2828,high_school_mathematics/test/77,high_school_mathematics,A,"caret_power,unbalanced_dollar","Cho $a\star b = a^b-ab$. Nếu $2\star x = 22$, tìm $x$.
+5
+22
+11
+6"
+2861,high_school_mathematics/test/171,high_school_mathematics,C,"caret_power,unbalanced_dollar","Nếu điểm $(3,6)$ nằm trên đồ thị của $y=g(x)$, và $h(x)=(g(x))^2$ cho mọi $x$, thì có một điểm phải nằm trên đồ thị của $y=h(x)$. Tổng của các tọa độ của điểm đó là bao nhiêu?
+12
+36
+39
+13"
+2871,high_school_physics/test/85,high_school_physics,A,multiple_underscores,"Một xe đẩy có khối lượng 1.5 kg di chuyển và va chạm và dính chặt lấy một xe đẩy khác có khối lượng 0.5 kg ban đầu ở yên. Ngay sau va chạm, cả hai xe đẩy đều có ______ giống nhau.
+Vận tốc
+Năng lượng động học
+Khối lượng
+Momentum động học"
+2888,high_school_mathematics/test/64,high_school_mathematics,C,"markdown_table_pipe,unbalanced_dollar","Trong phương trình $|x-4| -10 = 2$, tích của tất cả các giá trị có thể của $x$ là bao nhiêu?
+-8
+128
+-128
+16"
+2894,high_school_mathematics/test/39,high_school_mathematics,A,unbalanced_dollar,"Tìm tổng của tất cả các số nguyên $k$ sao cho $\binom{23}{4} + \binom{23}{5} = \binom{24}{k}$.
+24
+5
+3
+21"
+2895,abstract_algebra/test/97,abstract_algebra,C,subscript_underscore,"Tìm số phần tử của nhóm tuần hoàn sau: Nhóm con tuần hoàn của Z_30 được tạo ra bởi 25.
+25
+5
+6
+30"
+2924,high_school_physics/test/123,high_school_physics,A,caret_power,"Từ vị trí đứng yên, nếu ô tô tăng tốc đều trong đường thẳng với gia tốc 5 m/s^2, thì sẽ mất bao lâu để ô tô đi được quãng đường 200 m?
+9,0 giây
+10,5 giây
+12,0 giây
+15,5 giây"
+2930,high_school_mathematics/test/191,high_school_mathematics,A,"caret_power,unbalanced_dollar","Nếu $m$ và $n$ là số nguyên lẻ, thì trong quá trình khai triển của $(m+n)^6$ sẽ có bao nhiêu số lẻ?
+4
+2
+1
+9"
+2935,high_school_mathematics/test/236,high_school_mathematics,C,"unbalanced_dollar,unbalanced_dollar_count","Mười một cây bút chì bằng giá của ba cây bút máy. Nếu bảy cây bút máy có giá $\$ 9.24$, giá bao nhiêu, tính bằng xu, của một cây bút chì?
+11
+33
+36
+52"
+2936,abstract_algebra/test/6,abstract_algebra,A,markdown_table_pipe,"Tuyên bố 1 | Mọi hình ảnh đồng cấu của một nhóm G là đồng cấu với một nhóm thương của G. Tuyên bố 2 | Các hình ảnh đồng cấu của một nhóm G là giống nhau (đến đồng cấu) như các nhóm thương của G.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2954,high_school_physics/test/90,high_school_physics,C,caret_power,"Một xi lanh có piston di động chứa một khí ở áp suất P = 1 × 10^5 Pa, dung tích V = 20 cm^3, và nhiệt độ T = 273 K. Piston được di chuyển xuống một cách chậm và ổn định, cho phép nhiệt thoát ra khỏi khí và nhiệt độ giữ nguyên. Nếu thể tích cuối cùng của khí là 5 cm^3, thì áp suất kết quả sẽ là bao nhiêu?
+0,25 × 10^5 Pa
+2 × 10^5 Pa
+4 × 10^5 Pa
+8 × 10^5 Pa"
+2956,abstract_algebra/test/28,abstract_algebra,D,markdown_table_pipe,"Tuyên bố 1 | Hình ảnh của một nhóm gồm 6 phần tử dưới một ánh xạ đồng cấu có thể có 12 phần tử. Tuyên bố 2 | Tồn tại một ánh xạ đồng cấu từ một nhóm gồm 6 phần tử vào một nhóm gồm 12 phần tử nào đó.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+2961,high_school_mathematics/test/16,high_school_mathematics,A,unbalanced_dollar,"Cho $n$ là tích của hai số nguyên tố nhỏ hơn 1000 nhất. Tính tổng các chữ số của $n$.
+8
+3
+6
+9"
+2967,high_school_mathematics/test/107,high_school_mathematics,C,"raw_latex_sqrt,unbalanced_dollar","Tìm số nguyên dương nhỏ nhất của $n$ để $\sqrt{18\cdot n \cdot 34}$ là một số nguyên?
+34
+2
+17
+3"
+2976,high_school_mathematics/test/259,high_school_mathematics,A,"caret_power,unbalanced_dollar","Tìm tất cả các giá trị dương của $c$ để bất đẳng thức $x^2-6x+c<0$ có nghiệm thực cho $x$. Viết đáp án dưới dạng khoảng cách giá trị của $x$.
+(0, 9)
+(1, 1)
+(6, 0)
+(6, 6)"
+2987,high_school_chemistry/test/110,high_school_chemistry,B,caret_power,"Hòa tan 30.0 gam Ni(NO3)2 trong đủ nước để tạo thành 250 mL dung dịch. Nồng độ mol của dung dịch này là bao nhiêu?
+0,496 mol/Lít
+0,656 mol/Lít
+3,3 mol/Lít
+6,3 x 10^-3 mol/Lít"
+2992,high_school_physics/test/107,high_school_physics,D,caret_power,"Một đĩa có bán kính 0,1 mét ban đầu đứng yên chuyển động góc với gia tốc góc là 2,0 rad/s^2. Nếu chỉ quay, tính tổng quãng đường di chuyển của một điểm trên mép đĩa trong 4,0 giây.
+0,4 m
+0,8 m
+1,2 m
+1,6 m"
+3000,high_school_physics/test/36,high_school_physics,C,caret_power,"Với vận tốc ban đầu là 1.5 × 10^6 m/s, một proton đi vào một vùng không gian có một trường từ tính cố định với độ lớn là 1.5 T. Nếu vectơ vận tốc ban đầu của proton tạo một góc 30° với trường từ tính, hãy tính vận tốc của proton sau khi đi vào trong trường từ trong vòng 4 giây.
+5.0 × 10^6 m/s
+7.5 × 10^6 m/s
+1.5 × 10^6 m/s
+3.0 × 10^6 m/s"
+3043,high_school_mathematics/test/128,high_school_mathematics,C,caret_power,"Tìm diện tích của vùng thứ nhất giới hạn bởi đồ thị hàm số y = x^2, y = cos(x) và trục tung.
+0,292
+0,508
+0,547
+0,667"
+3047,elementary_mathematics/test/76,elementary_mathematics,A,"unbalanced_dollar,unbalanced_dollar_count","Thức ăn cho mèo có giá là $0,47/kg. Một bao thuận 6 kg có giá bao nhiêu?
+$2,82
+$2,97
+$6,47
+$12,77"
+3068,high_school_mathematics/test/182,high_school_mathematics,A,"raw_latex_sqrt,unbalanced_dollar","Trên hệ tọa độ Descartes, điểm $(1,2)$ và $(7, 4)$ là đỉnh đối diện của một hình vuông. Diện tích của hình vuông là bao nhiêu?
+20
+34
+40
+\sqrt{40}"
+3069,elementary_mathematics/test/219,elementary_mathematics,C,unbalanced_dollar,"Lisa sở hữu một công ty nhỏ. Thứ Hai đã thua 14 đô la và Thứ Ba đã lãi 18 đô la. Vào Thứ Tư, đã thua 6 đô la và vào Thứ Năm đã lãi 7 đô la. Tìm tổng lãi hoặc lỗ.
+$15 lãi
+$45 lỗ
+$5 lãi
+$10 lãi"
+3133,high_school_mathematics/test/46,high_school_mathematics,D,unbalanced_dollar,"Tìm số nguyên tố nhỏ nhất mà tổng các chữ số của nó bằng $19$?
+5
+11
+17
+199"
+3145,high_school_mathematics/test/226,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar,unbalanced_dollar_count","Một báo cáo tiêu dùng tiết lộ thông tin sau về ba tuýp kem đánh răng. Bright đắt hơn Fresh $60 \%$ và có thể tích ít hơn Glow $25\%$. Glow rẻ hơn Bright $25\%$ và có thể tích nhiều hơn Fresh $33\frac{1}{3} \%$. Fresh có giá $\$1.00$ cho mỗi đơn vị thể tích. Giá bao nhiêu đồng cho mỗi đơn vị thể tích của Glow?
+90
+120
+60
+320"
+3152,abstract_algebra/test/49,abstract_algebra,B,subscript_underscore,"Tìm bậc lớn nhất có thể đạt được cho một phần tử nào đó của Z_8 x Z_10 x Z_24.
+8
+120
+240
+24"
+3156,high_school_mathematics/test/34,high_school_mathematics,A,"caret_power,unbalanced_dollar","Cho $C$ là đường tròn với phương trình $x^2+12y+57=-y^2-10x$. Nếu $(a,b)$ là tâm của $C$ và $r$ là bán kính của nó, giá trị của $a + b + r$ bằng bao nhiêu?
+-9
+-5
+-6
+-57"
+3179,elementary_mathematics/test/4,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Bạn và ba người bạn đi xem một buổi hòa nhạc. Tổng chi phí cho bốn vé là $112. Viết và giải phương trình để tìm giá một vé t.
+4t = 112; $448
+4t = 112; $28
+t chia 4 bằng 112; $448
+t chia 4 bằng 112; $28"
+3209,high_school_mathematics/test/209,high_school_mathematics,A,"caret_power,unbalanced_dollar","Phần tử thứ $n^{\text{th}}$ của một dãy số học là $a\cdot r^{n-1}$, trong đó $a$ và $r$ là các số nguyên dương và $r$ lớn hơn 1. Bill chọn ra $k$ số khác nhau trong dãy này, tất cả các số đều có cùng số chữ số. Giá trị lớn nhất của $k$ là bao nhiêu?
+4
+5
+8
+16"
+3245,elementary_mathematics/test/338,elementary_mathematics,D,unbalanced_dollar,"Cái nào là món ăn ngon nhất?
+3 chai nước ép với giá $6.72
+11 chai nước ép với giá $24.86
+9 chai nước ép với giá $20.25
+16 chai nước ép với giá $35.68"
+3252,high_school_mathematics/test/159,high_school_mathematics,A,unbalanced_dollar,"Ở Học viện Học thuật, để đỗ được bài kiểm tra đại số bạn phải đạt tối thiểu $80\%$ số điểm. Nếu có 35 câu hỏi trong bài kiểm tra, bạn có thể bỏ lỡ nhiêu nhất và vẫn đỗ?
+7
+28
+35
+8"
+3260,high_school_mathematics/test/255,high_school_mathematics,B,"caret_power,unbalanced_dollar","Giả sử $f(x)$ là một hàm có tính nghịch đảo, và giả sử $f(2)=f^{-1}(2)=4$. Giá trị của $f(f(2))$ là gì?
+1
+2
+4
+0"
+3262,abstract_algebra/test/85,abstract_algebra,C,markdown_table_pipe,"Trạng thái 1 | Một ánh xạ đồng nhất là một một nếu và chỉ nếu các nhân thuộc về phần tử đơn vị một mình. Trạng thái 2 | Hình ảnh của một nhóm 6 phần tử dưới một số ánh xạ đồng nhất có thể có 4 phần tử.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+3269,high_school_mathematics/test/185,high_school_mathematics,C,raw_latex_frac,"Lắc sáu con xúc xắc 6 mặt. Xác suất để có 3 con xúc xắc hiển thị số nguyên tố và các con xúc xắc còn lại hiển thị số hợp số là bao nhiêu?
+\frac{125}{2916}
+\frac{5}{16}
+\frac{5}{54}
+\frac{5}{55}"
+3327,high_school_mathematics/test/189,high_school_mathematics,A,"caret_power,unbalanced_dollar","Cho $M=4a^2 - 2b^2 +a$. Cho $j$ là giá trị của $M$ khi $a=5$ và $b=3$, và cho $k$ là giá trị của $M$ khi $a=-1$ và $b=4$. Tính $j + 2k$.
+29
+28
+27
+26"
+3333,abstract_algebra/test/69,abstract_algebra,A,markdown_table_pipe,"Phát biểu 1 | Tồn tại một nhóm Abel tự do với mọi bậc số nguyên dương. Phát biểu 2 | Một nhóm Abel sinh hữu hạn là nhóm Abel tự do nếu số Betti bằng số phần tử trong một tập sinh.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+3355,high_school_mathematics/test/231,high_school_mathematics,C,caret_power,"Đường cong được định nghĩa bởi x^3 + xy - y^2 = 10 có đường tiếp tuyến đứng khi x =
+0 hoặc –1/3
+1,037
+2,074
+2,096"
+3378,high_school_mathematics/test/26,high_school_mathematics,D,"caret_power,unbalanced_dollar","Trong hình bình hành $ABCD$, góc $B$ có độ lớn $110^\circ$. Độ lớn góc $C$ là bao nhiêu?
+145
+90
+60
+70"
+3395,high_school_mathematics/test/194,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Khi tung ba con xúc xắc tiêu chuẩn, ta nhận được các số $a, b, c$. Tìm xác suất để $abc = 180$.
+\frac{1}{30}
+\frac{1}{72}
+\frac{1}{71}
+\frac{1}{70}"
+3404,elementary_mathematics/test/255,elementary_mathematics,A,"unbalanced_dollar,unbalanced_dollar_count","Một cửa hàng đồ thể thao đang giảm giá 10% cho các bộ trượt patin hàng đầu thường có giá $110.99. Giá bán của bộ trượt patin sau khi được giảm giá là bao nhiêu, không bao gồm thuế?
+$99.89
+$99.99
+$100.99
+$109.88"
+3423,high_school_mathematics/test/124,high_school_mathematics,D,raw_latex_frac,"Chọn ngẫu nhiên 3 lá bài từ bộ bài chuẩn gồm 52 lá. Xác suất để chúng tạo thành một đôi là bao nhiêu? (Một bài tay 3 lá được gọi là 'đôi' nếu hai lá bài có cùng mức giá, nhưng lá bài thứ ba khác. Ví dụ, 668 là một đôi, nhưng 999 không phải là đôi.)
+\frac{1}{8}
+\frac{1}{36}
+\frac{1}{78}
+\frac{72}{425}"
+3433,abstract_algebra/test/86,abstract_algebra,A,"markdown_table_pipe,subscript_underscore","Phát biểu 1 | Nếu H và K là nhóm con của nhóm G, thì |HK| = |H||K|/|H giao K|. Phát biểu 2 | Một nhóm có bậc 2p với p là số nguyên tố lẻ là chu trình hoặc đồng cấu với D_p.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+3442,abstract_algebra/test/5,abstract_algebra,A,markdown_table_pipe,"Phát biểu 1 | Nếu một nhóm có một phần tử có thứ tự là 15 thì nó phải có ít nhất 8 phần tử có thứ tự là 15. Phát biểu 2 | Nếu một nhóm có nhiều hơn 8 phần tử có thứ tự 15, nó phải có ít nhất 16 phần tử có thứ tự là 15.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+3504,high_school_chemistry/test/50,high_school_chemistry,B,caret_power,"Tìm pH của dung dịch được chuẩn bị bằng cách hòa tan 0.1665 mol axit hypochlorous (HClO) trong đủ nước để tạo ra 500 mL dung dịch? Giá trị của Ka là 3.0 x 10^-4
+1
+2
+5.4 x 10^-3
+1.76"
+3525,high_school_mathematics/test/252,high_school_mathematics,B,raw_latex_sqrt,"Khi thủy triều thay đổi, mực nước trong vịnh dao động theo hàm sin. Lúc thủy triều cao vào hôm nay lúc 8 giờ sáng, mực nước là 15 feet; sau 6 giờ đồng hồ vào thời điểm thủy triều thấp vào lúc 2 giờ chiều cùng ngày, mực nước là 3 feet. Tại thời điểm trưa hôm nay, nước đang giảm với tốc độ bao nhiêu feet trên giờ?
+3
+π\sqrt{3}/2
+3\sqrt{3}
+π\sqrt{3}"
+3531,elementary_mathematics/test/73,elementary_mathematics,C,"unbalanced_dollar,unbalanced_dollar_count","Trường Westview đang mua đồng phục bóng rổ mới. Mỗi bộ đồng phục giá $46. Trường sẽ mua 12 bộ đồng phục. Công thức nào dưới đây cho thấy cách tính tổng chi phí của các bộ đồng phục?
+(40 × 10) + (6 × 2) = 400 + 12
+(40 × 6) + (10 × 2) = 240 + 20
+(40 × 12) + (6 × 12) = 480 + 72
+(40 × 12) + (60 × 12) = 480 + 720"
+3567,high_school_mathematics/test/201,high_school_mathematics,D,raw_latex_frac,"Có một túi có 4 viên bi màu đỏ và 6 viên bi màu xanh. Lấy ra ngẫu nhiên một viên bi và không đặt lại, sau đó lấy ra thêm một viên bi. Xác suất để cả hai viên bi đều cùng màu là gì?
+\frac{1}{8}
+\frac{8}{15}
+\frac{1}{15}
+\frac{7}{15}"
+3571,high_school_mathematics/test/170,high_school_mathematics,D,unbalanced_dollar,"Ramanujan và Hardy đã chơi một trò chơi trong đó họ đều chọn một số phức. Nếu tích của số của họ là $32-8i$, và Hardy chọn $5+3i$, thì Ramanujan đã chọn số nào?
+32-8i
+5+3i
+4-i
+4-4i"
+3580,high_school_mathematics/test/71,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Tính $$\frac{-\frac{18}{7}}{-\frac{6}{5}}?$$
+\frac{7}{15}
+\frac{15}{7}
+\frac{15}{8}
+\frac{15}{11}"
+3582,high_school_mathematics/test/258,high_school_mathematics,B,raw_latex_frac,"Giả sử chúng ta tung hai con xúc xắc 6 mặt. Xác suất để tổng hai số trên hai con xúc xắc bằng 4 là bao nhiêu?
+\frac{1}{4}
+\frac{1}{12}
+\frac{1}{3}
+\frac{1}{9}"
+3594,elementary_mathematics/test/69,elementary_mathematics,D,caret_power,"Viết ra thừa số nguyên tố của 77. Sử dụng số mũ khi có thể.
+7 • 11^2 • 13
+7^2 • 11
+7 • 11 • 13
+7 • 11"
+3633,high_school_mathematics/test/221,high_school_mathematics,B,raw_latex_frac,"Năm năm trước, một máy tính làm việc chạy nhanh bằng một nửa máy tính hiện tại nhưng lại tốn gấp đôi số tiền. Tỷ lệ tốc độ giá của máy tính hiện tại so với máy tính cũ là bao nhiêu phần trăm?
+20
+400
+32
+\frac{2}{5}"
+3639,elementary_mathematics/test/124,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Sonia và Negin có tổng cộng $27.00. Sonia mua một cái áo sơ mi với giá $12.35 và Negin mua một đôi dép xăng đan với giá $10.11. Số tiền còn lại là bao nhiêu?
+$4.46
+$4.54
+$5.36
+$5.76"
+3723,high_school_physics/test/16,high_school_physics,D,caret_power,"Một chùm electron có vận tốc 10^7 m/s. Muốn sử dụng trường từ của Trái Đất, có cường độ từ là 5 × 10−5 T, để uốn chùm electron thành một vòng tròn. Bán kính của vòng tròn này sẽ là bao nhiêu?
+1 nm
+1 μm
+1 mm
+1 m"
+3757,high_school_mathematics/test/223,high_school_mathematics,A,"raw_latex_sqrt,unbalanced_dollar","Tính toán$$\lceil\sqrt{5}\rceil + \lceil\sqrt{6}\rceil + \lceil\sqrt{7}\rceil + \cdots + \lceil\sqrt{29}\rceil$$Lưu ý: Đối với một số thực $x,$ $\lceil x \rceil$ biểu thị số nguyên nhỏ nhất lớn hơn hoặc bằng $x.$
+112
+111
+2006
+110"
+3761,abstract_algebra/test/94,abstract_algebra,D,"markdown_table_pipe,subscript_underscore","Câu 1 | Q là một trường mở rộng của Z_2. Câu 2 | Mọi đa thức khác hằng số trên một trường có một số không trong một trường mở rộng nào đó.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+3766,high_school_mathematics/test/173,high_school_mathematics,C,"caret_power,raw_latex_frac,unbalanced_dollar","Chiều cao (theo mét) của viên đạn bắn theo quỹ đạo được cho bởi $h(t)=-4,9t^2+14t-0,4$ vào thời điểm $t$ (theo giây). Dưới dạng phân số không tối giản, trong bao lâu viên đạn nằm trên độ cao $6$ mét?
+\frac{5}{7}
+\frac{7}{12}
+\frac{12}{7}
+\frac{7}{5}"
+3772,high_school_mathematics/test/62,high_school_mathematics,A,caret_power,"Nếu f(x) = x^3 + 2x^2 - 9x - 18, câu nào sau đây là đúng?
+f(x) = 0 có ba giá trị thực.
+f(x) ≥ -18 với các giá trị x ≥ 0.
+f(x) ≤ -18 với các giá trị x ≤ 0.
+Hàm số f(x) giảm với x ≤ -3."
+3789,abstract_algebra/test/57,abstract_algebra,B,subscript_underscore,"Tìm phần tử tạo ra trường hữu hạn Z_11.
+1
+2
+3
+4"
+3798,high_school_mathematics/test/268,high_school_mathematics,D,raw_latex_frac,"Bob lắc một con xúc xắc có sáu mặt đều vào mỗi sáng. Nếu Bob lắc được một số hợp số, anh ấy ăn bột ngọt. Nếu anh ấy lắc được một số nguyên tố, anh ấy ăn bột không ngọt. Nếu Bob lắc được số 1, thì anh ta sẽ lắc lại. Trong một năm không nhuận, số lần Bob lắc xúc xắc trung bình là bao nhiêu lần?
+\frac{5}{8}
+\frac{1825}{4}
+\frac{5}{4}
+438"
+3867,abstract_algebra/test/79,abstract_algebra,C,markdown_table_pipe,"Phát biểu 1 | Nếu K là một con đoàn khác không bằng không của một nhóm đa thức tự do abelian có hữu hạn số phần tử sinh thì K là abelian tự do. Phát biểu 2 | Nếu K là một con đoàn khác không bằng không của một nhóm đa thức tự do abelian có hữu hạn số phần tử sinh thì G/K cũng là abelian tự do.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+3914,high_school_physics/test/120,high_school_physics,D,caret_power,"Một vật có khối lượng 6 N và dung tích là 2 x 10^-3 m^3 được đặt vào trong một thùng nước, vật này nổi trên bề mặt nước. Tính phần trăm khối lượng của vật nổi trên bề mặt nước?
+12%
+30%
+60%
+70%"
+3971,abstract_algebra/test/41,abstract_algebra,A,subscript_underscore,"Tìm đặc trưng của nhóm Z_3 x 3Z.
+0
+3
+12
+30"
+4002,high_school_mathematics/test/88,high_school_mathematics,D,unbalanced_dollar,"Khi đồ thị của hàm số $f(x)$ nhất định được dịch $2$ đơn vị sang phải và co giãn theo chiều dọc bởi một hệ số $2$ (nghĩa là tất cả các tọa độ $y$ được nhân đôi), hình dạng kết quả sẽ giống với đồ thị ban đầu. Cho biết $f(0)=0.1$, $f(10)$ bằng bao nhiêu?
+0,01
+1
+32
+3,2"
+4018,elementary_mathematics/test/340,elementary_mathematics,C,"unbalanced_dollar,unbalanced_dollar_count","Tìm giá trị trung vị trong tập dữ liệu $79.88, $21.88, $29.88, $19.88, $17.88.
+$17.88
+$19.88
+$21.88
+$29.88"
+4019,high_school_chemistry/test/169,high_school_chemistry,D,caret_power,"Xác định nồng độ H+(aq) trong dung dịch 1.0 M phenol, C6H5OH. (Kw cho phenol là 1x10^-10.)
+1 x 10^-10 M
+1 x 10^-9 M
+1 x 10^-3 M
+1 x 10^-5 M"
+4029,high_school_mathematics/test/175,high_school_mathematics,C,unbalanced_dollar,"Cho biểu thức: $1990\times1991 - 1989\times1990$. Số đếm nào tương đương với biểu thức?
+5
+8
+3980
+1160"
+4041,conceptual_physics/test/191,conceptual_physics,A,caret_power,"Khi bạn thả một quả bóng từ vị trí nghỉ, nó tăng tốc xuống với gia tốc là 9.8 m/s^2. Nếu thay vì đó bạn ném nó xuống dưới (giả sử không có kháng lực của không khí), gia tốc của nó ngay sau khi rời tay bạn là
+9.8 m/s2
+lớn hơn 9.8 m/s2
+nhỏ hơn 9.8 m/s2
+Không thể nói nếu không biết vận tốc khi ném."
+4094,high_school_mathematics/test/7,high_school_mathematics,A,"caret_power,unbalanced_dollar","Tính tổng tất cả các số nguyên dương $ n $ sao cho $ n ^ 2 $ là một thừa số của $ 1200 $?
+42
+12
+36
+39"
+4133,high_school_mathematics/test/257,high_school_mathematics,B,unbalanced_dollar,"Hãy xét hai số chẵn dương nhỏ hơn $15$ (không nhất thiết phải khác nhau). Khi tổng của hai số này được cộng với tích của chúng, có bao nhiêu giá trị khác nhau có thể có?
+21
+27
+49
+45"
+4143,abstract_algebra/test/24,abstract_algebra,B,markdown_table_pipe,"Tuyên bố 1 | Mọi lý tưởng cực đại đều là lý tưởng nguyên. Tuyên bố 2 | Nếu I là một lý tưởng cực đại của một nhóm trường giao hoán R, thì R/I là trường.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+4160,high_school_physics/test/52,high_school_physics,D,caret_power,"Một vật có khối lượng 2 kg chịu tác dụng của ba lực ngoài cùng, mỗi lực có cường độ 4 N. Trong số các lựa chọn sau, lựa chọn nào KHÔNG PHẢI là gia tốc kết quả của vật?
+0 m/s^2
+2 m/s^2
+4 m/s^2
+8 m/s^2"
+4175,high_school_statistics/test/25,high_school_statistics,D,unbalanced_dollar,"Một công ty lớn có văn phòng ở hai địa điểm, một ở New Jersey và một ở Utah. Mức lương trung bình của trợ lý văn phòng tại văn phòng New Jersey là $28,500. Mức lương trung bình của trợ lý văn phòng tại văn phòng Utah là $22,500. Văn phòng New Jersey có 128 trợ lý văn phòng và văn phòng Utah có 32 trợ lý văn phòng. Mức lương trung bình được trả cho trợ lý văn phòng trong công ty này là bao nhiêu?
+$22,500
+$23,700
+$25,500
+$27,300"
+4177,high_school_mathematics/test/115,high_school_mathematics,A,"caret_power,raw_latex_sqrt,unbalanced_dollar","Hình tròn $2x^2 = -2y^2 + 12x - 4y + 20$ được khắc nằm trong hình vuông có một cặp cạnh song song với trục x. Diện tích của hình vuông là bao nhiêu?
+80
+\sqrt{20}
+2\sqrt{20}
+20"
+4203,high_school_mathematics/test/222,high_school_mathematics,B,raw_latex_frac,"Ben lắc hai con xúc xắc có sáu mặt đồng chất. Giá trị trung bình của số lớn hơn trong hai số được lắc là bao nhiêu? Trả lời dưới dạng phân số. (Nếu hai số là giống nhau, chúng ta sẽ lấy số đó là số ""lớn"" hơn.)
+\frac{161}{6}
+\frac{161}{36}
+161
+\frac{161}{3}"
+4227,high_school_mathematics/test/109,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Chuyển đổi thành phân số thông thường số nghịch đảo của $0.\overline7$.
+\frac{7}{2}
+\frac{7}{9}
+\frac{9}{2}
+\frac{9}{7}"
+4234,abstract_algebra/test/4,abstract_algebra,B,"caret_power,subscript_underscore","Tìm tích của hai đa thức được cho trong trường đa thức được cho. f(x) = 4x - 5, g(x) = 2x^2 - 4x + 2 trong Z_8[x].
+2x^2 + 5
+6x^2 + 4x + 6
+0
+x^2 + 1"
+4278,high_school_physics/test/114,high_school_physics,C,caret_power,"Một cái bàn hỗ trợ một khối gỗ được đặt trên mặt bàn. Lực căn bản của tự nhiên nào chịu trách nhiệm cho sự tương tác này, và tại sao?
+Lực điện, vì các proton trong lõi nguyên tử của lớp trên của bàn đẩy lõi nguyên tử của lớp dưới của gỗ.
+Lực hấp dẫn, vì theo công thức F = GMm/r^2, lực của bàn lên gỗ ở khoảng cách đó đủ để cân bằng lực của Trái Đất lên gỗ.
+Lực điện, vì các electron ngoài cùng trong lớp trên của bàn đẩy các electron ngoài cùng của lớp dưới của gỗ.
+Lực hạt nhân mạnh, vì các proton trong lõi nguyên tử của lớp trên của bàn đẩy lõi nguyên tử của lớp dưới của gỗ."
+4282,high_school_physics/test/76,high_school_physics,B,caret_power,"Dữ liệu được thu thập trong một thí nghiệm được tiến hành với một khí lý tưởng. Trong thí nghiệm, nhiệt độ (tính bằng độ K) là biến độc lập và thể tích (tính bằng m^3) là biến phụ thuộc. Nếu ta vẽ một biểu đồ với biến phụ thuộc trên trục đứng, thì điều gì đúng về độ dốc và điểm chéo trục của đồ thị?
+Độ dốc sẽ tỉ lệ thuận với áp suất của khí và điểm chéo trục sẽ bằng 0 m^3.
+Độ dốc sẽ tỉ lệ nghịch với áp suất của khí và điểm chéo trục sẽ bằng 0 m^3.
+Độ dốc sẽ tỉ lệ thuận với áp suất của khí và điểm chéo trục sẽ không bằng 0 m^3.
+Độ dốc sẽ tỉ lệ nghịch với áp suất của khí và điểm chéo trục sẽ không bằng 0 m^3."
+4284,high_school_physics/test/45,high_school_physics,B,caret_power,"Đặt một khối nhựa rắn có khối lượng 100 kg và mật độ đồng nhất (độ dài cạnh bằng 0,5 m) trong một bồn chứa chất lỏng có mật độ là 1200 kg/m^3. Phần bao nhiêu của khối lập phương nổi trên mặt của chất lỏng?
+1.0/9
+1.0/3
+2.0/3
+4.0/5"
+4316,high_school_mathematics/test/144,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Tìm thương lớn nhất có thể của hai phần tử khác nhau trong tập hợp $\{\frac{2}{5}, \frac{1}{2},5,10\}$? Cụ thể, chúng ta muốn tối đa hóa $\frac{x}{y}$, trong đó $x$ và $y$ được chọn từ tập trước đó.
+5
+10
+20
+25"
+4342,high_school_mathematics/test/47,high_school_mathematics,A,"caret_power,raw_latex_sqrt,unbalanced_dollar","Phạm vi của hàm số $h(x) = \sqrt{25-x^2}+\sqrt{-(x-2)}$ là một khoảng có độ dài bao nhiêu?
+7
+5
+2
+25"
+4348,high_school_mathematics/test/73,high_school_mathematics,C,"caret_power,unbalanced_dollar","Nếu $(2x + 3y)^2 = 4$ và $xy = -5$, giá trị của $4x^2 + 9y^2$ là gì?
+-5
+13
+64
+25"
+4352,elementary_mathematics/test/308,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Roya đã trả $48 cho 12 thùng nước cam. Tỷ lệ đơn vị mỗi thùng nước cam mà Roya trả là bao nhiêu?
+$3
+$4
+$6
+$12"
+4395,high_school_mathematics/test/132,high_school_mathematics,D,unbalanced_dollar,"Để tất cả các số thực $r$ và $s$, định nghĩa phép toán toán học $\#$ sao cho các điều kiện sau được thỏa mãn: $r\ \#\ 0 = r, r\ \#\ s = s\ \#\ r$, và $(r + 1)\ \#\ s = (r\ \#\ s) + s + 1$. Giá trị của $11\ \#\ 5$ là gì?
+11
+12
+64
+71"
+4432,high_school_mathematics/test/157,high_school_mathematics,D,unbalanced_dollar,"Nếu một số nguyên kết thúc bằng chữ số $0$ và tổng các chữ số của nó chia hết cho $3$, thì có bao nhiêu trong số các số $2, 3, 4, 5, 6, 8, 9$ phải chia hết cho số đó?
+1
+2
+3
+4"
+4446,elementary_mathematics/test/141,elementary_mathematics,C,caret_power,"Tính giá trị của biểu thức (c^2 − b^2)^2 + a^2 cho a = 5, b = 3, và c = 2.
+194
+18
+50
+0"
+4469,high_school_mathematics/test/238,high_school_mathematics,B,"raw_latex_frac,raw_latex_sqrt,unbalanced_dollar","Đơn giản hóa phân số bằng cách làm mẫu số trùng với các căn số hạng: $$\frac{4}{\sqrt{108}+2\sqrt{12}+2\sqrt{27}}.$$
+\frac{4\sqrt{3}}{33}
+\frac{\sqrt{3}}{12}
+2\sqrt{27}
+\frac{1}{4\sqrt{3}}"
+4478,high_school_chemistry/test/100,high_school_chemistry,B,caret_power,"Joseph Priestly đã phát hiện ra khí ôxy bằng cách phân hủy oxit thủy ngân(II) rắn, HgO, thành khí ôxy, O2, và kim loại thủy ngân lỏng , Hg. Bao nhiêu mol khí ôxy sẽ tạo thành khi 4,32 gam oxit thủy ngân(II) rắn phân hủy? Khối lượng công thức của oxit thủy ngân(II) là 216 g mol^-1.
+0,100 mol
+0,0100 mol
+0,0200 mol
+0,0150 mol"
+4500,abstract_algebra/test/72,abstract_algebra,D,caret_power,"Sử dụng định lý Fermat, tìm phần dư của 3^47 khi chia cho 23.
+1
+2
+3
+4"
+4501,high_school_mathematics/test/93,high_school_mathematics,D,caret_power,"Cơ sở của một khối đặc là vùng được bao quanh bởi phương trình x ^ 2 = 4y và đường thẳng y = 2 và mỗi mặt phẳng vuông góc với trục y là một hình vuông. Thể tích của khối đặc là
+8
+16
+20
+32"
+4511,high_school_mathematics/test/225,high_school_mathematics,C,caret_power,"Nếu f(x) = 3x, g(x) = 5x + 3, và h(x) = 1 - x^2, thì f(g(h(x)))=
+15x^2 + 15
+-15x^2 + 18
+-15x^2 + 24
+-225x^2 + 90x - 8"
+4519,high_school_physics/test/125,high_school_physics,A,caret_power,"Một học sinh đẩy một quả bóng trên một cái bàn, di chuyển từ vị trí x = 0 đến vị trí x = 0,2 mét. Sau khi thả tay, quả bóng tiếp tục di chuyển trên bàn và dừng ở vị trí x = 1,2 mét. Khi quả bóng ở vị trí x = 1,0 mét, khẳng định nào sau đây về lực tương tự trên quả bóng là đúng?
+Lực tương tự là hướng âm, vì quả bóng đang di chuyển theo hướng dương nhưng từ từ chậm lại.
+Lực tương tự hướng xuống, vì quả bóng gần Trái Đất, nơi gia tốc trọng trường là 10 m/s^2 hướng xuống.
+Lực tương tự hướng dương, vì lực đẩy của học sinh khiến quả bóng tăng tốc theo hướng dương.
+Lực tương tự bằng không, vì lực đẩy theo hướng dương của học sinh phải bằng với lực ma sát theo hướng âm."
+4522,high_school_mathematics/test/114,high_school_mathematics,D,"caret_power,raw_latex_frac,unbalanced_dollar","Giải phương trình cho $x$:$$\left(\frac{1}{25}\right)^{x + 2} = 125^{-x}.$$
+1
+2
+3
+4"
+4539,high_school_mathematics/test/3,high_school_mathematics,B,raw_latex_frac,"Mỗi bữa ăn sáng, trưa và tối, Joe có thể chọn ngẫu nhiên với các xác suất bằng nhau một quả táo, một quả cam hoặc một quả chuối để ăn. Trong một ngày cụ thể, xác suất Joe sẽ ăn ít nhất hai loại trái cây khác nhau là bao nhiêu?
+\frac{7}{9}
+\frac{8}{9}
+\frac{5}{9}
+\frac{9}{11}"
+4556,high_school_mathematics/test/31,high_school_mathematics,A,"caret_power,unbalanced_dollar","Tìm khoảng cách ngắn nhất từ gốc tọa độ tới đường tròn được xác định bởi $x^2-24x +y^2+10y +160=0$?
+10
+16
+24
+12"
+4584,high_school_statistics/test/202,high_school_statistics,D,"unbalanced_dollar,unbalanced_dollar_count","Văn phòng hỗ trợ tài chính tại một trường đại học công lập thực hiện một nghiên cứu để xác định tổng chi phí của sinh viên mỗi kỳ học. Tất cả sinh viên sẽ phải trả $4500 cho học phí. Chi phí trung bình cho sách là $350 với độ lệch chuẩn là $65. Chi phí trung bình cho ở và ăn uống là $2800 với độ lệch chuẩn là $380. Chi tiêu cá nhân trung bình là $675 với độ lệch chuẩn là $125. Giả định độc lập giữa các danh mục, độ lệch chuẩn cho tổng chi phí của sinh viên là bao nhiêu?
+$24
+$91
+$190
+$405"
+4606,high_school_mathematics/test/123,high_school_mathematics,B,"caret_power,raw_latex_sqrt,unbalanced_dollar","Khi $(x\sqrt{x^3})^4$ được đơn giản hóa, số mũ của $x$ là bao nhiêu?
+5
+10
+2
+12"
+4612,elementary_mathematics/test/207,elementary_mathematics,B,caret_power,"Số nào được viết dưới dạng số mũ tương đương với 343?
+3^7
+7^3
+7^49
+294^49"
+4617,high_school_chemistry/test/49,high_school_chemistry,A,caret_power,"Một loại vật liệu phóng xạ nhất định có nửa đời là 36 phút. Bắt đầu với 10,00 gram của vật liệu này, còn lại bao nhiêu gam sau 2 giờ?
+1,00 gam
+1,5 × 10^-4 gam
+3,33 gam
+0,25 gam"
+4622,high_school_physics/test/66,high_school_physics,C,caret_power,"Một proton đi với vận tốc ban đầu là 1.5 × 10^6 m/s, đi vào một khu vực từ trường đều, B, có độ lớn là 1.0 T. Nếu vector vận tốc ban đầu của proton tạo một góc 30° với hướng của B, hãy tính vận tốc của proton sau 4 giây đi vào vùng từ.
+5.0 × 10^5 m/s
+7.5 × 10^5 m/s
+1.5 × 10^6 m/s
+3.0 × 10^6 m/s"
+4631,high_school_mathematics/test/208,high_school_mathematics,A,unbalanced_dollar,"Đồ thị của phương trình $x + 2y + 3 = 0$ vuông góc với đồ thị của phương trình $ax + 2y + 3 = 0$. Giá trị của $a$ là bao nhiêu?
+-4
+-13
+-9
+-15"
+4634,abstract_algebra/test/22,abstract_algebra,D,"caret_power,markdown_table_pipe","Phát biểu 1 | Bất kỳ cặp vector nào trong không gian R^2 đều độc lập tuyến tính. Phát biểu 2 | Nếu V = span(v1, ... , vk) và {v1, ... , vk} độc lập tuyến tính, thì dim(V) = k.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+4643,abstract_algebra/test/44,abstract_algebra,C,markdown_table_pipe,"Hãy cho A và B là các tập hợp, f: A -> B và g: B -> A là hàm sao cho với mọi a \in A, g(f(a)) = a. Tuyên bố 1 | Hàm f phải thuộc tính khác nhau (injective). Tuyên bố 2 | Hàm f phải thuộc tính nghịch đảo (surjective).
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+4669,high_school_mathematics/test/240,high_school_mathematics,A,raw_latex_frac,"Bốn gói hàng được giao tới bốn căn nhà, mỗi căn nhà có một gói hàng. Nếu những gói hàng này được giao ngẫu nhiên, xác suất để chính xác hai trong số chúng được giao đến đúng những căn nhà là bao nhiêu? Biểu thị câu trả lời dưới dạng phân số tối giản.
+\frac{1}{4}
+\frac{27}{128}
+\frac{1}{2}
+\frac{1}{9}"
+4673,high_school_mathematics/test/50,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Như một hình phạt vì hành vi xấu trong giờ giải lao, cô Busywork đã yêu cầu lớp của mình nhân 10 với $\frac{1}{3}$ năm lần. Tuy nhiên, John đã nhận ra rằng có thể nhân 10 với một phân số đơn và vẫn nhận được cùng một kết quả như học sinh khác. Phân số đơn này là gì?
+\frac{1}{27}
+\frac{1}{68}
+\frac{1}{3}
+\frac{1}{243}"
+4679,elementary_mathematics/test/96,elementary_mathematics,C,unbalanced_dollar,"Tháng 12, một cửa hàng đồ chơi đã bán 934 trò chơi ghép hình. Mỗi trò chơi ghép hình có giá là 6 đô la, bao gồm cả thuế. Tổng chi phí của các trò chơi ghép hình đã bán là bao nhiêu, bao gồm cả thuế?
+$5,434
+$5,484
+$5,604
+$5,684"
+4689,high_school_mathematics/test/205,high_school_mathematics,D,caret_power,"Cho số phức z = a + bi, biết rằng a và b là số nguyên dương và z^3 + z^2 + z là một số thực. Tìm giá trị nhỏ nhất có thể của b.
+10
+1
+6
+11"
+4697,elementary_mathematics/test/232,elementary_mathematics,D,caret_power,"Viết phân tích thành thừa số nguyên tố của số 48. Sử dụng mũ để tối giản.
+4 • 8
+6 • 8
+2^3 • 3^2
+2^4 • 3"
+4744,high_school_physics/test/115,high_school_physics,D,caret_power,"Trong các phương án sau, cái nào KHÔNG bằng một tesla?
+1 J/(A*m^2)
+1 kg/(C*s)
+1 N/(A*m)
+1 A*N/V"
+4781,abstract_algebra/test/66,abstract_algebra,D,markdown_table_pipe,"Câu 1 | Nếu R là một vòng và f(x) và g(x) thuộc R[x], thì deg (f(x)+g(x)) = max (deg f(x), deg g(x)). Câu 2 | Nếu F là một trường thì mọi lý thuyết của F[x] đều là nguyên tố.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+4821,abstract_algebra/test/88,abstract_algebra,A,subscript_underscore,"Tính tích trong vòng này. (12)(16) trong Z_24
+0
+1
+4
+6"
+4847,abstract_algebra/test/21,abstract_algebra,A,"caret_power,subscript_underscore","Tìm tổng của đa thức đã cho trong vòng tròn đa thức đã cho. f(x) = 4x - 5, g(x) = 2x^2 - 4x + 2 trong Z_8[x].
+2x^2 + 5
+6x^2 + 4x + 6
+0
+x^2 + 1"
+4858,elementary_mathematics/test/216,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Maria chi tiêu $9 cho bữa trưa mỗi ngày cô ấy đi làm. Để tính số tiền cô ấy chi tiêu cho bữa trưa trong vòng một tuần làm việc 5 ngày, cô ấy nhân 5 x 9. Maria chi tiêu bao nhiêu tiền cho bữa trưa trong vòng một tuần làm việc 5 ngày?
+$40
+$45
+$50
+$59"
+4873,high_school_mathematics/test/20,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Tìm nghịch đảo của $f(x)=4-5x$?
+\frac{5}{x-4}
+\frac{x-4}{5}
+\frac{x+4}{5}
+-\frac{x-4}{5}"
+4896,high_school_mathematics/test/228,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Tìm số nguyên dương nhỏ nhất $n$ sao cho $\frac{1}{n}$ là một thập phân chấm dứt và $n$ chứa chữ số 9?
+32
+64
+4096
+256"
+4931,abstract_algebra/test/32,abstract_algebra,A,"markdown_table_pipe,subscript_underscore","Tuyên bố 1 | Trong không gian vector hữu hạn chiều, mọi tập vector độc lập tuyến tính được chứa trong một cơ sở. Tuyên bố 2 | Nếu B_1 và B_2 là hai cơ sở của cùng một không gian vector, thì |B_1| = |B_2|.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+4995,high_school_mathematics/test/203,high_school_mathematics,B,"markdown_table_pipe,unbalanced_dollar","Tìm tổng tất cả các số nguyên thỏa mãn $|n| < |n-3| < 9$?
+-9
+-14
+14
+9"
+5004,elementary_mathematics/test/306,elementary_mathematics,B,caret_power,"Một cánh đồng có hình dạng là một hình thang. Đáy nhỏ của hình thang dài 130 yard và đáy lớn dài 390 yard. Khoảng cách giữa hai đáy là 75 yard. Diện tích của cánh đồng là bao nhiêu?
+9.750 yards^2
+19.500 yards^2
+29.250 yards^2
+39.000 yards^2"
+5063,high_school_mathematics/test/234,high_school_mathematics,D,"caret_power,raw_latex_frac,unbalanced_dollar","Tính giá trị của $\left(\frac{1}{a}\right)^4 \cdot 2 \cdot a^4+a^{2+1-3}$ khi $a=42$.
+0
+1
+2
+3"
+5075,abstract_algebra/test/42,abstract_algebra,B,markdown_table_pipe,"Phát biểu 1 | Một nhóm abelian có bậc 45 có một phân nhóm có bậc 10. Phát biểu 2 | H là một phân nhóm của nhóm G là một phân nhóm bình thường nếu và chỉ nếu số lượng phần tử trong tập các coset trái của H bằng số lượng phần tử trong tập các coset phải của H.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5079,high_school_mathematics/test/142,high_school_mathematics,D,"caret_power,unbalanced_dollar","Đơn giản hóa biểu thức sau: $(9x^9+7x^8+4x^7) + (x^{11}+x^9+2x^7+3x^3+5x+8).$ Trình bày phương trình kết quả dưới dạng đa thức với các bậc của các thuộc tính giảm dần.
+x^{11}+2x^9+2x^8
+x^{11}-6x^8+6x^7+3x^3+5x+8
+x^11 + 10x^9 + 7x^8+6x^73x^3+5x+8
+x^{11}+10x^9+7x^8+6x^7+3x^3+5x+8"
+5099,high_school_mathematics/test/147,high_school_mathematics,C,raw_latex_frac,"Chọn ngẫu nhiên và độc lập ba điểm trên một đường tròn. Xác suất để tất cả ba khoảng cách giữa các cặp điểm đều nhỏ hơn bán kính của đường tròn là gì?
+\frac{1}{20}
+\frac{1}{32}
+\frac{1}{12}
+\frac{1}{16}"
+5104,abstract_algebra/test/55,abstract_algebra,A,markdown_table_pipe,"Lệnh 1 | Mọi nhóm Abel tự do đều là nhóm không chùn. Lệnh 2 | Mọi nhóm Abel không chùn và sinh hữu hạn đều là nhóm Abel tự do.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5116,high_school_mathematics/test/19,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Phạm vi của hàm số $f(x) = \frac{1}{1-x}$ là gì? Biểu diễn câu trả lời của bạn dưới dạng khoảng.
+(-\infty,-1)\cup (1,\infty)
+(-\infty,0)\cup (0,\infty)
+[-1,1]
+(-1,1)"
+5132,high_school_physics/test/13,high_school_physics,B,caret_power,"Một quả cầu rắn (I = 0.06 kg·m^2) xoay tự do quanh một trục đi qua tâm của nó với vận tốc góc là 20 rad/s. Mong muốn đưa quả cầu dừng lại bằng cách áp dụng một lực ma sát có độ lớn là 2.0 N lên bề mặt ngoài của quả cầu, cách tâm của quả cầu 0.30 m. Thời gian cần để quả cầu dừng lại là bao nhiêu?
+4 giây
+2 giây
+0.06 giây
+0.03 giây"
+5206,high_school_mathematics/test/206,high_school_mathematics,A,unbalanced_dollar,"Các số $x$ và $y$ nghịch đảo tỉ lệ. Khi tổng của $x$ và $y$ là 42, $x$ bằng hai lần $y$. Giá trị của $y$ khi $x=-8$ là bao nhiêu?
+-49
+-7
+-40
+40"
+5215,abstract_algebra/test/60,abstract_algebra,D,markdown_table_pipe,"Phát biểu 1 | Đơn vị của khóm con phải giống với đơn vị của vòng. Phát biểu 2 | Mọi trường số là miền nguyên.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5233,abstract_algebra/test/51,abstract_algebra,B,"caret_power,subscript_underscore","Tìm tất cả c trong Z_3 sao cho Z_3[x]/(x^3 + cx^2 + 1) là một trường.
+0
+2
+1
+3"
+5241,elementary_mathematics/test/310,elementary_mathematics,D,"unbalanced_dollar,unbalanced_dollar_count","Molly cắt tóc với giá $25 và để lại 15% tiền boa. Tổng tiền tốn của Molly là bao nhiêu?
+$25.15
+$26.50
+$27.50
+$28.75"
+5259,high_school_mathematics/test/1,high_school_mathematics,C,"raw_latex_sqrt,unbalanced_dollar","Chiều dài của hình chữ nhật là gấp đôi chiều rộng của nó. Cho độ dài của đường chéo là $5\sqrt{5}$, tìm diện tích của hình chữ nhật.
+2500
+2
+50
+25"
+5267,high_school_mathematics/test/68,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Một điểm $(x,y)$ được chọn ngẫu nhiên từ phía bên trong hình chữ nhật có các đỉnh là $(0,0)$, $(3,0)$, $(3,2)$, và $(0,2)$. Xác suất để $x<y$ là bao nhiêu?
+\frac{1}{12}
+\frac{1}{6}
+\frac{2}{3}
+\frac{1}{3}"
+5300,high_school_physics/test/110,high_school_physics,B,caret_power,"Trạm Vũ trụ quay quanh Trái Đất cách mặt đất 300 km; bán kính Trái Đất là 6400 km. Gia tốc do trọng lực của Trái Đất tác động lên Trạm Vũ trụ là bao nhiêu?
+4.9 m/s^2
+8.9 m/s^2
+9.8 m/s^2
+10.8 m/s^2"
+5314,abstract_algebra/test/56,abstract_algebra,D,markdown_table_pipe,"Phát biểu 1 | 4x - 2 không thể phân tích được trên Z. Phát biểu 2 | 4x - 2 không thể phân tích được trên Q.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5352,high_school_physics/test/64,high_school_physics,C,caret_power,"Vòng khí helium được bơm đầy khí và được đo chu vi ở ba điều kiện khác nhau: ở nhiệt độ phòng, sau khi đi vào lò nóng trong 30 phút và sau khi vào tủ đông trong 30 phút. Nếu một học sinh biểu diễn tính bình phương của chu vi C^3 theo nhiệt độ T, người đó nên mong đợi nhìn thấy cái gì trong số những cái dưới đây?
+mối quan hệ bậc 3 giữa C^3 và T
+mối quan hệ nghịch đảo giữa C^3 và T
+một nhiệt độ ước tính T khi nào C^3 đạt tới giá trị bằng 0
+giá trị lớn nhất của C^3 khi nhiệt độ T tăng lên"
+5355,high_school_physics/test/94,high_school_physics,D,caret_power,"Tàu con thoi quỹ đạo ở độ cao 300 km so với bề mặt Trái Đất; bán kính Trái Đất là 6.400 km. Gia tốc điều kiển mà tàu con thoi trải qua là bao nhiêu?
+Không
+4,9 m/s^2
+9,8 m/s^2
+8,9 m/s^2"
+5357,abstract_algebra/test/33,abstract_algebra,C,caret_power,"Một nhóm G, 0 đã được biết là Abel. Vậy câu nào sau đây là ĐÚNG với G?
+g = g^-1 cho mọi g trong G
+g = g^2 cho mọi g trong G
+(g o h)^2 = g^2 o h^2 cho mọi g,h trong G
+G có số lượng phần tử hữu hạn"
+5420,high_school_mathematics/test/224,high_school_mathematics,D,unbalanced_dollar,"Diện tích, tính bằng đơn vị vuông, của một hình vuông có độ dài cạnh bằng bán kính của một hình tròn có chu vi là $12\pi$ đơn vị là gì?
+10
+11
+12
+36"
+5467,abstract_algebra/test/98,abstract_algebra,C,subscript_underscore,"Phần tử (4, 2) của Z_12 x Z_8 có thứ tự là
+4
+8
+12
+6"
+5478,high_school_mathematics/test/146,high_school_mathematics,A,"caret_power,unbalanced_dollar","Giả sử cho một số a,b,c bất kỳ thỏa mãn $a+b+c = 6$, $ab+ac+bc = 5$ và $abc = -12$. Tính $a^3+b^3+c^3$?
+90
+99
+64
+91"
+5503,high_school_mathematics/test/18,high_school_mathematics,A,"caret_power,unbalanced_dollar","Nếu $f(x)=ax^6-bx^4+x-1$ và $f(2)=5$, thì giá trị của $f(-2)$ là gì?
+1
+3
+0
+5"
+5523,high_school_mathematics/test/101,high_school_mathematics,D,"caret_power,unbalanced_dollar","Giả sử $f(x) = 3x^2-2$ và $g(f(x)) = x^2 + x +1$. Hãy tìm tổng của tất cả các giá trị có thể của $g(25)$.
+13
+25
+9
+20"
+5571,abstract_algebra/test/30,abstract_algebra,B,markdown_table_pipe,"Phát biểu 1 | Nếu H là một nhóm con của nhóm G và a thuộc G, thì aH = Ha. Phát biểu 2 | Nếu H là một nhóm bình thường của G và a thuộc G, thì ah = ha cho tất cả các h thuộc H.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5597,high_school_mathematics/test/134,high_school_mathematics,B,unbalanced_dollar,"Một chiếc áo có giá niêm yết là 325,00 đô la. Trong tháng 11, áo không được bán và người bán đã giảm giá nó đi 20%. Sau đó vào tháng 12, họ giảm thêm 10%. Một người mua đồ giáng sinh vào tháng 12 sẽ trả bao nhiêu tiền cho chiếc áo này?
+$227,50
+$234,00
+$286,00
+$290,00"
+5635,high_school_mathematics/test/249,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Tìm khoảng cách gồm tất cả $u$ sao cho cả $2u$ và $-20u$ đều không thuộc khoảng $(-\infty, -1)$?
+[-\frac{1}{2}, 0]
+[-1,1]
+[-\frac{1}{2}, -\frac{1}{20}]
+[0,2]"
+5638,elementary_mathematics/test/214,elementary_mathematics,A,unbalanced_dollar,"Peter làm việc 38 giờ một tuần và nhận được $7.25 mỗi giờ. Nhà tuyển dụng của anh ta đã tăng lương cho anh ta, từ đó tăng tổng thu nhập hàng tuần lên $307.80. Tăng thu nhập hàng tuần của Peter là bao nhiêu?
+$32.30
+$34.70
+$42.46
+$275.50"
+5651,high_school_mathematics/test/195,high_school_mathematics,C,unbalanced_dollar,"Một hộp chứa 5 quả bóng xanh và $k$ quả bóng tím, trong đó $k$ là một số nguyên dương không xác định. Một quả bóng được rút ngẫu nhiên từ hộp. Nếu rút được một quả bóng xanh, người chơi sẽ trúng 2 đô la, nhưng nếu rút được một quả bóng tím, người chơi sẽ mất 2 đô la. Nếu giá trị kì vọng của số tiền được trúng trong trò chơi là 50 xu, thì giá trị của $k$ là bao nhiêu?
+6
+12
+3
+4"
+5654,abstract_algebra/test/39,abstract_algebra,D,markdown_table_pipe,"Khẳng định 1 | Mọi hoán vị đều là chu trình. Khẳng định 2 | Mọi chu trình đều là hoán vị.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5668,abstract_algebra/test/68,abstract_algebra,A,"caret_power,subscript_underscore","Đa thức x^4 + 4 có thể phân giải thành nhân tử tuyến tính trong Z_5[x]. Hãy tìm phân giải này.
+(x − 2)(x + 2)(x − 1)(x + 1)
+(x+1)^4
+(x-1)(x+1)^3
+(x-1)^3(x+1)"
+5682,abstract_algebra/test/31,abstract_algebra,B,caret_power,"Nếu (G, .) là một nhóm sao cho (ab)^-1 = a^-1b^-1, với mọi a, b thuộc G, thì G là một
+bán nhóm giao hoán
+nhóm Abel
+nhóm không giao hoán
+Không có lựa chọn nào đúng"
+5709,high_school_mathematics/test/91,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Cho $f(x)=3x+4$ và $g(x)=2x-3$. Nếu $h(x)=f(g(x))$, thì nghịch đảo của $h(x)$ là gì?
+\frac{x-5}{3}
+\frac{x+5}{3}
+\frac{x+5}{6}
+\frac{x-5}{6}"
+5719,high_school_mathematics/test/55,high_school_mathematics,A,"caret_power,raw_latex_frac,raw_latex_sqrt,unbalanced_dollar","Hãy cho $f(x)=\frac{(x-2)^2-9}{3}$. Phương trình $y=f(x)$ được biểu diễn trên đồ thị và các tiếp xúc $x$ và $y$ của đồ thị được nối với nhau để tạo thành một đa giác. Diện tích của đa giác đó là bao nhiêu?
+5
+\frac{25}{6}
+\frac{\sqrt{2465}{9}
+2"
+5734,abstract_algebra/test/61,abstract_algebra,D,markdown_table_pipe,"Câu 1 | Tập các ma trận 2 x 2 có các phần tử là số nguyên và định thức khác 0 tạo thành một nhóm theo phép nhân ma trận. Câu 2 | Tập các ma trận 2 x 2 có các phần tử là số nguyên và định thức bằng 1 tạo thành một nhóm theo phép nhân ma trận.
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+5792,abstract_algebra/test/48,abstract_algebra,C,markdown_table_pipe,"Câu 1 | Nếu R là lĩnh vực nguyên, thì R[x] cũng là lĩnh vực nguyên. Câu 2 | Nếu R là một vòng và f(x) và g(x) đều thuộc R[x], thì deg(f(x)g(x)) = deg f(x) + deg g(x).
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5799,high_school_chemistry/test/186,high_school_chemistry,C,caret_power,"Hằng số tốc độ đặc biệt, k, cho một phản ứng bậc một nhất định là 86 h^-1. Khối lượng của mẫu vật liệu khởi đầu là 0.0500 g sẽ còn lại bao nhiêu sau 58 s?
+0.0500 g
+0.0250 g
+0.0125 g
+0.00625 g"
+5832,high_school_mathematics/test/104,high_school_mathematics,D,raw_latex_frac,"Giả sử có 5 số nguyên khác nhau được chọn ngẫu nhiên từ 20 đến 69. Xác suất là các số đó có các chữ số hàng chục khác nhau là bao nhiêu?
+\frac{1}{4}
+\frac{1}{3}
+\frac{1000}{52969}
+\frac{2500}{52969}"
+5834,high_school_physics/test/22,high_school_physics,A,caret_power,"Ánh sáng tử ngoại có bước sóng khoảng 6 × 10^-8 m. Tần số của ánh sáng này là bao nhiêu?
+5 × 10^15 Hz
+0.5 Hz
+2 Hz
+20 Hz"
+5860,elementary_mathematics/test/279,elementary_mathematics,C,"unbalanced_dollar,unbalanced_dollar_count","Phó chủ tịch bộ phận bán hàng dẫn khách hàng đi ăn trưa. Nếu giá của bữa trưa là $44 và bà ấy cho tiền boa 20%, tổng số tiền bà ấy đã chi tiêu để ăn trưa là bao nhiêu?
+$8.80
+$35.20
+$52.80
+$53.80"
+5870,high_school_mathematics/test/112,high_school_mathematics,A,unbalanced_dollar,"Nếu $a=7$ và $b=13$, số lượng số nguyên dương chẵn nhỏ hơn $ab$ là bao nhiêu?
+45
+46
+90
+180"
+5891,high_school_mathematics/test/251,high_school_mathematics,D,"caret_power,unbalanced_dollar","Tìm ước chung lớn nhất của $2^{1001}-1$ và $2^{1012}-1$?
+1
+2049
+2048
+2047"
+5920,high_school_statistics/test/169,high_school_statistics,D,unbalanced_dollar,"Để tính giá trung bình chi tiêu cho một chức vụ trong Đại hội Đại biểu quốc hội, một mẫu ngẫu nhiên đơn giản 50 chính trị gia được chọn và hồ sơ của các chính trị gia được xem xét. Hình thức chi phí cho thấy một trung bình là $125,000 với độ lệch chuẩn là $32,000. Trong số các khẳng định sau đây, cái nào là sự giải thích tốt nhất cho ước tính khoảng tin cậy 90% về giá trị chi phí trung bình cho việc tranh cử?
+90% số chính trị gia tranh cử trong Đại hội Đại biểu quốc hội chi tiêu từ $117,500 đến $132,500.
+90% số chính trị gia tranh cử trong Đại hội Đại biểu quốc hội có mức chi tiêu trung bình nằm trong khoảng từ $117,500 đến $132,500.
+Chúng tôi tin tưởng 90% số chính trị gia tranh cử trong Đại hội Đại biểu quốc hội chi tiêu từ $117,500 đến $132,500.
+Chúng tôi tin tưởng 90% số chính trị gia tranh cử trong Đại hội Đại biểu quốc hội có mức chi tiêu trung bình nằm trong khoảng từ $117,500 đến $132,500."
+5949,abstract_algebra/test/46,abstract_algebra,B,markdown_table_pipe,"Phát biểu 1 | Một đồng cấu có thể có lõi rỗng. Phát biểu 2 | Không thể có một đồng cấu phi trùng với một nhóm hữu hạn trong một nhóm vô hạn nào đó.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+5953,high_school_mathematics/test/242,high_school_mathematics,C,"raw_latex_sqrt,unbalanced_dollar","Tìm số nguyên dương nhỏ nhất $n$ để $\sqrt{18\cdot n \cdot 34}$ là một số nguyên?
+15
+10
+17
+34"
+5961,high_school_mathematics/test/265,high_school_mathematics,C,"unbalanced_dollar,unbalanced_dollar_count","Alex cần vay $\$10,\!000$ từ ngân hàng. Ngân hàng đưa ra cho anh ta hai lựa chọn. 1. Vay vốn trong 10 năm với lãi suất hàng năm $10\%$, gộp lại mỗi quý, với điều kiện đến cuối năm thứ 5, Alex phải thanh toán số tiền bằng một nửa số tiền mà anh ấy nợ. Nửa số tiền còn lại tiếp tục tích lũy lãi suất, và đến cuối thời hạn vay nợ là 10 năm, Alex sẽ thanh toán số tiền còn lại. 2. Vay vốn trong 10 năm với mức lãi suất hàng năm đơn giản $12\%$, chỉ với một khoản thanh toán toàn bộ vào cuối thời hạn vay. Tìm sự khác nhau tích cực giữa tổng số tiền mà Alex phải trả lại theo hai hình thức trên. Làm tròn đến đồng.
+16401
+16400
+382
+383"
+5994,high_school_chemistry/test/94,high_school_chemistry,D,caret_power,"Lưu huỳnh dioxide tác dụng với oxy tạo thành lưu huỳnh triôxit trong sự hiện diện của chất xúc tác. Hằng số cân bằng, Kp, ở một nhiệt độ nhất định là 3.0 × 10^22. Một bình 2.0 lít có đủ lượng SO3 được thêm vào để tạo ra áp suất là 0,789 atm Hg. Sau khi phản ứng đạt trạng thái cân bằng, áp suất riêng của O2 được dự đoán sẽ là
+2,88 × 10^-6 torr
+3 × 10^-18 mm Hg
+1100 mm Hg
+1,32 × 10^-5 torr"
+6003,high_school_chemistry/test/62,high_school_chemistry,A,caret_power,"Giá trị hằng số ion hóa, Ka, của một chất axit đơn proton yếu là bao nhiêu nếu dung dịch 0,060 molar có pH là 2,0?
+2,0 × 10^-3
+2,0 × 10^-1
+1,7 × 10^-1
+5,0 × 10^-3"
+6014,high_school_mathematics/test/176,high_school_mathematics,A,unbalanced_dollar,"Lương khởi điểm hàng năm của Patricia ở công việc mới của cô ấy là 20.000 đô la. Sau một năm làm việc, lương của cô ấy tăng 10%; sau năm thứ hai làm việc, lương của cô ấy tăng thêm 10% so với mức lương của năm trước. Sau hai năm này, lương của cô ấy sẽ là bao nhiêu?
+$24,200
+$24,000
+$22,000
+$4,000"
+6029,elementary_mathematics/test/74,elementary_mathematics,B,unbalanced_dollar,"Manuel đã mua một chiếc ô tô đã qua sử dụng với giá sáu ngàn bốn mươi chín đô la. Tổng số tiền mà Manuel đã mua chiếc ô tô đã qua sử dụng là bao nhiêu khi được viết dưới dạng số?
+$649
+$6,049
+$6,409
+$6,490"
+6062,elementary_mathematics/test/226,elementary_mathematics,B,unbalanced_dollar,"Một nhóm bạn đi ăn trưa. d người mua salad và p người mua súp. Mỗi phần salad giá $3.99 và mỗi phần súp giá $2.99. Viết biểu thức tính tổng chi phí của salad và súp.
+3.99p + 2.99d
+2.99p + 3.99d
+(2.99 + 3.99)(p + d)
+(3.99p + 2.99)d"
+6069,high_school_physics/test/57,high_school_physics,B,caret_power,"Một chất lỏng có mật độ ρ chảy qua một ống ngang với độ nhớt bỏ qua. Dòng chảy được dàn trải với tốc độ dòng chảy không đổi. Đường kính ống tại Điểm 1 là d và vận tốc dòng chảy là V. Nếu đường kính của ống tại Điểm 2 là d/3, thì áp suất tại Điểm 2 là
+thấp hơn áp suất tại Điểm 1 4 ρv^2
+thấp hơn áp suất tại Điểm 1 40 ρv^2
+cao hơn áp suất tại Điểm 1 4 ρv^2
+cao hơn áp suất tại Điểm 1 40 ρv^2"
+6108,elementary_mathematics/test/3,elementary_mathematics,B,unbalanced_dollar,"Một đội bóng đá có $90,00 để mua bóng. Nếu một quả bóng đá giá $15,60, đội có thể mua được tối đa bao nhiêu quả bóng?
+4
+5
+6
+7"
+6112,abstract_algebra/test/64,abstract_algebra,B,subscript_underscore,"Có bao nhiêu ánh xạ đồng cấu từ Z vào Z_2?
+1
+2
+Vô hạn
+0"
+6113,high_school_mathematics/test/196,high_school_mathematics,D,unbalanced_dollar,"Cho $p$, $q$ và $r$ là các hằng số. Một nghiệm của phương trình $(x-p)(x-q) = (r-p)(r-q)$ là $x=r$. Tìm nghiệm còn lại theo $p$, $q$ và $r$.
+pqr
+pq-r
+p-q-r
+p+q-r"
+6122,high_school_physics/test/121,high_school_physics,C,caret_power,"Vị trí của một đối tượng được cho bởi các công thức x = 2.0t^3 + 4.0t + 6.25, trong đó x tính bằng mét và t tính bằng giây. Gia tốc của đối tượng tại t = 1.50 giây là bao nhiêu?
+6 m/s^2
+12 m/s^2
+18 m/s^2
+24 m/s^2"
+6134,high_school_mathematics/test/219,high_school_mathematics,B,"caret_power,subscript_underscore,unbalanced_dollar","Nếu đường parabol $y_1 = x^2 + 2x + 7$ và đường thẳng $y_2 = 6x + b$ giao nhau tại chỉ một điểm, giá trị của $b$ là bao nhiêu?
+7
+3
+12
+4"
+6160,abstract_algebra/test/58,abstract_algebra,A,markdown_table_pipe,"Tuyên bố 1 | Mỗi nhóm có bậc 159 là chu trình. Tuyên bố 2 | Mỗi nhóm có bậc 102 có một tổ chức con bình thường khác không trùng lặp.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6168,elementary_mathematics/test/351,elementary_mathematics,D,"unbalanced_dollar,unbalanced_dollar_count","Sam đã trả $8.28 để mua 18 tem. Theo mức giá này, Sam sẽ phải trả bao nhiêu để mua 12 tem?
+$2.19
+$2.28
+$3.72
+$5.52"
+6185,high_school_mathematics/test/217,high_school_mathematics,D,caret_power,"Viết một phương trình cho đường tiếp tuyến tại đường cong được xác định bởi F(t) = (t ^ 2 + 1, 2 ^ t) tại điểm mà y = 4.
+y - 4 = ln 2(x - 2)
+y - 4 = 4 ln 2(x - 2)
+y - 4 = 4(x - 5)
+y - 4 = ln 2(x - 5)"
+6215,elementary_mathematics/test/359,elementary_mathematics,B,unbalanced_dollar,"Một nhóm tình nguyện viên đã thu được tổng số tiền là $5,144 từ việc bán áo thun tại một buổi hòa nhạc từ thiện. Mỗi chiếc áo được bán với giá $8. Hỏi nhóm tình nguyện viên đã bán tổng cộng bao nhiêu áo thun?
+632
+643
+655
+668"
+6278,abstract_algebra/test/75,abstract_algebra,B,"caret_power,markdown_table_pipe","Câu 1 | Trong nhóm (ab)^{-2} = b^{-2}a^{-2}. Câu 2 | Trong nhóm (ab)^n = a^nb^n.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6300,elementary_mathematics/test/43,elementary_mathematics,C,caret_power,"Giá trị của biểu thức 2(3(4^2 + 1)) - 2^3 là bao nhiêu?
+156
+110
+94
+48"
+6317,high_school_mathematics/test/180,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar","Nếu tỷ lệ của $2x-y$ đến $x+y$ là 2 đến 3, tỷ lệ của $x$ đến $y$ là bao nhiêu? Trả lời dưới dạng phân số tối giản.
+\frac{5}{4}
+\frac{4}{5}
+\frac{5}{2}
+\frac{2}{5}"
+6331,abstract_algebra/test/93,abstract_algebra,A,subscript_underscore,"Tìm giá trị lớn nhất có thể của một phần tử trong tập hợp S_n với n = 6.
+6
+12
+30
+105"
+6366,abstract_algebra/test/19,abstract_algebra,A,"caret_power,markdown_table_pipe","Phát biểu 1| Mọi nhóm cấp p^2 với p là số nguyên tố là Abelian. Phát biểu 2 | Với một số nguyên tố p cố định, một Sylow p-phân nhóm của một nhóm G là một phân nhóm bình thường của G nếu và chỉ nếu nó là duy nhất Sylow p-phân nhóm của G.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6378,high_school_mathematics/test/143,high_school_mathematics,A,"unbalanced_dollar,unbalanced_dollar_count","Tiền boa chuẩn trong nhà hàng là $15\%$ của hóa đơn trước thuế. Nhiều người tại California tính boa bằng cách nhân với 2 số thuế bán hàng $8.25\%$. Số xu bị vượt quá tiền boa chuẩn trên hóa đơn trước thuế $\$60$ là bao nhiêu?
+90
+80
+70
+60"
+6414,high_school_mathematics/test/94,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar","Cho $a$ và $b$ là các số thực sao cho $-3\leq a\leq 1$ và $-2\leq b\leq 4$, và lựa chọn các giá trị cho $a$ và $b$ ngẫu nhiên, có bao nhiêu khả năng tích $a\cdot b$ là số dương? Thể hiện câu trả lời của bạn dưới dạng phân số tối giản.
+\frac{5}{12}
+\frac{5}{11}
+\frac{7}{12}
+\frac{5}{17}"
+6425,high_school_mathematics/test/188,high_school_mathematics,B,"caret_power,unbalanced_dollar","Một số $x$ có các thừa số là $107\cdot109^5$, và $107$ và $109$ là số nguyên tố. Trong phân tích thành thừa số nguyên tố của $x^{11}$, số mũ của $109$ là bao nhiêu?
+9
+55
+21
+11"
+6442,high_school_mathematics/test/66,high_school_mathematics,C,caret_power,"Nếu 3^(x – 3) + 10 = 19, thì x =
+3
+4
+5
+6"
+6446,abstract_algebra/test/27,abstract_algebra,B,caret_power,"Xác định xem đa thức trong Z[x] đáp ứng tiêu chuẩn Eisenstein để là vô hạn trên Q hay không. 8x^3 + 6x^2 - 9x + 24
+Có, với p=2.
+Có, với p=3.
+Có, với p=5.
+Không."
+6462,high_school_mathematics/test/244,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Rowena có thể sơn một phòng trong $14$ giờ, còn Ruby thì trong $6$ giờ. Nếu Rowena sơn trong $x$ giờ và Ruby sơn trong $y$ giờ, họ sẽ sơn xong một nửa, trong khi nếu Rowena sơn trong $y$ giờ và Ruby sơn trong $x$ giờ thì họ sẽ sơn xong cả phòng. Tìm cặp số nguyên $(x,y)$.
+(\frac{11}{10}, \frac{11}{10})
+(\frac{231}{20}, \frac{21}{20})
+(\frac{231}{40}, \frac{21}{40})
+(1,1)"
+6477,high_school_mathematics/test/11,high_school_mathematics,D,"caret_power,unbalanced_dollar","Cho $n>1$, tìm số nguyên dương nhỏ nhất $n$ sao cho tích của các ước số dương của $n$ bằng $n^6$?
+30
+64
+2048
+60"
+6537,high_school_physics/test/119,high_school_physics,C,caret_power,"Khối lượng của Trái đất là 5,97 x 10^24 kg. Mặt trăng, tâm của nó cách trung tâm Trái đất 3,84 x 10^8 m, có khối lượng là 7,35 x 10^22 kg. Đâu là ước lượng tốt nhất về lực hấp dẫn của Trái đất đối với mặt trăng?
+10^39 N
+10^29 N
+10^19 N
+10^9 N"
+6635,high_school_chemistry/test/185,high_school_chemistry,B,caret_power,"Tính độ pH của dung dịch được tạo thành bằng cách hòa tan 0,0300 mol natri etanoate trong đủ nước để tạo thành 50 mL dung dịch (Ka của axit etanoic là 1,8 × 10^-5)?
+7
+9,26
+4,74
+11,02"
+6643,elementary_mathematics/test/120,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Bạn của John nói với anh ấy rằng anh ấy có thể kiếm được $49 cho việc phát tờ rơi tại một buổi hòa nhạc địa phương. John muốn tính tỷ lệ theo giờ. Nếu anh ấy làm tổng cộng 3,5 giờ, phương trình 3,5x = 49 có thể được sử dụng để xác định tỷ lệ theo giờ của anh ấy. Tỷ lệ theo giờ của John sẽ là bao nhiêu, tính bằng đô la?
+$1,40
+$14,00
+$45,50
+$171,50"
+6671,elementary_mathematics/test/38,elementary_mathematics,C,"caret_power,unbalanced_dollar,unbalanced_dollar_count","Một rạp chiếu phim bán được vé xem phim với giá $6 mỗi vé. Rạp đã bán được 500 vé. Công thức dưới đây có thể được sử dụng để tính số tiền rạp đã thu được từ việc bán vé. 6 × 500 Công thức nào cũng có thể được sử dụng để tính số tiền rạp đã thu được từ việc bán vé?
+30 × 10^1
+30 × 10^3
+(6 × 5) × 10^2
+(6 × 5) × 10^3"
+6672,abstract_algebra/test/3,abstract_algebra,B,markdown_table_pipe,"Tuyên bố 1 | Một nhóm thức chất của một nhóm không-Abelian không phải là nhóm Abelian. Tuyên bố 2 | Nếu K là một nhóm thức chất bình thường của nhóm H và H là một nhóm thức chất bình thường của nhóm G, thì K là một nhóm thức chất bình thường của G.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6696,abstract_algebra/test/81,abstract_algebra,D,markdown_table_pipe,"Mệnh đề 1 | Mọi nhóm Abel tự do khác không có phần tử không và không vô hạn số cơ sở. Mệnh đề 2 | Mọi nhóm Abel tự do có hạng ít nhất bằng 2 không có số cơ sở vô hạn.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6698,high_school_statistics/test/127,high_school_statistics,D,unbalanced_dollar,"Gieo hai xúc xắc cùng một lúc. Nếu cả hai xúc xắc đều hiện số 6, thì người chơi sẽ thắng được $20; nếu không, người chơi sẽ thua trò chơi. Chơi trò chơi này sẽ tốn $2.00. Tính kỳ vọng lợi nhuận hoặc tổn thất cho mỗi lượt chơi?
+Người chơi sẽ có lợi khoảng $0.55.
+Người chơi sẽ có lợi khoảng $1.44.
+Người chơi sẽ thua khoảng $0.55.
+Người chơi sẽ thua khoảng $1.44."
+6705,high_school_mathematics/test/227,high_school_mathematics,B,caret_power,"Tìm thể tích của khối chất rắn được tạo thành khi khu vực bị chặn bởi trục y, y = e^x và y = 2 được xoay quanh trục y.
+0,296
+0,592
+2,427
+3,998"
+6710,elementary_mathematics/test/282,elementary_mathematics,C,caret_power,"Một chiếc bể chứa có hình dạng của một lăng trụ tam giác. Nếu đáy tam giác có diện tích là 116 feet vuông, và bể chứa có chiều cao là 30 feet, lượng nước bể chứa có thể chứa khi đầy là bao nhiêu?
+1725 ft ^ 3
+1740 ft ^ 3
+3480 ft ^ 3
+6960 ft ^ 3"
+6726,high_school_mathematics/test/145,high_school_mathematics,D,"caret_power,raw_latex_sqrt","Diện tích bị chận bởi đồ thị của đồng phân y = x^2 và các đường thẳng y = 1 và y = 9 bằng
+8
+84/3
+64\sqrt{2}/3
+104/3"
+6728,abstract_algebra/test/53,abstract_algebra,C,"markdown_table_pipe,subscript_underscore","Phát biểu 1 | Nếu G, H và K là nhóm có bậc là 4, thì ít nhất hai trong số chúng là đồng cấu. Phát biểu 2 | Nếu Z_r + Z_s đồng cấu với một nhóm con Z_m + Z_n, thì r chia hết cho m và s chia hết cho n.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6770,high_school_mathematics/test/105,high_school_mathematics,A,unbalanced_dollar,"Nếu $f(x) = 2$ cho tất cả các số thực $x$, giá trị của $f(x + 2)$ là gì?
+2
+4
+0
+1"
+6845,high_school_mathematics/test/152,high_school_mathematics,C,unbalanced_dollar,"Trong danh sách $-36, -29, -22, \ldots, 41, 48$, có bao nhiêu số?
+12
+10
+13
+11"
+6859,high_school_mathematics/test/100,high_school_mathematics,B,unbalanced_dollar,"Đơn giản hóa $(5x+3) - 2(2x-4)$.
+10+x
+x+11
+5x+3
+7+2x"
+6879,elementary_mathematics/test/274,elementary_mathematics,B,"unbalanced_dollar,unbalanced_dollar_count","Giá ban đầu của một chiếc xe đạp mới là $138.00. Nếu chiếc xe đạp giảm giá 15%, giá mới là bao nhiêu?
+$20.70
+$117.30
+$123.00
+$153.00"
+6880,high_school_physics/test/19,high_school_physics,D,caret_power,"Trong một khu vực nhất định, trường điện thay đổi theo bán kính r bằng phương trình Er = -6r^2 + 4r + 3, trong đó r được cho bằng mét và E được tính bằng N/C. Điện thế giữa điểm gốc và điểm (3, 4) là
+-165 V
+-120 V
+64 V
+185 V"
+6894,abstract_algebra/test/15,abstract_algebra,B,markdown_table_pipe,"Tuyên bố 1 | R là một trường chia của một đa thức nào đó trên Q. Tuyên bố 2 | Có một trường với 60 phần tử.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+6899,high_school_mathematics/test/117,high_school_mathematics,C,"caret_power,raw_latex_frac,unbalanced_dollar","Một điểm trong không gian $(x,y,z)$ được chọn ngẫu nhiên sao cho $-1\le x \le 1$,$-1\le y \le 1$,$-1\le z \le 1$. Xác suất để $x^2+y^2+z^2\le 1$ là gì?
+\frac{\pi}{24}
+\frac{\pi}{12}
+\frac{\pi}{6}
+\frac{\pi}{3}"
+6919,elementary_mathematics/test/222,elementary_mathematics,D,"unbalanced_dollar,unbalanced_dollar_count","Một đội bóng chày đã bán được 215 vé giá trị $3 mỗi vé cho các em nhỏ
+(215 × 3) – (467 × 7)
+(215 × 7) – (467 × 3)
+(467 × 3) – (215 × 7)
+(467 × 7) – (215 × 3)"
+6940,high_school_physics/test/35,high_school_physics,C,caret_power,"Nếu L, M, và T thể hiện các kích thước về chiều dài, khối lượng và thời gian, lực tác động có kích thước như thế nào?
+LM/T^3
+LM/T^2
+LM/T
+L^2M/T^2"
+6969,high_school_mathematics/test/45,high_school_mathematics,D,raw_latex_frac,"Một hộp có 4 quả bóng trắng và 4 quả bóng đen. Tôi lấy từ hộp ra một cách ngẫu nhiên, mỗi lần lấy một quả. Xác suất để tất cả các lần lấy của tôi lần lượt có màu sắc khác nhau là gì?
+\frac{1}{8}
+\frac{1}{7}
+\frac{1}{40}
+\frac{1}{35}"
+6988,high_school_mathematics/test/80,high_school_mathematics,B,unbalanced_dollar,"Có bao nhiêu số trong danh sách $25, 26, 27, \ldots, 99, 100?$
+75
+76
+22
+23"
+6989,high_school_mathematics/test/113,high_school_mathematics,A,"caret_power,unbalanced_dollar","Giả sử $a$, $b$ và $c$ là các số dương thỏa mãn $a^2/b=1$, $b^2/c=2$, $c^2/a=3$. Tìm $a$.
+12^(1/7)
+7^(1/12)
+1
+6"
+7036,abstract_algebra/val/4,abstract_algebra,C,subscript_underscore,"Tìm bậc lớn nhất có thể có cho một phần tử trong Z_4 x Z_6.
+4
+6
+12
+24"
+7064,high_school_mathematics/val/12,high_school_mathematics,A,"markdown_table_pipe,unbalanced_dollar","Tính diện tích các đơn vị vuông trong vùng thoả mãn các bất đẳng thức $y \ge |x|$ và $y \leq -|x|+3$? Đưa ra kết quả dưới dạng thập phân.
+4.5
+2.25
+6.6
+3.3"
+7090,high_school_mathematics/val/17,high_school_mathematics,B,"raw_latex_frac,unbalanced_dollar","Đơn giản hóa $\frac{2+2i}{-3+4i}$. Biểu diễn kết quả dưới dạng số phức $a+bi$
+2-14i
+\frac{2}{25} + \frac{-14}{25}i
+1+0i
+0-1i"
+7108,high_school_mathematics/val/25,high_school_mathematics,A,unbalanced_dollar,"Có bao nhiêu số mũ ba dương chia hết cho $3!\cdot 5!\cdot 7!\,$?
+6
+4
+3
+1"
+7126,high_school_mathematics/val/9,high_school_mathematics,C,"markdown_table_pipe,raw_latex_frac,unbalanced_dollar","Cho $a(a+2b) = \frac{104}3$, $b(b+2c) = \frac{7}{9}$, và $c(c+2a) = -7$, tìm $|a+b+c|$.
+\frac{23}{3}
+\frac{5}{3}
+\frac{16}{3}
+\frac{10}{3}"
+7131,high_school_physics/val/10,high_school_physics,D,caret_power,"Nếu L, M, và T biểu thị cho kích thước của độ dài, khối lượng, và thời gian, tương ứng, thì kích thước năng lượng là gì?
+(L^2)M/T^2
+(M^2)L/T^2
+(L^2)M/T^3
+M(L^2)/T^3"
+7153,abstract_algebra/val/9,abstract_algebra,C,markdown_table_pipe,"Tuyên bố 1 | Mọi miền nguyên có một trường phân số. Tuyên bố 2 | Một đa thức bậc n trên một vòng có thể có tối đa n điểm số đếm theo bội số.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7155,abstract_algebra/val/1,abstract_algebra,B,subscript_underscore,"Tìm thứ tự của nhóm hạng Z_6/<3>.
+2
+3
+6
+12"
+7219,abstract_algebra/val/5,abstract_algebra,D,"markdown_table_pipe,subscript_underscore","Phiên bản 1 | Nhóm đối xứng S_3 là chu kỳ hóa. Phiên bản 2 | Mọi nhóm đều đồng cấu với một nhóm hoán vị nào đó.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7249,high_school_chemistry/val/17,high_school_chemistry,B,caret_power,"Cặp ion nào sau đây sẽ tạo thành đệm tốt ở mức pH cơ bản nhất? Ka cho HC3H2O2 = 1.75 x 10^-5. Ka cho HPO42- = 4.8 x 10^-13.
+H2SO4 và H2PO4
+HPO42- và NaH2PO4-
+HC3H2O2 và NaC3H2O2
+NaOH và HC2H3O2"
+7293,high_school_mathematics/val/24,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Có ba số thực $x$ không thuộc miền xác định của hàm số $$f(x) = \frac{1}{1+\frac{1}{1+\frac 1x}}.$$ Tổng của ba số đó là bao nhiêu?
+0.5
+0
+-1
+-1.5"
+7313,high_school_mathematics/val/6,high_school_mathematics,C,unbalanced_dollar,"Giá trị lớn nhất của $4(x + 7)(2 - x)$ trên tất cả các số thực $x$ là gì?
+-2.5
+4
+81
+56"
+7320,high_school_mathematics/val/16,high_school_mathematics,D,"caret_power,unbalanced_dollar","Giá trị nhỏ nhất của biểu thức $a^2 + 6a - 7$ là bao nhiêu?
+-30
+-12
+-7
+-16"
+7370,abstract_algebra/val/8,abstract_algebra,B,subscript_underscore,"Tìm giá trị lớn nhất có thể của một phần tử trong S_n với n = 7.
+6
+12
+30
+105"
+7423,high_school_mathematics/val/28,high_school_mathematics,B,unbalanced_dollar,"Hãy tìm một số nguyên có hai chữ số nhỏ nhất $n$ sao cho khi đổi chỗ hai chữ số của nó và cộng thêm 3 ta được $2n$?
+6
+12
+96
+102"
+7424,high_school_mathematics/val/10,high_school_mathematics,A,"caret_power,unbalanced_dollar","Hãy đặt $f(x) = (x+2)^2-5$. Nếu tập xác định của $f$ là các số thực, thì $f$ không có hàm nghịch đảo, nhưng nếu chúng ta giới hạn tập xác định của $f$ trong một đoạn $[c,\infty)$, thì $f$ có thể có một hàm nghịch đảo. Giá trị nhỏ nhất của $c$ mà chúng ta có thể sử dụng ở đây, để $f$ có một hàm nghịch đảo là gì?
+-2
+-5
+3
+-8"
+7443,high_school_mathematics/val/23,high_school_mathematics,A,"raw_latex_frac,unbalanced_dollar","Giải phương trình để tìm $x$: $(-\frac{1}{3})(-4 -3x)=\frac{1}{2}$
+-\frac{5}{6}
+\frac{7}{6}
+\frac{5}{3}
+\frac{1}{6}"
+7459,abstract_algebra/val/7,abstract_algebra,D,markdown_table_pipe,"Phát biểu 1 | Nếu f là phép đồng cấu từ G tới K và H là nhóm bình thường trong G thì f(H) là nhóm bình thường trong K. Phát biểu 2 | Nếu f là phép đồng cấu từ G đến một nhóm và H là nhóm con hữu hạn của G, thì |f(H)| chia hết cho |H|.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7484,high_school_mathematics/val/15,high_school_mathematics,C,"caret_power,unbalanced_dollar","Nếu điểm $(3,6)$ nằm trên đồ thị của $y=g(x)$, và $h(x)=(g(x))^2$ cho mọi $x$, thì sẽ có một điểm phải nằm trên đồ thị của $y=h(x)$. Tổng của các tọa độ của điểm đó là bao nhiêu?
+3
+6
+39
+36"
+7488,high_school_chemistry/val/15,high_school_chemistry,A,caret_power,"Hằng số cân bằng của một phản ứng nhất định là 2,6 × 10^8 ở 25 °C. Giá trị của ΔG° là bao nhiêu?
+-48,0 kJ/mol
+20,8 J mol-1
+4,68 × 10^-3 kJ/mol
+-4,03 kJ mol-1"
+7492,high_school_mathematics/val/18,high_school_mathematics,A,"caret_power,unbalanced_dollar","Tính $i+i^2+i^3+\cdots+i^{258}+i^{259}$.
+-1
+1
+i
+0"
+7540,abstract_algebra/val/2,abstract_algebra,A,markdown_table_pipe,"Tuyên bố 1 | Một hoán vị là tích của m hoán vị chẵn và n hoán vị lẽ là một hoán vị chẵn nếu và chỉ nếu n chẵn. Tuyên bố 2 | Mọi nhóm đều đồng cấu với một nhóm các hoán vị.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7555,abstract_algebra/val/3,abstract_algebra,C,subscript_underscore,"Tìm thứ tự của nhóm thừa số (Z_4 x Z_12)/(<2> x <2>)
+2
+3
+4
+12"
+7568,astronomy/val/8,astronomy,A,multiple_underscores,"Lý do mà các hành tinh nhỏ có xu hướng mất nhiệt bên trong nhanh hơn các hành tinh lớn là về cơ bản giống như lý do________.
+củ khoai tây lớn mất nhiều thời gian hơn để nguội so với củ khoai tây nhỏ
+Trái Đất chứa nhiều kim loại hơn Mặt Trăng
+Sấm sét có xu hướng hình thành vào những ngày hè nóng
+Bong bóng khí hình thành và trỗi lên trong nước sôi"
+7578,abstract_algebra/val/10,abstract_algebra,B,markdown_table_pipe,"Câu 1 | Nếu một nhóm có một phần tử có thứ tự là 10, thì số lượng các phần tử có thứ tự là 10 là chia hết cho 4. Câu 2 | Nếu m và n là các số nguyên dương và phi là hàm Euler phi, thì phi(mn) = phi(m)phi(n).
+Đúng, đúng
+Sai, sai
+Đúng, sai
+Sai, đúng"
+7579,high_school_physics/val/13,high_school_physics,B,caret_power,"Quan sát thấy âm thanh có thể nghe được xung quanh một cái góc nhưng ánh sáng lại không thể nhìn thấy xung quanh góc đó. Giải thích hợp lý cho hiện tượng này là gì?
+Ánh sáng di chuyển với vận tốc 3 x 10^8 m/s, quá nhanh để thay đổi hướng đi xung quanh một góc.
+Âm thanh có bước sóng dài hơn, điều này tăng độ lệch quang.
+Ánh sáng là một sóng điện từ đang có hành vi giống như một hạt.
+Âm thanh là một sóng cơ học có thể thay đổi hướng đi trong môi trường truyền tải của nó."
+7581,high_school_mathematics/val/14,high_school_mathematics,D,"raw_latex_frac,unbalanced_dollar","Khi một tàu vũ trụ đầy các nhà khoa học hạ cánh trên Hành tinh Q, họ nhận thấy rằng $\frac{17}{40}$ trong số $160$ người ngoài hành tinh có $3$ con mắt. Bao nhiêu người ngoài hành tinh có $3$ con mắt?
+67
+35
+36
+68"
+7607,high_school_mathematics/val/4,high_school_mathematics,A,caret_power,"Alex nuôi 100 nấm Rhizopus stolonifer ban đầu trên một mẫu bánh mì. Cô muốn mô hình hóa sự phát triển của nấm theo phương trình mũ A = Pe^(rt), trong đó A là số nấm cuối cùng, P là số nấm ban đầu, r là tỷ lệ tăng trưởng, và t là thời gian trôi qua tính bằng giờ. Nếu sau 5 giờ cô đo được số lượng nấm là 750, giá trị của r là gì?
+0,403
+0,863
+2,015
+4,317"
+7616,elementary_mathematics/val/37,elementary_mathematics,C,unbalanced_dollar,"Dawn cần sửa cửa sổ trong nhà. Cô ấy phải mua 3 feet gỗ, giá $7 một foot. Cô ấy cũng cần mua 4 tấm kính. Mỗi tấm kính có giá $23. Tổng chi phí để sửa chữa các cửa sổ sẽ là bao nhiêu?
+$30
+$90
+$113
+$176"
+7663,abstract_algebra/val/6,abstract_algebra,B,"caret_power,markdown_table_pipe","Câu lệnh 1 | Nếu a và b là những phần tử có độ bội hữu hạn trong một nhóm có tính giao hoán, thì |ab| là bội số chung nhỏ nhất của (|a|,|b|). Câu lệnh 2 | Nếu g là một phần tử nhóm và g^n = e, thì |g| = n.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7668,high_school_mathematics/val/7,high_school_mathematics,B,unbalanced_dollar,"Chia $11$ cho nghịch đảo của $1815 \div 11$.
+111
+1815
+121
+68"
+7682,high_school_mathematics/val/19,high_school_mathematics,B,caret_power,"Tìm giá trị của c trên khoảng 0 < x < 1 sao cho tiếp tuyến với đồ thị của hàm số f (x) = e^x - x^2 song song với đường xiên trên khoảng [0,1]?
+-0,248
+0,351
+0,5
+0,693"
+7683,high_school_mathematics/val/8,high_school_mathematics,D,"raw_latex_sqrt,unbalanced_dollar","Khi $\sqrt[3]{-128}$ được đơn giản hóa, kết quả là $a\sqrt[3]{b}$, trong đó $a$ là một số nguyên và $b$ là một số nguyên dương. Nếu $b$ là nhỏ nhất có thể, thì $a + b$ bằng bao nhiêu?
+2
+-4
+6
+-2"
+7695,elementary_mathematics/val/14,elementary_mathematics,B,unbalanced_dollar,"Giá vé xem kịch là $5,00 cho giáo viên và $3,00 cho sinh viên. Tổng chi phí để một nhóm gồm 71 sinh viên và 5 giáo viên xem kịch là bao nhiêu?
+$228,00
+$238,00
+$370,00
+$380,00"
+7696,abstract_algebra/val/0,abstract_algebra,A,subscript_underscore,"Tập con chu kỳ của Z_24 được sinh ra bởi 18 có thứ tự là
+4
+8
+12
+6"
+7700,elementary_mathematics/val/23,elementary_mathematics,A,unbalanced_dollar,"George có $23 để mua đồ dùng học tập. Anh ấy muốn mua bút đánh dấu, giấy và keo dán. Nếu tổng số tiền cho bút và giấy là hơn $14, chưa bao gồm keo dán, ký hiệu bất đẳng thức nào dưới đây đại diện cho số tiền, p, mà George có thể chi cho keo dán?
+p<9
+p>9
+p<37
+p>37"
+7705,high_school_physics/val/16,high_school_physics,C,caret_power,"Cho trọng lượng của Trái Đất là m, vận tốc v khi quay quanh Mặt Trời, và khoảng cách từ Mặt Trời đến Trái Đất là R, trong đó phát biểu nào sau đây đúng mô tả công việc được thực hiện bởi lực ly tâm, Wc, trong một năm?
+Wc > 2R(mv^2/R)
+Wc = 2R(mv^2/R)
+Wc < 2R(mv^2/R)
+Không thể xác định được"
+7706,high_school_mathematics/val/20,high_school_mathematics,D,unbalanced_dollar,"Hãy cho $h(4x-1) = 2x + 7$. Đối với giá trị nào của $x$ thì $h(x) = x$?
+420
+69
+7
+15"
+7715,high_school_physics/val/5,high_school_physics,A,caret_power,"Một vật ban đầu đứng yên chịu tác động gia tốc thay đổi theo thời gian được cho bởi a = (2 m/s^3)t khi t ≥ 0. Vật di chuyển được bao nhiêu mét trong 3 giây đầu tiên?
+9 m
+12 m
+18 m
+24 m"
+7761,high_school_chemistry/val/10,high_school_chemistry,A,caret_power,"Hòa tan 25 miligam saccarozơ (C12H22O11) trong đủ nước để tạo ra dung dịch 1,00 lít. Nồng độ mol của dung dịch là bao nhiêu?
+7,3 × 10^-5
+7,31 × 10^-2
+73,1
+1,36"
+7809,high_school_mathematics/dev/3,high_school_mathematics,D,"raw_latex_frac,raw_latex_sqrt,unbalanced_dollar","Đơn giản hóa và viết kết quả với mẫu số hữu tỉ: $$\sqrt{\sqrt[3]{\sqrt{\frac{1}{729}}}}$$
+\frac{3\sqrt{3}}{3}
+\frac{1}{3}
+\sqrt{3}
+\frac{\sqrt{3}}{3}"
+7813,high_school_mathematics/dev/2,high_school_mathematics,C,"raw_latex_frac,unbalanced_dollar","Biến số $x$ thay đổi tỉ lệ thuận với bình phương của $y$, và $y$ thay đổi tỉ lệ thuận với khối của $z$. Nếu $x$ bằng $-16$ khi $z$ bằng $2$, giá trị của $x$ khi $z$ bằng $\frac{1}{2}$ là bao nhiêu?
+-1
+16
+-\frac{1}{256}
+\frac{1}{16}"
+7846,abstract_algebra/dev/0,abstract_algebra,B,"caret_power,subscript_underscore","Tìm tất cả c trong Z_3 sao cho Z_3[x]/(x^2 + c) là một trường.
+0
+1
+2
+3"
+7894,abstract_algebra/dev/2,abstract_algebra,C,"markdown_table_pipe,subscript_underscore","Phiên bản 1 | Mỗi phần tử trong một nhóm tạo ra một nhóm vòng của nhóm đó. Phiên bản 2 | Nhóm đối xứng S_10 có 10 phần tử.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7895,high_school_mathematics/dev/1,high_school_mathematics,C,unbalanced_dollar,"Với một khoản tiền ban đầu là năm nghìn đô la được cộng dồn hàng năm với lãi suất là $x\%$, sau sáu năm số tiền đó sẽ tăng gấp đôi. Với cùng một lãi suất, trong bao nhiêu năm $\$300$ sẽ tăng lên thành $\$9600$?
+12
+1
+30
+5"
+7908,abstract_algebra/dev/3,abstract_algebra,A,markdown_table_pipe,"Phát biểu 1 | Mọi hàm từ một tập hữu hạn tới chính nó đều phải là một một. Phát biểu 2 | Mọi nhóm con của một nhóm abelian đều phải là abelian.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7915,abstract_algebra/dev/1,abstract_algebra,B,markdown_table_pipe,"Phát biểu 1 | Nếu aH là một phần tử của một nhóm chỉ số, thì |aH| chia hết cho |a|. Phát biểu 2 | Nếu H và K là các nhóm con của G thì HK là một nhóm con của G.
+Đúng, Đúng
+Sai, Sai
+Đúng, Sai
+Sai, Đúng"
+7922,high_school_physics/dev/2,high_school_physics,D,caret_power,"Một photocell có chức năng làm việc ϕ = 2eV được kết nối với một điện trở nối tiếp. Ánh sáng có tần số f = 1 × 10^15 Hz chiếu vào một tấm kim loại của photocell. Nếu công suất của ánh sáng là P = 100 W, dòng điện qua điện trở là bao nhiêu?
+2 giờ sáng
+6 giờ sáng
+12 giờ trưa
+24 A"
