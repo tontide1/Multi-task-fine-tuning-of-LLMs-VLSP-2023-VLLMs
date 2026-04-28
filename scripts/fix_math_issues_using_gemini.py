@@ -321,6 +321,39 @@ def parse_gemini_response(response_text: str, batch: list[dict]) -> dict[str, st
     return fixed
 
 
+def extract_gemini_error_code(err: Exception):
+    code = None
+    if isinstance(err, google_exceptions.TooManyRequests):
+        code = 429
+    elif isinstance(err, google_exceptions.ResourceExhausted):
+        code = 429
+    elif isinstance(err, google_exceptions.ServiceUnavailable):
+        code = 503
+    elif isinstance(err, google_exceptions.GoogleAPICallError):
+        code = getattr(err, "code", None)
+        if callable(code):
+            code = code()
+
+    if code is None:
+        code = getattr(getattr(err, "status_code", None), "value", None)
+    if code is None:
+        code = getattr(err, "status_code", None)
+    if code is None:
+        match = re.search(r"\b(429|503)\b", str(err))
+        if match:
+            code = int(match.group(1))
+
+    return code
+
+
+def is_retryable_code(code) -> bool:
+    if isinstance(code, int):
+        return code in RETRYABLE_CODES
+    if code is None:
+        return False
+    return str(code) in {str(c) for c in RETRYABLE_CODES}
+
+
 def call_gemini_batch(client, batch: list[dict]) -> dict[str, str]:
     prompt = (
         SYSTEM_PROMPT
@@ -346,33 +379,8 @@ def call_gemini_batch(client, batch: list[dict]) -> dict[str, str]:
 
         except Exception as e:
             last_error = e
-            code = None
-            if isinstance(e, google_exceptions.TooManyRequests):
-                code = 429
-            elif isinstance(e, google_exceptions.ResourceExhausted):
-                code = 429
-            elif isinstance(e, google_exceptions.ServiceUnavailable):
-                code = 503
-            elif isinstance(e, google_exceptions.GoogleAPICallError):
-                code = getattr(e, "code", None)
-                if callable(code):
-                    code = code()
-
-            if code is None:
-                code = getattr(getattr(e, "status_code", None), "value", None)
-            if code is None:
-                code = getattr(e, "status_code", None)
-            if code is None:
-                match = re.search(r"\b(429|503)\b", str(e))
-                if match:
-                    code = int(match.group(1))
-
-            if isinstance(code, int):
-                retryable = code in RETRYABLE_CODES
-            elif code is None:
-                retryable = False
-            else:
-                retryable = str(code) in {str(c) for c in RETRYABLE_CODES}
+            code = extract_gemini_error_code(e)
+            retryable = is_retryable_code(code)
 
             if retryable:
                 backoff = min(MAX_BACKOFF_SECONDS, BASE_BACKOFF_SECONDS * (2 ** (attempt - 1)))
@@ -586,6 +594,11 @@ def main():
 
         updated_rows.append(row)
 
+    updated_rows_by_source_id = {
+        str(r["metadata"]["source_id"]): r
+        for r in updated_rows
+    }
+
     # --------------------------------------------------------
     # STEP 4: final recheck only issue rows
     # --------------------------------------------------------
@@ -596,10 +609,7 @@ def main():
         if source_id not in source_id_to_row:
             continue
 
-        row = next(
-            r for r in updated_rows
-            if str(r["metadata"]["source_id"]) == source_id
-        )
+        row = updated_rows_by_source_id[source_id]
         flags = detect_math_format_flags(row["messages"][0]["content"])
 
         if flags:

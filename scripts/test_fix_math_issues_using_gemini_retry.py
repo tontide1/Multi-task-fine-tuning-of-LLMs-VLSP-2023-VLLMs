@@ -64,6 +64,31 @@ class TestGeminiRetryBackoff(unittest.TestCase):
         self.assertEqual(client.models.call_count, 1)
         sleep_mock.assert_not_called()
 
+    def test_retryable_error_exhausts_retries_and_raises(self) -> None:
+        batch = [{"source_id": "1", "text": "x", "flags": []}]
+        client = FakeClient(
+            [
+                google_exceptions.ServiceUnavailable("still down"),
+                google_exceptions.ServiceUnavailable("still down"),
+                google_exceptions.ServiceUnavailable("still down"),
+            ]
+        )
+
+        with (
+            patch.object(fixer, "MAX_RETRIES", 3),
+            patch.object(fixer, "BASE_BACKOFF_SECONDS", 2),
+            patch.object(fixer, "MAX_BACKOFF_SECONDS", 60),
+            patch.object(fixer, "RETRY_JITTER", 0.25),
+            patch("scripts.fix_math_issues_using_gemini.random.random", return_value=0.0),
+            patch("scripts.fix_math_issues_using_gemini.time.sleep") as sleep_mock,
+        ):
+            with self.assertRaises(RuntimeError):
+                fixer.call_gemini_batch(client, batch)
+
+        self.assertEqual(len(sleep_mock.call_args_list), 3)
+        sleep_durations = [c.args[0] for c in sleep_mock.call_args_list]
+        self.assertEqual(sleep_durations, [2, 4, 8])
+
 
 if __name__ == "__main__":
     unittest.main()
