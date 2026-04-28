@@ -16,4 +16,4 @@ alwaysApply: true
 
 - Use conda for primary
 - "conda activate nlp" is a command to activate environment named "nlp"
-- python version is 3.12
+- python version is 3.11
