@@ -385,8 +385,7 @@ def process_shynbui_row(row, split_name):
         return None, "schema_error"
 
     answer_start = answer_start_raw - leading_trim
-    if answer_start < 0:
-        return None, "answer_not_found_after_normalize"
+    if answer_start < 0 or answer_start + len(answer_text) > len(context) or context[answer_start : answer_start + len(answer_text)] != answer_text:
     if answer_start + len(answer_text) > len(context) or context[answer_start : answer_start + len(answer_text)] != answer_text:
         found = context.find(answer_text, max(0, answer_start))
         if found < 0 or context[found : found + len(answer_text)] != answer_text:
