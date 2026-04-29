@@ -63,6 +63,10 @@ python scripts/recheck_wiki_mcq_seed.py
 
 Output ghi vào `seed_exports/`.
 
+Trạng thái hiện tại:
+
+- `comprehension_seed_raw` đã có spec + plan, ETL chưa implement (xem `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md` và `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`).
+
 Ghi chú file seed cho `wiki_mcq`:
 
 - `seed_exports/wiki_mcq_seed.jsonl`: seed thô đã clean schema

@@ -5,15 +5,21 @@ alwaysApply: true
 
 # AGENTS.md
 
-## Core Working Rules (STRICT)
+## Environment (source of truth)
 
-- **Minimal Impact:** Make the smallest correct change. NEVER refactor unrelated code, formatting, or docs.
-- **No Guessing:** If requirements, contracts, or scope are ambiguous, stop and ask.
-- **Verify First:** Prove your changes work via direct reads, checks, or tests before finishing.
-- **Keep It Simple:** Do not over-engineer. Write straightforward solutions.
+- `conda activate nlp` (Python 3.11)
 
-## Environment
+## High-signal commands
 
-- Use conda for primary
-- "conda activate nlp" is a command to activate environment named "nlp"
-- python version is 3.11
+- Parser tests: `python -m unittest scripts.test_baseline_parsers -v`
+- Seed ETL (MCQ):
+  - `python scripts/load_exams_mcq_seed.py`
+  - `python scripts/recheck_exams_mcq_seed.py`
+  - `python scripts/load_wiki_mcq_seed.py`
+  - `python scripts/recheck_wiki_mcq_seed.py`
+
+## Current status
+
+- `comprehension_seed_raw` spec: `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md`
+- `comprehension_seed_raw` plan: `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`
+- ETL script not implemented yet (seed file not built)
