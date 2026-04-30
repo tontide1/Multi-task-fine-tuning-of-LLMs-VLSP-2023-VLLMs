@@ -16,6 +16,10 @@ from scripts.comprehension_mcq_seed_common import (
     split_mcq_user_content,
     stable_choice_labels,
 )
+from scripts.prepare_comprehension_mcq_generation import (
+    build_generation_request,
+    should_keep_for_generation,
+)
 
 
 class TestComprehensionMcqSeedCommon(unittest.TestCase):
@@ -238,6 +242,55 @@ class TestComprehensionRawUitFilter(unittest.TestCase):
             self.assertEqual(report["output_jsonl"], str(output_path))
             self.assertEqual(report["rejects_jsonl"], str(rejects_path))
             self.assertEqual(report["report_json"], str(report_path))
+
+
+class TestComprehensionMcqGenerationRequestExport(unittest.TestCase):
+    def test_should_keep_for_generation_applies_deterministic_bounds(self) -> None:
+        self.assertFalse(should_keep_for_generation({"context": "", "question": "Q", "answer_text": "AB"}))
+        self.assertFalse(should_keep_for_generation({"context": "CTX", "question": None, "answer_text": "AB"}))
+        self.assertFalse(should_keep_for_generation({"context": "CTX", "question": "Q", "answer_text": "A"}))
+        self.assertFalse(should_keep_for_generation({"context": "CTX", "question": "Q", "answer_text": "A" * 221}))
+        self.assertFalse(should_keep_for_generation({"context": "A" * 8001, "question": "Q", "answer_text": "AB"}))
+        self.assertFalse(should_keep_for_generation({"context": 123, "question": "Q", "answer_text": "AB"}))
+        self.assertTrue(
+            should_keep_for_generation(
+                {"context": "A" * 8000, "question": "Q", "answer_text": "AB"}
+            )
+        )
+        self.assertTrue(
+            should_keep_for_generation(
+                {"context": "CTX", "question": "Q", "answer_text": "A" * 220}
+            )
+        )
+
+    def test_build_generation_request_exports_expected_schema(self) -> None:
+        record = {
+            "context": "CTX",
+            "question": "Q",
+            "answer_text": "Đáp án",
+            "metadata": {
+                "source_id": "sid",
+                "source_split": "train",
+                "title": "T",
+                "dedup_hash": "raw-hash",
+                "answer_variants": [{"text": "Đáp án", "answer_start": 0}, {"text": "Phương án", "answer_start": 10}],
+            },
+        }
+
+        request = build_generation_request(record)
+
+        self.assertEqual(request["request_id"], "cmcq-gen-sid")
+        self.assertEqual(request["source_id"], "sid")
+        self.assertEqual(request["source_split"], "train")
+        self.assertEqual(request["context"], "CTX")
+        self.assertEqual(request["question"], "Q")
+        self.assertEqual(request["gold_answer_text"], "Đáp án")
+        self.assertEqual(request["answer_variants"], ["Đáp án", "Phương án"])
+        self.assertEqual(request["title"], "T")
+        self.assertEqual(request["raw_dedup_hash"], "raw-hash")
+        self.assertEqual(request["context_hash"], compute_context_hash("CTX"))
+        self.assertEqual(request["generation_prompt_version"], "comprehension_mcq_distractors_v1")
+        self.assertEqual(request["filter_version"], "comprehension_mcq_generation_filter_v1")
 
 
 if __name__ == "__main__":
