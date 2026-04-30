@@ -20,6 +20,7 @@ from scripts.comprehension_mcq_seed_common import (
 )
 from scripts.prepare_comprehension_mcq_generation import (
     build_generation_request,
+    filter_generation_requests,
     should_keep_for_generation,
 )
 
@@ -293,6 +294,35 @@ class TestComprehensionMcqGenerationRequestExport(unittest.TestCase):
         self.assertEqual(request["context_hash"], compute_context_hash("CTX"))
         self.assertEqual(request["generation_prompt_version"], "comprehension_mcq_distractors_v1")
         self.assertEqual(request["filter_version"], "comprehension_mcq_generation_filter_v1")
+
+    def test_filter_generation_requests_reports_short_question_and_generic_answer(self) -> None:
+        kept_record = {
+            "context": "CTX đủ dài để vượt qua bộ lọc.",
+            "question": "Câu hỏi nào hợp lệ?",
+            "answer_text": "Đáp án",
+            "metadata": {"source_id": "keep", "source_split": "train", "dedup_hash": "h1"},
+        }
+        short_question_record = {
+            "context": "CTX đủ dài để vượt qua bộ lọc.",
+            "question": "Ai?",
+            "answer_text": "Đáp án",
+            "metadata": {"source_id": "short-q", "source_split": "train", "dedup_hash": "h2"},
+        }
+        generic_answer_record = {
+            "context": "CTX đủ dài để vượt qua bộ lọc.",
+            "question": "Câu hỏi nào hợp lệ?",
+            "answer_text": "Không có thông tin",
+            "metadata": {"source_id": "generic-a", "source_split": "train", "dedup_hash": "h3"},
+        }
+
+        kept, rejects, report = filter_generation_requests(
+            [kept_record, short_question_record, generic_answer_record]
+        )
+
+        self.assertEqual(kept, [kept_record])
+        self.assertEqual(len(rejects), 2)
+        self.assertEqual(report["reject_reasons"]["question_too_short"], 1)
+        self.assertEqual(report["reject_reasons"]["generic_answer_text"], 1)
 
     def test_prepare_generation_script_help_runs_directly(self) -> None:
         script_path = Path(__file__).resolve().parent / "prepare_comprehension_mcq_generation.py"

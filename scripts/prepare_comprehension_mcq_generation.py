@@ -10,7 +10,7 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from scripts.comprehension_mcq_seed_common import compute_context_hash
+from scripts.comprehension_mcq_seed_common import compute_context_hash, normalize_for_hash
 
 
 DEFAULT_INPUT_JSONL = Path(__file__).resolve().parent.parent / "seed_exports" / "comprehension_seed_raw_uit_only.jsonl"
@@ -21,8 +21,19 @@ DEFAULT_REJECTS_JSONL = (
 DEFAULT_REPORT_JSON = Path(__file__).resolve().parent.parent / "seed_exports" / "comprehension_mcq_generation_request_report.json"
 
 MIN_ANSWER_CHARS = 2
+MIN_QUESTION_CHARS = 5
 MAX_ANSWER_CHARS = 220
 MAX_CONTEXT_CHARS = 8000
+
+GENERIC_ANSWER_DENYLIST = {
+    normalize_for_hash(text)
+    for text in (
+        "Không có thông tin",
+        "Tất cả các đáp án trên",
+        "Cả A và B",
+        "Cả A, B và C",
+    )
+}
 
 GENERATION_PROMPT_VERSION = "comprehension_mcq_distractors_v1"
 FILTER_VERSION = "comprehension_mcq_generation_filter_v1"
@@ -88,6 +99,10 @@ def _answer_variants(metadata):
     return texts
 
 
+def _is_generic_answer_text(answer_text):
+    return normalize_for_hash(answer_text) in GENERIC_ANSWER_DENYLIST
+
+
 def should_keep_for_generation(record):
     context = _string_field(record, "context")
     question = _string_field(record, "question")
@@ -96,6 +111,8 @@ def should_keep_for_generation(record):
     if context is None or not context.strip():
         return False
     if question is None or not question.strip():
+        return False
+    if len(question.strip()) < MIN_QUESTION_CHARS:
         return False
     if answer_text is None or not answer_text.strip():
         return False
@@ -142,12 +159,16 @@ def _filter_reason(record):
         return "missing_context"
     if not isinstance(question, str) or not question.strip():
         return "missing_question"
+    if len(question.strip()) < MIN_QUESTION_CHARS:
+        return "question_too_short"
     if not isinstance(answer_text, str) or not answer_text.strip():
         return "missing_answer"
     if len(answer_text) < MIN_ANSWER_CHARS:
         return "answer_too_short"
     if len(answer_text) > MAX_ANSWER_CHARS:
         return "answer_too_long"
+    if _is_generic_answer_text(answer_text):
+        return "generic_answer_text"
     if len(context) > MAX_CONTEXT_CHARS:
         return "context_too_long"
     return None
@@ -196,6 +217,7 @@ def filter_generation_requests(records):
         "reject_reasons": dict(reject_reasons),
         "filter": {
             "min_answer_chars": MIN_ANSWER_CHARS,
+            "min_question_chars": MIN_QUESTION_CHARS,
             "max_answer_chars": MAX_ANSWER_CHARS,
             "max_context_chars": MAX_CONTEXT_CHARS,
             "generation_prompt_version": GENERATION_PROMPT_VERSION,
