@@ -67,6 +67,33 @@ Trạng thái hiện tại:
 
 - `comprehension_seed_raw` đã có spec + plan, ETL chưa implement (xem `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md` và `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`).
 
+### Comprehension MCQ pipeline
+
+```bash
+# Offline boundary: raw UIT-only filter -> request export
+python scripts/filter_comprehension_raw_uit.py
+python scripts/prepare_comprehension_mcq_generation.py
+
+# External handoff files
+# - seed_exports/comprehension_mcq_generation_requests.jsonl
+# - seed_exports/comprehension_mcq_generation_outputs_raw.jsonl
+
+# Offline boundary: build candidates -> rule QC -> solver request export
+python scripts/build_comprehension_mcq_candidates.py
+python scripts/qc_comprehension_mcq_seed.py
+python scripts/prepare_comprehension_mcq_solver.py
+
+# External handoff files
+# - seed_exports/comprehension_mcq_solver_requests.jsonl
+# - seed_exports/comprehension_mcq_solver_outputs_raw.jsonl
+
+# Offline boundary: solver QC -> leak check -> finalize -> recheck
+python scripts/apply_comprehension_mcq_solver_qc.py
+python scripts/check_comprehension_mcq_leakage.py --allow-missing-benchmark
+python scripts/finalize_comprehension_mcq_seed.py
+python scripts/recheck_comprehension_mcq_seed.py
+```
+
 Ghi chú file seed cho `wiki_mcq`:
 
 - `seed_exports/wiki_mcq_seed.jsonl`: seed thô đã clean schema
