@@ -18,6 +18,7 @@ from scripts.comprehension_mcq_seed_common import (
     split_mcq_user_content,
     stable_choice_labels,
 )
+from scripts.build_comprehension_mcq_candidates import build_candidate_record, parse_generation_output
 from scripts.prepare_comprehension_mcq_generation import (
     build_generation_request,
     filter_generation_requests,
@@ -247,6 +248,80 @@ class TestComprehensionRawUitFilter(unittest.TestCase):
             self.assertEqual(report["report_json"], str(report_path))
 
 
+class TestComprehensionMcqCandidateBuilder(unittest.TestCase):
+    def test_parse_generation_output_accepts_raw_and_fenced_json(self) -> None:
+        raw_payload = parse_generation_output('{"distractors": ["x", "y", "z"]}')
+        fenced_payload = parse_generation_output("```json\n{\"distractors\": [\"x\", \"y\", \"z\"]}\n```")
+
+        self.assertEqual(raw_payload["distractors"], ["x", "y", "z"])
+        self.assertEqual(fenced_payload["distractors"], ["x", "y", "z"])
+
+    def test_parse_generation_output_rejects_wrong_distractor_count(self) -> None:
+        with self.assertRaises(ValueError):
+            parse_generation_output('{"distractors": ["x", "y"]}')
+
+    def test_build_candidate_record_exports_expected_schema(self) -> None:
+        raw_record = {
+            "context": "CTX",
+            "question": "Q",
+            "answer_text": "A",
+            "metadata": {
+                "source_id": "sid",
+                "source_split": "train",
+                "dedup_hash": "raw-hash",
+                "title": "T",
+            },
+        }
+
+        record = build_candidate_record(raw_record, ["B", "C", "D"])
+
+        self.assertEqual(len(record["messages"]), 2)
+        self.assertEqual(record["messages"][0]["role"], "user")
+        self.assertEqual(record["messages"][1]["role"], "assistant")
+        self.assertEqual(record["messages"][1]["content"], f"Đáp án: {record['metadata']['answer']}")
+        self.assertEqual(record["metadata"]["task"], "comprehension_mcq")
+        self.assertEqual(record["metadata"]["source"], "synthetic")
+        self.assertEqual(record["metadata"]["source_dataset"], "taidng/UIT-ViQuAD2.0")
+        self.assertEqual(record["metadata"]["source_split"], "train")
+        self.assertEqual(record["metadata"]["source_id"], "sid")
+        self.assertEqual(record["metadata"]["title"], "T")
+        self.assertEqual(record["metadata"]["context_hash"], compute_context_hash("CTX"))
+        self.assertEqual(record["metadata"]["raw_dedup_hash"], "raw-hash")
+        self.assertEqual(record["metadata"]["gold_answer_text"], "A")
+        self.assertEqual(record["metadata"]["generation_method"], "llm_distractor_generation_v1")
+        self.assertEqual(record["metadata"]["generation_prompt_version"], "comprehension_mcq_distractors_v1")
+        self.assertEqual(record["metadata"]["qc_version"], "comprehension_mcq_uit_rule_qc_v1")
+        self.assertEqual(record["metadata"]["language"], "vi")
+        self.assertEqual(record["metadata"]["difficulty"], "medium")
+        self.assertEqual(sorted(record["metadata"]["choices"].keys()), ["A", "B", "C", "D"])
+        self.assertEqual(
+            record["messages"][0]["content"],
+            build_mcq_user_content(
+                "CTX",
+                "Q",
+                [
+                    record["metadata"]["choices"]["A"],
+                    record["metadata"]["choices"]["B"],
+                    record["metadata"]["choices"]["C"],
+                    record["metadata"]["choices"]["D"],
+                ],
+            ),
+        )
+        self.assertEqual(
+            record["metadata"]["mcq_dedup_hash"],
+            make_mcq_dedup_hash(
+                "CTX",
+                "Q",
+                [
+                    record["metadata"]["choices"]["A"],
+                    record["metadata"]["choices"]["B"],
+                    record["metadata"]["choices"]["C"],
+                    record["metadata"]["choices"]["D"],
+                ],
+            ),
+        )
+
+
 class TestComprehensionMcqGenerationRequestExport(unittest.TestCase):
     def test_should_keep_for_generation_applies_deterministic_bounds(self) -> None:
         self.assertFalse(should_keep_for_generation({"context": "", "question": "Q", "answer_text": "AB"}))
@@ -257,12 +332,12 @@ class TestComprehensionMcqGenerationRequestExport(unittest.TestCase):
         self.assertFalse(should_keep_for_generation({"context": 123, "question": "Q", "answer_text": "AB"}))
         self.assertTrue(
             should_keep_for_generation(
-                {"context": "A" * 8000, "question": "Q", "answer_text": "AB"}
+                {"context": "A" * 8000, "question": "Câu hỏi hợp lệ?", "answer_text": "AB"}
             )
         )
         self.assertTrue(
             should_keep_for_generation(
-                {"context": "CTX", "question": "Q", "answer_text": "A" * 220}
+                {"context": "CTX", "question": "Câu hỏi hợp lệ?", "answer_text": "A" * 220}
             )
         )
 
