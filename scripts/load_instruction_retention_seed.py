@@ -286,7 +286,7 @@ def main():
     write_jsonl(out_rejects, rejects)
     
     report = {
-        "total_processed": len(kept_alpaca) + len(kept_multi) + len(rejects),
+        "total_processed": len(unique_alpaca) + len(unique_multi) + len(rejects),
         "total_kept_before_sample": len(unique_alpaca) + len(unique_multi),
         "total_final": len(final_all),
         "by_source": {
