@@ -12,7 +12,7 @@ if str(_REPO_ROOT) not in sys.path:
 from scripts.comprehension_mcq_seed_common import ANSWER_LABELS, canonical_choice_text, split_mcq_user_content  # noqa: E402
 
 
-DEFAULT_INPUT_JSONL = _REPO_ROOT / "seed_exports" / "comprehension_mcq_seed_rule_checked.jsonl"
+DEFAULT_INPUT_JSONL = _REPO_ROOT / "seed_exports" / "comprehension_mcq_seed_final.jsonl"
 VALID_TASK = "comprehension_mcq"
 VALID_SOURCE = "synthetic"
 VALID_SOURCE_DATASET = "taidng/UIT-ViQuAD2.0"
@@ -43,6 +43,10 @@ def _metadata(record):
         return {}
     metadata = record.get("metadata")
     return metadata if isinstance(metadata, dict) else {}
+
+
+def _format_counter(counter):
+    return json.dumps(dict(counter), ensure_ascii=False, indent=2) if counter else "N/A"
 
 
 def validate_record_schema(record):
@@ -182,13 +186,13 @@ def main(argv=None):
     print(f"   Invalid records: {len(invalid_records)}")
     print()
     print("=== [2] Source dataset distribution ===")
-    print(source_datasets.to_string() if source_datasets else "N/A")
+    print(_format_counter(source_datasets))
     print()
     print("=== [3] Source split distribution ===")
-    print(source_splits.to_string() if source_splits else "N/A")
+    print(_format_counter(source_splits))
     print()
     print("=== [4] Answer label distribution ===")
-    print(answer_labels.to_string() if answer_labels else "N/A")
+    print(_format_counter(answer_labels))
     print()
     print("=== [5] Invalid records ===")
     if invalid_records:

@@ -26,6 +26,8 @@ from scripts.prepare_comprehension_mcq_generation import (
     should_keep_for_generation,
 )
 from scripts.apply_comprehension_mcq_solver_qc import parse_solver_output, solver_keep_decision
+from scripts import finalize_comprehension_mcq_seed
+from scripts.finalize_comprehension_mcq_seed import finalize_records
 from scripts.prepare_comprehension_mcq_solver import build_solver_request
 from scripts import recheck_comprehension_mcq_seed
 from scripts.recheck_comprehension_mcq_seed import validate_record_schema
@@ -867,6 +869,118 @@ class TestComprehensionMcqRecheck(unittest.TestCase):
             result = recheck_comprehension_mcq_seed.main(["--input", str(input_path), "--sample", "1"])
 
             self.assertEqual(result, 0)
+
+
+class TestComprehensionMcqFinalizer(unittest.TestCase):
+    def _valid_record(self, source_id: str = "sid", dedup_hash: str = "hash-1") -> dict:
+        return {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: CTX\n\n"
+                        "Câu hỏi: Q\n"
+                        "A. a\n"
+                        "B. b\n"
+                        "C. c\n"
+                        "D. d"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: A"},
+            ],
+            "metadata": {
+                "task": "comprehension_mcq",
+                "source": "synthetic",
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "source_split": "train",
+                "source_id": source_id,
+                "gold_answer_text": "a",
+                "answer": "A",
+                "choices": {"A": "a", "B": "b", "C": "c", "D": "d"},
+                "mcq_dedup_hash": dedup_hash,
+                "context_hash": "ctx-hash",
+            },
+        }
+
+    def test_finalize_records_keeps_valid_rows_and_builds_report(self) -> None:
+        records = [self._valid_record(source_id="sid-1", dedup_hash="hash-1"), self._valid_record(source_id="sid-2", dedup_hash="hash-2")]
+
+        final_records, report, samples = finalize_records(records, sample_size=1)
+
+        self.assertEqual(len(final_records), 2)
+        self.assertEqual(report["total_loaded"], 2)
+        self.assertEqual(report["total_kept"], 2)
+        self.assertEqual(report["total_rejected"], 0)
+        self.assertEqual(report["duplicate_mcq_dedup_hashes"], [])
+        self.assertEqual(report["output_jsonl"], str(finalize_comprehension_mcq_seed.DEFAULT_OUTPUT_JSONL))
+        self.assertEqual(report["report_json"], str(finalize_comprehension_mcq_seed.DEFAULT_REPORT_JSON))
+        self.assertEqual(report["samples_jsonl"], str(finalize_comprehension_mcq_seed.DEFAULT_SAMPLES_JSONL))
+        self.assertEqual(samples, [records[0]])
+
+    def test_finalize_records_rejects_invalid_schema(self) -> None:
+        record = self._valid_record()
+        record["metadata"]["choices"] = {"A": "a", "B": "b", "C": "b", "D": "d"}
+
+        with self.assertRaises(ValueError) as ctx:
+            finalize_records([record])
+
+        self.assertIn("duplicate_choices_normalized", str(ctx.exception))
+
+    def test_finalize_records_rejects_duplicate_dedup_hash(self) -> None:
+        records = [self._valid_record(source_id="sid-1", dedup_hash="hash-1"), self._valid_record(source_id="sid-2", dedup_hash="hash-1")]
+
+        with self.assertRaises(ValueError) as ctx:
+            finalize_records(records)
+
+        self.assertIn("duplicate mcq_dedup_hash", str(ctx.exception))
+
+    def test_main_writes_final_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            input_path = tmp_path / "no_leak.jsonl"
+            output_path = tmp_path / "final.jsonl"
+            report_path = tmp_path / "final_report.json"
+            samples_path = tmp_path / "final_samples.jsonl"
+            input_path.write_text(json.dumps(self._valid_record(), ensure_ascii=False) + "\n", encoding="utf-8")
+
+            result = finalize_comprehension_mcq_seed.main(
+                [
+                    "--input",
+                    str(input_path),
+                    "--output-jsonl",
+                    str(output_path),
+                    "--report-json",
+                    str(report_path),
+                    "--samples-jsonl",
+                    str(samples_path),
+                    "--sample-size",
+                    "1",
+                ]
+            )
+
+            self.assertEqual(result, 0)
+            self.assertEqual(
+                [
+                    json.loads(line)
+                    for line in output_path.read_text(encoding="utf-8").splitlines()
+                    if line.strip()
+                ],
+                [self._valid_record()],
+            )
+            self.assertEqual(
+                [
+                    json.loads(line)
+                    for line in samples_path.read_text(encoding="utf-8").splitlines()
+                    if line.strip()
+                ],
+                [self._valid_record()],
+            )
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertEqual(report["input_jsonl"], str(input_path))
+            self.assertEqual(report["output_jsonl"], str(output_path))
+            self.assertEqual(report["report_json"], str(report_path))
+            self.assertEqual(report["samples_jsonl"], str(samples_path))
 
 
 class TestComprehensionMcqSolverBoundary(unittest.TestCase):
