@@ -2,10 +2,6 @@ import argparse
 import json
 from collections import Counter
 from pathlib import Path
-import sys
-
-if __package__ in (None, ""):
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scripts.comprehension_mcq_seed_common import compute_context_hash
 
