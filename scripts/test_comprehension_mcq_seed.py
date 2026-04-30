@@ -96,7 +96,7 @@ class TestComprehensionMcqSeedCommon(unittest.TestCase):
 
 
 class TestComprehensionRawUitFilter(unittest.TestCase):
-    def test_main_filters_uit_only_rows_and_writes_matching_report(self) -> None:
+    def test_filter_uit_only_and_main_write_matching_report(self) -> None:
         from scripts import filter_comprehension_raw_uit as uit_filter
 
         keep_record = {
@@ -157,17 +157,41 @@ class TestComprehensionRawUitFilter(unittest.TestCase):
 
             input_path.write_text(
                 "\n".join(
-                    json.dumps(record, ensure_ascii=False)
-                    for record in [
-                        keep_record,
-                        reject_dataset_record,
-                        reject_span_mode_record,
-                        reject_variants_record,
+                    [
+                        json.dumps(keep_record, ensure_ascii=False),
+                        json.dumps(reject_dataset_record, ensure_ascii=False),
+                        json.dumps(reject_span_mode_record, ensure_ascii=False),
+                        json.dumps(reject_variants_record, ensure_ascii=False),
+                        "{not json}",
                     ]
                 )
                 + "\n",
                 encoding="utf-8",
             )
+
+            kept_records, reject_rows, report = uit_filter.filter_uit_only(
+                [
+                    keep_record,
+                    reject_dataset_record,
+                    reject_span_mode_record,
+                    reject_variants_record,
+                ]
+            )
+
+            self.assertEqual(kept_records, [keep_record])
+            self.assertEqual(len(reject_rows), 3)
+            self.assertEqual(report["total_loaded"], 4)
+            self.assertEqual(report["total_kept"], 1)
+            self.assertEqual(report["total_rejected"], 3)
+            self.assertNotIn("kept_by_dataset", report)
+            self.assertEqual(report["kept_by_split"], {"train": 1})
+            self.assertEqual(report["source_datasets"], {"taidng/UIT-ViQuAD2.0": 1})
+            self.assertEqual(report["span_check_modes"], {"strict_exact": 1})
+            self.assertEqual(report["empty_answer_variants"], 1)
+            self.assertEqual(report["invalid_records"], 0)
+            self.assertEqual(report["reject_reasons"]["source_dataset"], 1)
+            self.assertEqual(report["reject_reasons"]["span_check_mode"], 1)
+            self.assertEqual(report["reject_reasons"]["answer_variants_empty"], 1)
 
             self.assertEqual(
                 uit_filter.main(
@@ -198,14 +222,19 @@ class TestComprehensionRawUitFilter(unittest.TestCase):
             report = json.loads(report_path.read_text(encoding="utf-8"))
 
             self.assertEqual(kept_rows, [keep_record])
-            self.assertEqual(len(reject_rows), 3)
-            self.assertEqual(report["total_loaded"], 4)
+            self.assertEqual(len(reject_rows), 4)
+            self.assertEqual(report["total_loaded"], 5)
             self.assertEqual(report["total_kept"], 1)
-            self.assertEqual(report["total_rejected"], 3)
-            self.assertEqual(report["kept_by_dataset"], {"taidng/UIT-ViQuAD2.0": 1})
+            self.assertEqual(report["total_rejected"], 4)
+            self.assertEqual(report["kept_by_split"], {"train": 1})
+            self.assertEqual(report["source_datasets"], {"taidng/UIT-ViQuAD2.0": 1})
+            self.assertEqual(report["span_check_modes"], {"strict_exact": 1})
+            self.assertEqual(report["empty_answer_variants"], 1)
+            self.assertEqual(report["invalid_records"], 1)
             self.assertEqual(report["reject_reasons"]["source_dataset"], 1)
             self.assertEqual(report["reject_reasons"]["span_check_mode"], 1)
             self.assertEqual(report["reject_reasons"]["answer_variants_empty"], 1)
+            self.assertEqual(report["reject_reasons"]["invalid_json"], 1)
             self.assertEqual(report["output_jsonl"], str(output_path))
             self.assertEqual(report["rejects_jsonl"], str(rejects_path))
             self.assertEqual(report["report_json"], str(report_path))

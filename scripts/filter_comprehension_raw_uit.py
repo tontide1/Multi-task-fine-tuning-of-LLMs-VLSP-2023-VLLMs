@@ -15,12 +15,27 @@ STRICT_SPAN_CHECK_MODE = "strict_exact"
 
 def read_jsonl(path):
     records = []
+    malformed_rejects = []
     with Path(path).open("r", encoding="utf-8") as handle:
-        for line in handle:
+        for line_number, line in enumerate(handle, start=1):
             line = line.strip()
             if line:
-                records.append(json.loads(line))
-    return records
+                try:
+                    records.append(json.loads(line))
+                except json.JSONDecodeError:
+                    malformed_rejects.append(
+                        {
+                            "source_dataset": "unknown",
+                            "source_split": "unknown",
+                            "source_id": f"line-{line_number}",
+                            "reason": "invalid_json",
+                            "context_preview": "",
+                            "question": "",
+                            "answer_text": "",
+                            "raw_preview": line[:200],
+                        }
+                    )
+    return records, malformed_rejects
 
 
 def write_jsonl(path, rows):
@@ -103,19 +118,26 @@ def build_reject_record(record, reason):
     }
 
 
-def run_filter(records):
+def filter_uit_only(records):
     kept = []
     rejects = []
     reject_reasons = Counter()
-    kept_by_dataset = Counter()
+    kept_by_split = Counter()
+    source_datasets = Counter()
+    span_check_modes = Counter()
+    empty_answer_variants = 0
 
     for record in records:
         reason = _filter_reason(record)
         if reason is None:
             kept.append(record)
-            kept_by_dataset[_source_dataset(record)] += 1
+            kept_by_split[_source_split(record)] += 1
+            source_datasets[_source_dataset(record)] += 1
+            span_check_modes[str(record["metadata"].get("span_check_mode"))] += 1
             continue
         reject_reasons[reason] += 1
+        if reason == "answer_variants_empty":
+            empty_answer_variants += 1
         rejects.append(build_reject_record(record, reason))
 
     report = {
@@ -126,7 +148,11 @@ def run_filter(records):
         "total_loaded": len(records),
         "total_kept": len(kept),
         "total_rejected": len(rejects),
-        "kept_by_dataset": dict(kept_by_dataset),
+        "kept_by_split": dict(kept_by_split),
+        "source_datasets": dict(source_datasets),
+        "span_check_modes": dict(span_check_modes),
+        "empty_answer_variants": empty_answer_variants,
+        "invalid_records": 0,
         "reject_reasons": dict(reject_reasons),
         "filter": {
             "source_dataset": UIT_DATASET_ID,
@@ -150,8 +176,14 @@ def main(argv=None):
         print(f"[error] missing input file: {input_path}")
         return 1
 
-    records = read_jsonl(input_path)
-    kept, rejects, report = run_filter(records)
+    records, malformed_rejects = read_jsonl(input_path)
+    kept, rejects, report = filter_uit_only(records)
+    rejects = malformed_rejects + rejects
+    report["invalid_records"] = len(malformed_rejects)
+    report["total_loaded"] = len(records) + len(malformed_rejects)
+    report["total_rejected"] = len(rejects)
+    if malformed_rejects:
+        report["reject_reasons"]["invalid_json"] = len(malformed_rejects)
 
     output_path = Path(args.output_jsonl)
     rejects_path = Path(args.rejects_jsonl)
