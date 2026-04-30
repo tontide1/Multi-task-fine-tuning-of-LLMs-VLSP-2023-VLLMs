@@ -13,10 +13,6 @@ from collections import Counter
 from pathlib import Path
 import random
 
-import pandas as pd
-from datasets import load_dataset
-from tqdm.auto import tqdm
-
 # Constants
 VI_ALPACA_ID = "bkai-foundation-models/vi-alpaca"
 MULTITURN_ID = "lamhieu/alpaca_multiturns_dialogue_vi"
@@ -51,7 +47,13 @@ def clean_markers(text: str) -> str:
 def is_mcq_like(user_content: str, assistant_content: str) -> bool:
     has_choices = bool(re.search(r"[A-D]\.\s+.*?\n[A-D]\.\s+.*?\n[A-D]\.\s+.*?\n[A-D]\.\s+", user_content))
     is_short_answer = bool(re.match(r"^\s*(Đáp án|Answer|Kết quả)\s*:?\s*[A-D]\s*$", assistant_content, re.IGNORECASE))
-    return has_choices or is_short_answer
+    
+    if is_short_answer:
+        return True
+    if has_choices and len(assistant_content) < 20:
+        if re.match(r"^\s*[A-D]\.?\s*$", assistant_content, re.IGNORECASE):
+            return True
+    return False
 
 def extract_first_user_assistant_pair(messages):
     # messages can be list or numpy.ndarray
@@ -107,8 +109,8 @@ def build_reject_record(source_dataset, source_split, source_id, reason, user_pr
         "source_split": source_split,
         "source_id": source_id,
         "reason": reason,
-        "user_preview": user_preview[:200] if user_preview else "",
-        "assistant_preview": assistant_preview[:200] if assistant_preview else "",
+        "user_preview": (user_preview or "")[:200],
+        "assistant_preview": (assistant_preview or "")[:200],
     }
 
 def process_vi_alpaca_row(row, split_name):
@@ -186,6 +188,11 @@ def write_jsonl(path: Path, rows):
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 def main():
+    # Lazy imports for heavy dependencies
+    import pandas as pd
+    from datasets import load_dataset
+    from tqdm.auto import tqdm
+
     repo_root = Path(__file__).parent.parent
     out_dir = repo_root / "seed_exports"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -211,7 +218,14 @@ def main():
             record, reason = process_vi_alpaca_row(row.to_dict(), split_name)
             if reason:
                 reject_reasons[reason] += 1
-                rejects.append(build_reject_record(VI_ALPACA_ID, split_name, f"alpaca-{row.get('_row_index')}", reason, row.get("instruction"), row.get("output")))
+                rejects.append(build_reject_record(
+                    VI_ALPACA_ID, 
+                    split_name, 
+                    f"alpaca-{row.get('_row_index')}", 
+                    reason, 
+                    row.get("instruction"), 
+                    row.get("output")
+                ))
             else:
                 kept_alpaca.append(record)
                 
@@ -223,29 +237,41 @@ def main():
             record, reason = process_multiturn_row(row.to_dict(), split_name)
             if reason:
                 reject_reasons[reason] += 1
-                rejects.append(build_reject_record(MULTITURN_ID, split_name, f"multiturn-{row.get('_row_index')}", reason, str(row.get("messages")), ""))
+                rejects.append(build_reject_record(
+                    MULTITURN_ID, 
+                    split_name, 
+                    f"multiturn-{row.get('_row_index')}", 
+                    reason, 
+                    str(row.get("messages")), 
+                    ""
+                ))
             else:
                 kept_multi.append(record)
     
     print("[4/5] Deduplicating and Sampling...")
     
-    def dedup(records):
+    def dedup_and_log(records, dataset_id):
         seen = set()
         unique = []
-        dups = []
         for r in records:
             h = r["metadata"]["dedup_hash"]
             if h in seen:
-                dups.append(r)
+                reject_reasons["duplicate"] += 1
+                rejects.append(build_reject_record(
+                    dataset_id,
+                    r["metadata"]["source_split"],
+                    r["metadata"]["source_id"],
+                    "duplicate",
+                    r["messages"][0]["content"],
+                    r["messages"][1]["content"]
+                ))
             else:
                 seen.add(h)
                 unique.append(r)
-        return unique, dups
+        return unique
     
-    unique_alpaca, dups_alpaca = dedup(kept_alpaca)
-    unique_multi, dups_multi = dedup(kept_multi)
-    
-    reject_reasons["duplicate"] += (len(dups_alpaca) + len(dups_multi))
+    unique_alpaca = dedup_and_log(kept_alpaca, VI_ALPACA_ID)
+    unique_multi = dedup_and_log(kept_multi, MULTITURN_ID)
     
     # Random sampling
     random.seed(RANDOM_SEED)
