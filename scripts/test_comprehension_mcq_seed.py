@@ -19,11 +19,13 @@ from scripts.comprehension_mcq_seed_common import (
     stable_choice_labels,
 )
 from scripts.build_comprehension_mcq_candidates import build_candidate_record, parse_generation_output
+from scripts.qc_comprehension_mcq_seed import rule_check_record
 from scripts.prepare_comprehension_mcq_generation import (
     build_generation_request,
     filter_generation_requests,
     should_keep_for_generation,
 )
+from scripts.recheck_comprehension_mcq_seed import validate_record_schema
 
 
 class TestComprehensionMcqSeedCommon(unittest.TestCase):
@@ -410,6 +412,274 @@ class TestComprehensionMcqGenerationRequestExport(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0)
         self.assertIn("usage:", result.stdout)
+
+
+class TestComprehensionMcqRuleQc(unittest.TestCase):
+    def _base_record(self) -> dict:
+        return {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: CTX\n\n"
+                        "Câu hỏi: Q\n"
+                        "A. a\n"
+                        "B. b\n"
+                        "C. c\n"
+                        "D. d"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: A"},
+            ],
+            "metadata": {
+                "task": "comprehension_mcq",
+                "source": "synthetic",
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "source_split": "train",
+                "source_id": "sid",
+                "gold_answer_text": "a",
+                "answer": "A",
+                "choices": {"A": "a", "B": "b", "C": "c", "D": "d"},
+                "mcq_dedup_hash": "hash-1",
+                "context_hash": "ctx-hash",
+            },
+        }
+
+    def test_rule_check_record_rejects_expected_hard_cases(self) -> None:
+        base_hash = self._base_record()["metadata"]["mcq_dedup_hash"]
+        cases = [
+            ("invalid_messages", {"messages": [], "metadata": self._base_record()["metadata"]}),
+            (
+                "invalid_assistant_answer_format",
+                {
+                    **self._base_record(),
+                    "messages": [
+                        self._base_record()["messages"][0],
+                        {"role": "assistant", "content": "A"},
+                    ],
+                },
+            ),
+            (
+                "invalid_answer_label",
+                {
+                    **self._base_record(),
+                    "metadata": {**self._base_record()["metadata"], "answer": "E"},
+                },
+            ),
+            (
+                "missing_choices",
+                {
+                    **self._base_record(),
+                    "metadata": {k: v for k, v in self._base_record()["metadata"].items() if k != "choices"},
+                },
+            ),
+            (
+                "duplicate_choices_normalized",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "choices": {"A": "a", "B": "A. a", "C": "c", "D": "d"},
+                    },
+                },
+            ),
+            (
+                "gold_answer_missing_from_choices",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "choices": {"A": "x", "B": "b", "C": "c", "D": "d"},
+                    },
+                },
+            ),
+            (
+                "gold_answer_label_mismatch",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "choices": {"A": "x", "B": "a", "C": "c", "D": "d"},
+                    },
+                },
+            ),
+            (
+                "distractor_matches_gold",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "gold_answer_text": "hà nội đẹp",
+                        "choices": {
+                            "A": "hà nội đẹp",
+                            "B": "đẹp hà nội",
+                            "C": "đà nẵng",
+                            "D": "huế",
+                        },
+                    },
+                },
+            ),
+            (
+                "distractor_contains_gold",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "gold_answer_text": "hà nội",
+                        "choices": {
+                            "A": "hà nội",
+                            "B": "thành phố hà nội cổ",
+                            "C": "đà nẵng",
+                            "D": "huế",
+                        },
+                    },
+                },
+            ),
+            (
+                "banned_option_text",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "choices": {"A": "a", "B": "b", "C": "Không có thông tin", "D": "d"},
+                    },
+                },
+            ),
+            (
+                "missing_context_or_question",
+                {
+                    **self._base_record(),
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "Đọc đoạn văn sau và chọn đáp án đúng.\n\nĐoạn văn: \n\nCâu hỏi: \nA. a\nB. b\nC. c\nD. d",
+                        },
+                        {"role": "assistant", "content": "Đáp án: A"},
+                    ],
+                },
+            ),
+            (
+                "invalid_task",
+                {
+                    **self._base_record(),
+                    "metadata": {**self._base_record()["metadata"], "task": "other"},
+                },
+            ),
+            (
+                "invalid_source_dataset",
+                {
+                    **self._base_record(),
+                    "metadata": {**self._base_record()["metadata"], "source_dataset": "other/dataset"},
+                },
+            ),
+            (
+                "choice_too_long",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "choices": {
+                            "A": "a",
+                            "B": "b",
+                            "C": "c",
+                            "D": "d" * 301,
+                        },
+                    },
+                },
+            ),
+            (
+                "choice_length_imbalance",
+                {
+                    **self._base_record(),
+                    "metadata": {
+                        **self._base_record()["metadata"],
+                        "choices": {
+                            "A": "a",
+                            "B": "b",
+                            "C": "x" * 60,
+                            "D": "c",
+                        },
+                    },
+                },
+            ),
+            (
+                "duplicate_mcq_dedup_hash",
+                {
+                    **self._base_record(),
+                    "metadata": {**self._base_record()["metadata"], "mcq_dedup_hash": base_hash},
+                },
+                {"seen_mcq_dedup_hashes": {base_hash}},
+            ),
+        ]
+
+        for case in cases:
+            if len(case) == 2:
+                expected_reason, record = case
+                kwargs = {}
+            else:
+                expected_reason, record, kwargs = case
+            with self.subTest(reason=expected_reason):
+                accepted, reason = rule_check_record(record, **kwargs)
+                self.assertFalse(accepted)
+                self.assertEqual(reason, expected_reason)
+
+
+class TestComprehensionMcqRecheck(unittest.TestCase):
+    def _valid_record(self) -> dict:
+        return {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: CTX\n\n"
+                        "Câu hỏi: Q\n"
+                        "A. a\n"
+                        "B. b\n"
+                        "C. c\n"
+                        "D. d"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: A"},
+            ],
+            "metadata": {
+                "task": "comprehension_mcq",
+                "source": "synthetic",
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "source_split": "train",
+                "source_id": "sid",
+                "gold_answer_text": "a",
+                "answer": "A",
+                "choices": {"A": "a", "B": "b", "C": "c", "D": "d"},
+                "mcq_dedup_hash": "hash-1",
+                "context_hash": "ctx-hash",
+            },
+        }
+
+    def test_validate_record_schema_accepts_valid_final_style_record(self) -> None:
+        self.assertEqual(validate_record_schema(self._valid_record()), [])
+
+    def test_validate_record_schema_reports_schema_errors(self) -> None:
+        record = {
+            "messages": [
+                {"role": "user", "content": ""},
+                {"role": "assistant", "content": "Đáp án: A"},
+            ],
+            "metadata": {"task": "comprehension_mcq"},
+        }
+
+        errors = validate_record_schema(record)
+
+        self.assertIn("empty_user_content", errors)
+        self.assertIn("missing_metadata_source", errors)
+        self.assertIn("missing_metadata_source_dataset", errors)
+        self.assertIn("missing_metadata_source_split", errors)
+        self.assertIn("missing_metadata_source_id", errors)
+        self.assertIn("missing_metadata_gold_answer_text", errors)
+        self.assertIn("missing_metadata_answer", errors)
+        self.assertIn("missing_metadata_choices", errors)
+        self.assertIn("missing_metadata_mcq_dedup_hash", errors)
 
 
 if __name__ == "__main__":
