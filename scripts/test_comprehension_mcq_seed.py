@@ -1,6 +1,8 @@
 import hashlib
 import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from scripts.comprehension_mcq_seed_common import (
     build_mcq_user_content,
@@ -91,6 +93,122 @@ class TestComprehensionMcqSeedCommon(unittest.TestCase):
             extract_json_object("not json")
         with self.assertRaises(json.JSONDecodeError):
             extract_json_object("{bad json}")
+
+
+class TestComprehensionRawUitFilter(unittest.TestCase):
+    def test_main_filters_uit_only_rows_and_writes_matching_report(self) -> None:
+        from scripts import filter_comprehension_raw_uit as uit_filter
+
+        keep_record = {
+            "context": "Một đoạn văn đủ điều kiện để giữ lại.",
+            "question": "Câu hỏi nào được giữ?",
+            "answer_text": "được giữ",
+            "metadata": {
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "span_check_mode": "strict_exact",
+                "answer_variants": [{"text": "được giữ", "answer_start": 24}],
+                "source_id": "keep-1",
+                "source_split": "train",
+            },
+        }
+        reject_dataset_record = {
+            "context": "Một đoạn văn khác.",
+            "question": "Câu hỏi bị loại?",
+            "answer_text": "bị loại",
+            "metadata": {
+                "source_dataset": "other/dataset",
+                "span_check_mode": "strict_exact",
+                "answer_variants": [{"text": "bị loại", "answer_start": 15}],
+                "source_id": "reject-1",
+                "source_split": "train",
+            },
+        }
+        reject_span_mode_record = {
+            "context": "Một đoạn văn khác nữa.",
+            "question": "Câu hỏi bị loại do span?",
+            "answer_text": "bị loại",
+            "metadata": {
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "span_check_mode": "loose",
+                "answer_variants": [{"text": "bị loại", "answer_start": 18}],
+                "source_id": "reject-2",
+                "source_split": "validation",
+            },
+        }
+        reject_variants_record = {
+            "context": "Một đoạn văn khác nữa.",
+            "question": "Câu hỏi bị loại do variants?",
+            "answer_text": "bị loại",
+            "metadata": {
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "span_check_mode": "strict_exact",
+                "answer_variants": [],
+                "source_id": "reject-3",
+                "source_split": "test",
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            input_path = tmp_path / "comprehension_seed_raw.jsonl"
+            output_path = tmp_path / "comprehension_seed_raw_uit_only.jsonl"
+            rejects_path = tmp_path / "comprehension_seed_raw_uit_only_rejects.jsonl"
+            report_path = tmp_path / "comprehension_seed_raw_uit_only_report.json"
+
+            input_path.write_text(
+                "\n".join(
+                    json.dumps(record, ensure_ascii=False)
+                    for record in [
+                        keep_record,
+                        reject_dataset_record,
+                        reject_span_mode_record,
+                        reject_variants_record,
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                uit_filter.main(
+                    [
+                        "--input-jsonl",
+                        str(input_path),
+                        "--output-jsonl",
+                        str(output_path),
+                        "--rejects-jsonl",
+                        str(rejects_path),
+                        "--report-json",
+                        str(report_path),
+                    ]
+                ),
+                0,
+            )
+
+            kept_rows = [
+                json.loads(line)
+                for line in output_path.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            reject_rows = [
+                json.loads(line)
+                for line in rejects_path.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+
+            self.assertEqual(kept_rows, [keep_record])
+            self.assertEqual(len(reject_rows), 3)
+            self.assertEqual(report["total_loaded"], 4)
+            self.assertEqual(report["total_kept"], 1)
+            self.assertEqual(report["total_rejected"], 3)
+            self.assertEqual(report["kept_by_dataset"], {"taidng/UIT-ViQuAD2.0": 1})
+            self.assertEqual(report["reject_reasons"]["source_dataset"], 1)
+            self.assertEqual(report["reject_reasons"]["span_check_mode"], 1)
+            self.assertEqual(report["reject_reasons"]["answer_variants_empty"], 1)
+            self.assertEqual(report["output_jsonl"], str(output_path))
+            self.assertEqual(report["rejects_jsonl"], str(rejects_path))
+            self.assertEqual(report["report_json"], str(report_path))
 
 
 if __name__ == "__main__":
