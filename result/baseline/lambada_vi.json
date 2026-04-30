@@ -1,25 +1,3 @@
-{
-  "results": {
-    "lambada_vi": {
-      "ppl": 23.16310982220912,
-      "ppl_stderr": 0.5886385528043585,
-      "acc": 0.311,
-      "acc_stderr": 0.004629259444479261
-    }
-  },
-  "versions": {
-    "lambada_vi": null
-  },
-  "config": {
-    "model": "hf-causal",
-    "model_args": "pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,load_in_4bit=True,dtype=float16,trust_remote_code=True",
-    "num_fewshot": 0,
-    "batch_size": "16",
-    "batch_sizes": [],
-    "device": "cuda:0",
-    "no_cache": false,
-    "limit": null,
-    "bootstrap_iters": 100000,
-    "description_dict": {}
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:972c0b624512add31e850b6bf231126f332f1bbade1d3e77b5645c677e466312
+size 596

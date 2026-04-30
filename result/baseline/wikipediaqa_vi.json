@@ -1,25 +1,3 @@
-{
-  "results": {
-    "wikipediaqa_vi": {
-      "acc": 0.3975,
-      "acc_stderr": 0.010945628277499404,
-      "acc_norm": 0.4185,
-      "acc_norm_stderr": 0.011033573531383031
-    }
-  },
-  "versions": {
-    "wikipediaqa_vi": 0
-  },
-  "config": {
-    "model": "hf-causal",
-    "model_args": "pretrained=unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit,load_in_4bit=True,dtype=float16,trust_remote_code=True",
-    "num_fewshot": 5,
-    "batch_size": "16",
-    "batch_sizes": [],
-    "device": "cuda:0",
-    "no_cache": false,
-    "limit": null,
-    "bootstrap_iters": 100000,
-    "description_dict": {}
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:28752803780d0382f12c4af79f94618f35019908a2ca614d5011b99c0f52ec11
+size 603
