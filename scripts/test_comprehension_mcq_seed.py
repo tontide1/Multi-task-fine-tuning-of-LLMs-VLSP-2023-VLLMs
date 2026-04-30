@@ -25,6 +25,9 @@ from scripts.prepare_comprehension_mcq_generation import (
     filter_generation_requests,
     should_keep_for_generation,
 )
+from scripts.apply_comprehension_mcq_solver_qc import parse_solver_output, solver_keep_decision
+from scripts.prepare_comprehension_mcq_solver import build_solver_request
+from scripts import recheck_comprehension_mcq_seed
 from scripts.recheck_comprehension_mcq_seed import validate_record_schema
 
 
@@ -103,6 +106,180 @@ class TestComprehensionMcqSeedCommon(unittest.TestCase):
             extract_json_object("not json")
         with self.assertRaises(json.JSONDecodeError):
             extract_json_object("{bad json}")
+
+
+class TestComprehensionMcqLeakageChecker(unittest.TestCase):
+    def test_exact_question_match(self) -> None:
+        from scripts.check_comprehension_mcq_leakage import has_exact_question_match
+
+        self.assertTrue(has_exact_question_match("Câu hỏi gì?", "  câu hỏi gì? "))
+
+    def test_near_duplicate_question(self) -> None:
+        from scripts.check_comprehension_mcq_leakage import is_near_duplicate_question
+
+        self.assertTrue(is_near_duplicate_question("Ai là tác giả?", "Tác giả là ai?"))
+
+    def test_same_choices_pattern(self) -> None:
+        from scripts.check_comprehension_mcq_leakage import has_same_choices_pattern
+
+        left_choices = {"A": "a", "B": "b", "C": "c", "D": "d"}
+        right_choices = {"A": "a", "B": "b", "C": "c", "D": "d"}
+
+        self.assertTrue(has_same_choices_pattern(left_choices, right_choices))
+
+    def test_high_context_overlap(self) -> None:
+        from scripts.check_comprehension_mcq_leakage import has_high_context_overlap
+
+        self.assertTrue(has_high_context_overlap("abc def ghi", "abc def ghi xyz"))
+
+    def test_cli_runs_on_jsonl_file_and_directory_benchmark(self) -> None:
+        from scripts.check_comprehension_mcq_leakage import main
+
+        record = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: Cùng một đoạn văn mẫu.\n\n"
+                        "Câu hỏi: Ai là tác giả?\n"
+                        "A. A1\n"
+                        "B. B2\n"
+                        "C. C3\n"
+                        "D. D4"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: B"},
+            ],
+            "metadata": {
+                "source_id": "candidate-1",
+                "answer": "B",
+                "choices": {"A": "A1", "B": "B2", "C": "C3", "D": "D4"},
+            },
+        }
+        benchmark_record = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: Cùng một đoạn văn mẫu khác.\n\n"
+                        "Câu hỏi: Tác giả là ai?\n"
+                        "A. A1\n"
+                        "B. B2\n"
+                        "C. C3\n"
+                        "D. D4"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: B"},
+            ],
+            "metadata": {
+                "source_id": "benchmark-1",
+                "answer": "B",
+                "choices": {"A": "A1", "B": "B2", "C": "C3", "D": "D4"},
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            input_path = tmp_path / "input.jsonl"
+            benchmark_dir = tmp_path / "benchmark"
+            benchmark_file = benchmark_dir / "part-1.jsonl"
+            output_path = tmp_path / "output.jsonl"
+            rejects_path = tmp_path / "rejects.jsonl"
+            report_path = tmp_path / "report.json"
+            benchmark_dir.mkdir()
+
+            input_path.write_text(json.dumps(record, ensure_ascii=False) + "\n", encoding="utf-8")
+            benchmark_file.write_text(json.dumps(benchmark_record, ensure_ascii=False) + "\n", encoding="utf-8")
+
+            self.assertEqual(
+                main(
+                    [
+                        "--input",
+                        str(input_path),
+                        "--benchmark",
+                        str(benchmark_dir),
+                        "--output-jsonl",
+                        str(output_path),
+                        "--rejects-jsonl",
+                        str(rejects_path),
+                        "--report-json",
+                        str(report_path),
+                    ]
+                ),
+                0,
+            )
+
+            kept_rows = [
+                json.loads(line)
+                for line in output_path.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            reject_rows = [
+                json.loads(line)
+                for line in rejects_path.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+
+            self.assertEqual(kept_rows, [])
+            self.assertEqual(len(reject_rows), 1)
+            self.assertEqual(reject_rows[0]["reason"], "near_duplicate_question")
+            self.assertEqual(report["benchmark_jsonl_inputs"], [str(benchmark_file)])
+            self.assertEqual(report["total_loaded"], 1)
+            self.assertEqual(report["total_rejected"], 1)
+
+    def test_same_answer_fact_pattern(self) -> None:
+        from scripts.check_comprehension_mcq_leakage import check_leakage
+
+        candidate = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: Câu chuyện hoàn toàn khác.\n\n"
+                        "Câu hỏi: Câu nào đúng?\n"
+                        "A. Alpha\n"
+                        "B. Beta\n"
+                        "C. Gamma\n"
+                        "D. Delta"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: C"},
+            ],
+            "metadata": {"source_id": "candidate-2", "answer": "C"},
+        }
+        benchmark = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: Một dữ kiện khác.\n\n"
+                        "Câu hỏi: Câu hỏi riêng biệt?\n"
+                        "A. Một\n"
+                        "B. Hai\n"
+                        "C. Ba\n"
+                        "D. Bốn"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: C"},
+            ],
+            "metadata": {
+                "source_id": "benchmark-2",
+                "answer": "C",
+                "gold_answer_text": "Ba",
+            },
+        }
+
+        kept, rejects, report = check_leakage([candidate], [benchmark])
+
+        self.assertEqual(kept, [])
+        self.assertEqual(len(rejects), 1)
+        self.assertEqual(rejects[0]["reason"], "same_answer_fact_pattern")
+        self.assertEqual(report["reject_reasons"], {"same_answer_fact_pattern": 1})
 
 
 class TestComprehensionRawUitFilter(unittest.TestCase):
@@ -680,6 +857,82 @@ class TestComprehensionMcqRecheck(unittest.TestCase):
         self.assertIn("missing_metadata_answer", errors)
         self.assertIn("missing_metadata_choices", errors)
         self.assertIn("missing_metadata_mcq_dedup_hash", errors)
+
+    def test_main_runs_on_valid_final_style_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            input_path = tmp_path / "final.jsonl"
+            input_path.write_text(json.dumps(self._valid_record(), ensure_ascii=False) + "\n", encoding="utf-8")
+
+            result = recheck_comprehension_mcq_seed.main(["--input", str(input_path), "--sample", "1"])
+
+            self.assertEqual(result, 0)
+
+
+class TestComprehensionMcqSolverBoundary(unittest.TestCase):
+    def _rule_checked_record(self) -> dict:
+        return {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: CTX\n\n"
+                        "Câu hỏi: Q\n"
+                        "A. a\n"
+                        "B. b\n"
+                        "C. c\n"
+                        "D. d"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: A"},
+            ],
+            "metadata": {
+                "task": "comprehension_mcq",
+                "source": "synthetic",
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "source_split": "train",
+                "source_id": "sid",
+                "gold_answer_text": "a",
+                "answer": "A",
+                "choices": {"A": "a", "B": "b", "C": "c", "D": "d"},
+                "mcq_dedup_hash": "hash-1",
+                "context_hash": "ctx-hash",
+            },
+        }
+
+    def test_build_solver_request_exports_expected_schema(self) -> None:
+        request = build_solver_request(self._rule_checked_record())
+
+        self.assertEqual(request["mcq_dedup_hash"], "hash-1")
+        self.assertEqual(request["source_id"], "sid")
+        self.assertEqual(request["gold_answer"], "A")
+        self.assertEqual(request["solver_prompt_version"], "comprehension_mcq_solver_v1")
+        self.assertEqual(request["choices"], {"A": "a", "B": "b", "C": "c", "D": "d"})
+        self.assertEqual(request["context"], "CTX")
+        self.assertEqual(request["question"], "Q")
+
+    def test_parse_solver_output_accepts_raw_and_fenced_json(self) -> None:
+        raw = parse_solver_output('{"predicted_answer":"A","is_unambiguous":true,"bad_reason":null}')
+        fenced = parse_solver_output("```json\n{\"predicted_answer\":\"A\",\"is_unambiguous\":true,\"bad_reason\":null}\n```")
+
+        self.assertEqual(raw["predicted_answer"], "A")
+        self.assertEqual(fenced["predicted_answer"], "A")
+
+    def test_solver_keep_decision_requires_match_and_unambiguous(self) -> None:
+        record = self._rule_checked_record()
+        self.assertTrue(
+            solver_keep_decision(
+                record,
+                {"predicted_answer": "A", "is_unambiguous": True, "bad_reason": None},
+            )
+        )
+        self.assertFalse(
+            solver_keep_decision(
+                record,
+                {"predicted_answer": "B", "is_unambiguous": True, "bad_reason": None},
+            )
+        )
 
 
 if __name__ == "__main__":
