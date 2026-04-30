@@ -18,7 +18,14 @@ from scripts.comprehension_mcq_seed_common import (
     split_mcq_user_content,
     stable_choice_labels,
 )
+from scripts import apply_comprehension_mcq_solver_qc
+from scripts import build_comprehension_mcq_candidates
+from scripts import check_comprehension_mcq_leakage
+from scripts import filter_comprehension_raw_uit
+from scripts import prepare_comprehension_mcq_generation
+from scripts import prepare_comprehension_mcq_solver
 from scripts.build_comprehension_mcq_candidates import build_candidate_record, parse_generation_output
+from scripts import qc_comprehension_mcq_seed
 from scripts.qc_comprehension_mcq_seed import rule_check_record
 from scripts.prepare_comprehension_mcq_generation import (
     build_generation_request,
@@ -427,6 +434,288 @@ class TestComprehensionRawUitFilter(unittest.TestCase):
             self.assertEqual(report["output_jsonl"], str(output_path))
             self.assertEqual(report["rejects_jsonl"], str(rejects_path))
             self.assertEqual(report["report_json"], str(report_path))
+
+
+class TestComprehensionMcqPipelineSmoke(unittest.TestCase):
+    def _raw_record(self) -> dict:
+        return {
+            "context": "Đây là một đoạn văn ngắn để kiểm tra pipeline.",
+            "question": "Tài liệu này đang nói về điều gì?",
+            "answer_text": "Đoạn văn",
+            "metadata": {
+                "source_dataset": "taidng/UIT-ViQuAD2.0",
+                "span_check_mode": "strict_exact",
+                "answer_variants": [{"text": "Đoạn văn", "answer_start": 34}],
+                "source_id": "raw-1",
+                "source_split": "train",
+                "dedup_hash": "raw-hash-1",
+                "title": "fixture",
+            },
+        }
+
+    def _benchmark_record(self) -> dict:
+        return {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "Đọc đoạn văn sau và chọn đáp án đúng.\n\n"
+                        "Đoạn văn: Một đoạn benchmark khác.\n\n"
+                        "Câu hỏi: Benchmark hỏi gì?\n"
+                        "A. Một\n"
+                        "B. Hai\n"
+                        "C. Ba\n"
+                        "D. Bốn"
+                    ),
+                },
+                {"role": "assistant", "content": "Đáp án: B"},
+            ],
+            "metadata": {
+                "source_id": "benchmark-1",
+                "answer": "B",
+                "choices": {"A": "Một", "B": "Hai", "C": "Ba", "D": "Bốn"},
+            },
+        }
+
+    @staticmethod
+    def _read_jsonl(path: Path) -> list[dict]:
+        return [
+            json.loads(line)
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+
+    def test_fixture_only_pipeline_smoke(self) -> None:
+        raw_record = self._raw_record()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            raw_input = tmp_path / "comprehension_seed_raw.jsonl"
+            uit_output = tmp_path / "comprehension_seed_raw_uit_only.jsonl"
+            uit_rejects = tmp_path / "comprehension_seed_raw_uit_only_rejects.jsonl"
+            uit_report = tmp_path / "comprehension_seed_raw_uit_only_report.json"
+
+            generation_requests = tmp_path / "comprehension_mcq_generation_requests.jsonl"
+            generation_rejects = tmp_path / "comprehension_mcq_generation_request_rejects.jsonl"
+            generation_report = tmp_path / "comprehension_mcq_generation_request_report.json"
+            generation_outputs = tmp_path / "comprehension_mcq_generation_outputs_raw.jsonl"
+
+            candidate_output = tmp_path / "comprehension_mcq_seed_candidates.jsonl"
+            candidate_rejects = tmp_path / "comprehension_mcq_seed_candidate_rejects.jsonl"
+            candidate_report = tmp_path / "comprehension_mcq_seed_candidate_report.json"
+
+            rule_output = tmp_path / "comprehension_mcq_seed_rule_checked.jsonl"
+            rule_rejects = tmp_path / "comprehension_mcq_seed_rule_rejects.jsonl"
+            rule_report = tmp_path / "comprehension_mcq_seed_rule_report.json"
+
+            solver_requests = tmp_path / "comprehension_mcq_solver_requests.jsonl"
+            solver_request_rejects = tmp_path / "comprehension_mcq_solver_request_rejects.jsonl"
+            solver_request_report = tmp_path / "comprehension_mcq_solver_request_report.json"
+            solver_outputs = tmp_path / "comprehension_mcq_solver_outputs_raw.jsonl"
+
+            solver_checked = tmp_path / "comprehension_mcq_seed_solver_checked.jsonl"
+            solver_rejects = tmp_path / "comprehension_mcq_seed_solver_rejects.jsonl"
+            solver_report = tmp_path / "comprehension_mcq_seed_solver_report.json"
+
+            benchmark_dir = tmp_path / "benchmark" / "comprehension"
+            benchmark_file = benchmark_dir / "fixture.jsonl"
+            leak_output = tmp_path / "comprehension_mcq_seed_no_leak.jsonl"
+            leak_rejects = tmp_path / "comprehension_mcq_seed_leakage_rejects.jsonl"
+            leak_report = tmp_path / "comprehension_mcq_seed_leakage_report.json"
+
+            final_output = tmp_path / "comprehension_mcq_seed_final.jsonl"
+            final_report = tmp_path / "comprehension_mcq_seed_final_report.json"
+            final_samples = tmp_path / "comprehension_mcq_seed_final_samples.jsonl"
+
+            raw_input.write_text(json.dumps(raw_record, ensure_ascii=False) + "\n", encoding="utf-8")
+            benchmark_dir.mkdir(parents=True)
+            benchmark_file.write_text(
+                json.dumps(self._benchmark_record(), ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                filter_comprehension_raw_uit.main(
+                    [
+                        "--input-jsonl",
+                        str(raw_input),
+                        "--output-jsonl",
+                        str(uit_output),
+                        "--rejects-jsonl",
+                        str(uit_rejects),
+                        "--report-json",
+                        str(uit_report),
+                    ]
+                ),
+                0,
+            )
+            self.assertEqual(
+                prepare_comprehension_mcq_generation.main(
+                    [
+                        "--input-jsonl",
+                        str(uit_output),
+                        "--output-jsonl",
+                        str(generation_requests),
+                        "--rejects-jsonl",
+                        str(generation_rejects),
+                        "--report-json",
+                        str(generation_report),
+                    ]
+                ),
+                0,
+            )
+
+            generation_request_rows = self._read_jsonl(generation_requests)
+            self.assertEqual(len(generation_request_rows), 1)
+            generation_outputs.write_text(
+                json.dumps(
+                    {
+                        "source_id": "raw-1",
+                        "raw_response": json.dumps({"distractors": ["Mồi 1", "Mồi 2", "Mồi 3"]}, ensure_ascii=False),
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                build_comprehension_mcq_candidates.main(
+                    [
+                        "--raw-jsonl",
+                        str(uit_output),
+                        "--generation-jsonl",
+                        str(generation_outputs),
+                        "--output-jsonl",
+                        str(candidate_output),
+                        "--rejects-jsonl",
+                        str(candidate_rejects),
+                        "--report-json",
+                        str(candidate_report),
+                    ]
+                ),
+                0,
+            )
+            candidate_rows = self._read_jsonl(candidate_output)
+            self.assertEqual(len(candidate_rows), 1)
+
+            self.assertEqual(
+                qc_comprehension_mcq_seed.main(
+                    [
+                        "--input-jsonl",
+                        str(candidate_output),
+                        "--output-jsonl",
+                        str(rule_output),
+                        "--rejects-jsonl",
+                        str(rule_rejects),
+                        "--report-json",
+                        str(rule_report),
+                    ]
+                ),
+                0,
+            )
+            rule_rows = self._read_jsonl(rule_output)
+            self.assertEqual(len(rule_rows), 1)
+
+            self.assertEqual(
+                prepare_comprehension_mcq_solver.main(
+                    [
+                        "--input-jsonl",
+                        str(rule_output),
+                        "--output-jsonl",
+                        str(solver_requests),
+                        "--rejects-jsonl",
+                        str(solver_request_rejects),
+                        "--report-json",
+                        str(solver_request_report),
+                    ]
+                ),
+                0,
+            )
+            solver_request_rows = self._read_jsonl(solver_requests)
+            self.assertEqual(len(solver_request_rows), 1)
+
+            solver_outputs.write_text(
+                json.dumps(
+                    {
+                        "mcq_dedup_hash": candidate_rows[0]["metadata"]["mcq_dedup_hash"],
+                        "raw_response": json.dumps(
+                            {
+                                "predicted_answer": candidate_rows[0]["metadata"]["answer"],
+                                "is_unambiguous": True,
+                                "bad_reason": None,
+                            },
+                            ensure_ascii=False,
+                        ),
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            self.assertEqual(
+                apply_comprehension_mcq_solver_qc.main(
+                    [
+                        "--input-jsonl",
+                        str(rule_output),
+                        "--solver-jsonl",
+                        str(solver_outputs),
+                        "--output-jsonl",
+                        str(solver_checked),
+                        "--rejects-jsonl",
+                        str(solver_rejects),
+                        "--report-json",
+                        str(solver_report),
+                    ]
+                ),
+                0,
+            )
+            solver_checked_rows = self._read_jsonl(solver_checked)
+            self.assertEqual(len(solver_checked_rows), 1)
+
+            self.assertEqual(
+                check_comprehension_mcq_leakage.main(
+                    [
+                        "--input",
+                        str(solver_checked),
+                        "--benchmark",
+                        str(benchmark_dir),
+                        "--output-jsonl",
+                        str(leak_output),
+                        "--rejects-jsonl",
+                        str(leak_rejects),
+                        "--report-json",
+                        str(leak_report),
+                    ]
+                ),
+                0,
+            )
+            leak_rows = self._read_jsonl(leak_output)
+            self.assertEqual(len(leak_rows), 1)
+
+            self.assertEqual(
+                finalize_comprehension_mcq_seed.main(
+                    [
+                        "--input",
+                        str(leak_output),
+                        "--output-jsonl",
+                        str(final_output),
+                        "--report-json",
+                        str(final_report),
+                        "--samples-jsonl",
+                        str(final_samples),
+                        "--sample-size",
+                        "1",
+                    ]
+                ),
+                0,
+            )
+            final_rows = self._read_jsonl(final_output)
+            self.assertEqual(len(final_rows), 1)
+            self.assertEqual(
+                recheck_comprehension_mcq_seed.main(["--input", str(final_output), "--sample", "1"]),
+                0,
+            )
 
 
 class TestComprehensionMcqCandidateBuilder(unittest.TestCase):
