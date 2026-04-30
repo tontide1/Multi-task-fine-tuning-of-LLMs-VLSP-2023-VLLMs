@@ -1,7 +1,9 @@
 import hashlib
 import json
+import subprocess
 import tempfile
 import unittest
+import sys
 from pathlib import Path
 
 from scripts.comprehension_mcq_seed_common import (
@@ -291,6 +293,18 @@ class TestComprehensionMcqGenerationRequestExport(unittest.TestCase):
         self.assertEqual(request["context_hash"], compute_context_hash("CTX"))
         self.assertEqual(request["generation_prompt_version"], "comprehension_mcq_distractors_v1")
         self.assertEqual(request["filter_version"], "comprehension_mcq_generation_filter_v1")
+
+    def test_prepare_generation_script_help_runs_directly(self) -> None:
+        script_path = Path(__file__).resolve().parent / "prepare_comprehension_mcq_generation.py"
+        result = subprocess.run(
+            [sys.executable, str(script_path), "--help"],
+            capture_output=True,
+            text=True,
+            cwd=Path(__file__).resolve().parent.parent,
+        )
+
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("usage:", result.stdout)
 
 
 if __name__ == "__main__":

@@ -2,6 +2,13 @@ import argparse
 import json
 from collections import Counter
 from pathlib import Path
+import sys
+
+# Allow running this script directly (e.g. `python scripts/prepare_comprehension_mcq_generation.py`)
+# by ensuring the repo root is on sys.path so `scripts.comprehension_mcq_seed_common` resolves.
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 from scripts.comprehension_mcq_seed_common import compute_context_hash
 
