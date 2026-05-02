@@ -1,6 +1,6 @@
 # my
 mcp.json
-
+assistant
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -216,3 +216,7 @@ __marimo__/
 # duplicate copies under notebooks/seed_exports/; ignore that path so it does
 # not get re-committed.
 notebooks/seed_exports/
+
+# Data artifacts
+seed_exports/*.jsonl
+seed_exports/*_report.json
