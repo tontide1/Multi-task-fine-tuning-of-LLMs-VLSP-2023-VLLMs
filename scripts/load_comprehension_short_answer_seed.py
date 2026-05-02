@@ -43,8 +43,7 @@ def main():
     print(f"Đang đọc dữ liệu từ {INPUT_FILE}...")
     with open(input_path, "r", encoding="utf-8") as f:
         # Đọc từng dòng để tiết kiệm RAM
-        lines = f.readlines()
-        for line in tqdm(lines, desc="Đang chuyển đổi"):
+        for line in tqdm(f, desc="Đang chuyển đổi"):
             if not line.strip():
                 continue
 
