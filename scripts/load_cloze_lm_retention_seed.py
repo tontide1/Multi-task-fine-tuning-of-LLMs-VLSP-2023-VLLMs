@@ -12,8 +12,6 @@ import re
 import sys
 import unicodedata
 from pathlib import Path
-from datasets import load_dataset
-from tqdm import tqdm
 
 # Constants
 DATASET_ID = "VTSNLP/vietnamese_curated_dataset"
@@ -74,6 +72,10 @@ def make_dedup_hash(user: str, assistant: str) -> str:
     return hashlib.sha1(key.encode("utf-8")).hexdigest()
 
 def main():
+    # Lazy imports for heavy dependencies to allow importing helpers in tests
+    from datasets import load_dataset
+    from tqdm import tqdm
+
     print(f"Loading {DATASET_ID} in streaming mode...")
     try:
         # Load only the first shard to avoid timeouts and excessive downloads
