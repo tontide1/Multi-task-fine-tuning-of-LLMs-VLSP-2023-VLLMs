@@ -6,9 +6,10 @@
 > | `seed_exports/wiki_mcq_seed.jsonl` | **Đã build** | seed thô đã clean schema (xuất bởi `scripts/load_wiki_mcq_seed.py`) |
 > | `seed_exports/wiki_mcq_seed_clean.jsonl` | **Đã build** | seed sạch đã whitelist subject, dùng cho stage-2 public seed |
 > | `seed_exports/wiki_mcq_seed_dropped.jsonl` | **Đã build** | archive audit/drop |
-> | `seed_exports/comprehension_seed_raw.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
-> | `seed_exports/instruction_retention_seed.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
-> | `seed_exports/cloze_lm_retention_seed.jsonl` | **Chưa build** | nguồn đã chốt, chưa có script ETL |
+> | `seed_exports/comprehension_seed_raw.jsonl` | **Đã build** | xuất bởi `scripts/load_comprehension_seed_raw.py` |
+> | `seed_exports/comprehension_short_answer_seed.jsonl` | **Đã build** | train đọc hiểu dạng trả lời ngắn (UIT-only); xuất bởi `scripts/load_comprehension_short_answer_seed.py` sau `filter_comprehension_raw_uit.py` |
+> | `seed_exports/instruction_retention_seed.jsonl` | **Đã build** | xuất bởi `scripts/load_instruction_retention_seed.py` |
+> | `seed_exports/cloze_lm_retention_seed.jsonl` | **Đã build** | xuất bởi `scripts/load_cloze_lm_retention_seed.py` |
 
 ## 1) `exams_mcq_seed.jsonl`
 
@@ -27,15 +28,22 @@ Dùng 1 nguồn:
 * **`lighteval/okapi_mmlu`** với config **`vi`** trong notebook
   Vai trò: nguồn `wiki_mcq` / general-knowledge MCQ. Dataset `lighteval/okapi_mmlu` là bản parquet, có schema phù hợp gồm `question`, `choices`, `answer`, `subject`, `id`, nên dùng được ngay thay cho bản script-based trước đó. ([Hugging Face][3])
 
-## 3) `comprehension_seed_raw.jsonl`
+## 3) `comprehension_seed_raw.jsonl` và train **`comprehension_short_answer`**
 
-Dùng 2 nguồn:
+Pool thô `comprehension_seed_raw.jsonl` dùng 2 nguồn:
 
 * **`taidng/UIT-ViQuAD2.0`**
   Vai trò: nguồn chính cho reading comprehension tiếng Việt sau khi thay `uit_viwikiqa`. Dataset này là **extractive QA**, format parquet, có khoảng **39,569** mẫu với các field `context`, `question`, `answers`, `is_impossible`, `plausible_answers`. Trong notebook, bạn đang lọc bỏ các mẫu `is_impossible=True`. ([Hugging Face][4])
 
 * **`ShynBui/Vietnamese_Reading_Comprehension_Dataset`**
   Vai trò: nguồn comprehension bổ sung để tăng volume. Dataset này có khoảng **53,845** mẫu, với các field `context`, `question`, `answer`, `answer_start`. Card ghi rõ nó được tổng hợp từ internet/SQuAD/wiki và có phần dịch bằng Google Translate, nên dùng được nhưng cần QC ngôn ngữ kỹ hơn. ([Hugging Face][5])
+
+**Train đọc hiểu trong repo** không còn dùng bucket MCQ (`comprehension_mcq`). Hướng chính hiện tại là **`comprehension_short_answer`** vì đã có extractive QA sạch từ UIT-ViQuAD2.0, trong khi chưa có API LLM/distractor generator đủ tin cậy để chuyển short answer thành MCQ sạch. Nói ngắn gọn: **Better clean extractive QA than noisy generated MCQ.**
+
+Sau khi có raw pool, flow chuẩn là:
+
+1. `scripts/filter_comprehension_raw_uit.py` → `seed_exports/comprehension_seed_raw_uit_only.jsonl`
+2. `scripts/load_comprehension_short_answer_seed.py` → `seed_exports/comprehension_short_answer_seed.jsonl` (`metadata.task == comprehension_short_answer`, chỉ UIT-ViQuAD2.0)
 
 ## 4) `instruction_retention_seed.jsonl`
 
@@ -64,6 +72,7 @@ Dùng 1 nguồn:
 * `exams_mcq` → `roshansk23/...` + `hllj/...`
 * `wiki_mcq` → `lighteval/okapi_mmlu` (`vi`)
 * `comprehension_seed_raw` → `taidng/UIT-ViQuAD2.0` + `ShynBui/...`
+* `comprehension_short_answer` (train) → UIT-only slice từ pool trên (`scripts/filter_comprehension_raw_uit.py` + `scripts/load_comprehension_short_answer_seed.py`)
 * `instruction_retention` → `bkai.../vi-alpaca` + `lamhieu/...`
 * `cloze_lm_retention` → `VTSNLP/vietnamese_curated_dataset`
 

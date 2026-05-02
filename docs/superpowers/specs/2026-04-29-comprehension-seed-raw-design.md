@@ -1,8 +1,7 @@
 # Design: comprehension_seed_raw.jsonl
 
 ## Goal
-Build `seed_exports/comprehension_seed_raw.jsonl` from two public Hugging Face sources while preserving extractive QA fidelity and enabling later MCQ expansion.
-
+Build `seed_exports/comprehension_seed_raw.jsonl` from two public Hugging Face sources while preserving extractive QA fidelity as the canonical input to downstream **`comprehension_short_answer`** training. This is the practical, low-risk train path right now because there is no reliable LLM API/distractor generator available for clean MCQ conversion. Better clean extractive QA than noisy generated MCQ.
 Sources:
 - `taidng/UIT-ViQuAD2.0` (primary)
 - `ShynBui/Vietnamese_Reading_Comprehension_Dataset` (supplementary)

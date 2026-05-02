@@ -1,3 +1,5 @@
+> **Trạng thái (2026-05): archive, không còn là đường train mặc định.** Project đã chuyển train đọc hiểu sang bucket **`comprehension_short_answer`** (`scripts/load_comprehension_short_answer_seed.py`, `README.md`). Hiện không có API LLM/distractor generator đáng tin cậy để chuyển short answer thành MCQ sạch, nên hướng thực dụng là **Better clean extractive QA than noisy generated MCQ**. Tài liệu dưới đây mô tả pipeline **comprehension MCQ** lịch sử (sinh distractor, solver QC, …); chỉ tái dùng nếu sau này có nguồn sinh và kiểm tra distractor đủ tốt.
+
 # Design: comprehension_mcq_seed_final.jsonl
 
 ## Goal
@@ -20,7 +22,7 @@ into the train MCQ schema:
 passage + question + A/B/C/D -> Đáp án: X
 ```
 
-This supports the project-level `comprehension_mcq` bucket while keeping VLSP 2023 benchmark data as holdout evaluation data only.
+Historically, this supported the project-level `comprehension_mcq` bucket while keeping VLSP 2023 benchmark data as holdout evaluation data only. It is not the current train path.
 
 ## Scope
 
