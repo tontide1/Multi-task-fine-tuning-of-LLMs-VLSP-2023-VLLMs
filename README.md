@@ -14,7 +14,7 @@ trên bộ benchmark **VLSP 2023 VLLMs** gồm 4 task:
 
 ```
 .agents/skills/                # Skills nội bộ (HF CLI, ...)
-AGENTS.md / GEMINI.md          # Quy tắc làm việc + môi trường (conda nlp, py3.1)
+AGENTS.md / GEMINI.md          # Quy tắc làm việc + môi trường (conda nlp, py3.11)
 docs/
   plan/overview.md             # Plan 9 giai đoạn cho project
   Information_of_VLSP_2023_VLLMs_benchmarks.md
