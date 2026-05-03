@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build ETL + QC scripts to export `seed_exports/comprehension_seed_raw.jsonl` with source-specific span checks, rejects/report, and a recheck validator.
+**Goal:** Build ETL + QC scripts to export `seed_exports/comprehension_seed_raw.jsonl` with source-specific span checks, rejects/report, and a recheck validator. Downstream train đọc hiểu trong repo dùng **`comprehension_short_answer`** (`scripts/filter_comprehension_raw_uit.py`, `scripts/load_comprehension_short_answer_seed.py`), không dùng MCQ synthesis từ raw pool trong đường mặc định hiện tại vì chưa có API LLM/distractor generator đáng tin cậy. Better clean extractive QA than noisy generated MCQ.
 
 **Architecture:** A single loader script (`scripts/load_comprehension_seed_raw.py`) handles dataset loading, QC, dedup, and export. A recheck script (`scripts/recheck_comprehension_seed_raw.py`) validates the exported JSONL. Unit tests cover the loader’s pure functions and the recheck validator.
 

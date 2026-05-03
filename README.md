@@ -8,7 +8,7 @@ trên bộ benchmark **VLSP 2023 VLLMs** gồm 4 task:
 - `exams_vi` — MCQ học đường, **tách thành 7 task con** theo môn (`exams_dialy_vi`,
   `exams_hoahoc_vi`, `exams_lichsu_vi`, `exams_sinhhoc_vi`, `exams_toan_vi`,
   `exams_vatly_vi`, `exams_van_vi`)
-- `comprehension_vi` — MCQ đọc hiểu (0-shot)
+- `comprehension_vi` — MCQ đọc hiểu trên VLSP benchmark (0-shot). **Train seed đọc hiểu trong repo** dùng nhánh **`comprehension_short_answer`** (trả lời ngắn / extractive QA từ UIT-ViQuAD2.0), không dùng bucket MCQ sinh từ comprehension nữa. Đây là lựa chọn thực dụng và ít rủi ro nhất hiện tại: **Better clean extractive QA than noisy generated MCQ**.
 
 ## Cấu trúc repo
 
@@ -26,12 +26,16 @@ notebooks/
   wiki_mcq_seed.ipynb          # Build wiki_mcq seed
 result/baseline/               # Kết quả baseline (JSON, mỗi task 1 file)
 scripts/
-  baseline_parsers.py          # MCQ + Lambada answer parsers
-  load_exams_mcq_seed.py       # ETL exams_mcq từ 2 nguồn HF
-  load_wiki_mcq_seed.py        # ETL wiki_mcq từ okapi_mmlu (vi)
-  recheck_exams_mcq_seed.py    # QC sau export
-  recheck_wiki_mcq_seed.py     # QC sau export
-  test_baseline_parsers.py     # Unit tests cho parsers
+  baseline_parsers.py                   # MCQ + Lambada answer parsers
+  load_exams_mcq_seed.py               # ETL exams_mcq từ 2 nguồn HF
+  load_wiki_mcq_seed.py                # ETL wiki_mcq từ okapi_mmlu (vi)
+  load_comprehension_seed_raw.py       # ETL comprehension_seed_raw (HF)
+  recheck_comprehension_seed_raw.py    # QC sau export raw pool
+  filter_comprehension_raw_uit.py      # Lọc UIT-only cho nhánh short answer
+  load_comprehension_short_answer_seed.py  # Export comprehension_short_answer_seed.jsonl
+  recheck_exams_mcq_seed.py            # QC sau export
+  recheck_wiki_mcq_seed.py             # QC sau export
+  test_baseline_parsers.py             # Unit tests cho parsers
 seed_exports/                  # Output ETL (jsonl + report)
 ```
 
@@ -65,34 +69,27 @@ Output ghi vào `seed_exports/`.
 
 Trạng thái hiện tại:
 
-- `comprehension_seed_raw` đã có spec + plan, ETL chưa implement (xem `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md` và `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`).
+- `comprehension_seed_raw`: spec/plan trong `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md` và `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`; ETL chạy bằng `scripts/load_comprehension_seed_raw.py` + `scripts/recheck_comprehension_seed_raw.py`.
+- **Định hướng train đọc hiểu:** nhánh **`comprehension_short_answer`** (`seed_exports/comprehension_short_answer_seed.jsonl`), build từ pool UIT đã lọc — xem pipeline dưới đây.
+- Lý do: hiện không có API LLM/distractor generator đáng tin cậy để chuyển short answer sang MCQ sạch; rule-based distractor dễ tạo nhiễu hoặc nhiều đáp án đúng. Vì vậy **clean extractive QA** an toàn hơn **noisy generated MCQ** cho vòng train đầu.
+- Pipeline **comprehension MCQ** (sinh distractor + solver QC, …) chỉ còn trong repo như **tài liệu/script lịch sử** (`docs/superpowers/specs/2026-04-30-comprehension-mcq-seed-final-design.md`); không còn là đường train mặc định.
 
-### Comprehension MCQ pipeline
+### Comprehension short answer pipeline
 
 ```bash
-# Offline boundary: raw UIT-only filter -> request export
+# Raw extractive pool từ Hugging Face (UIT-ViQuAD2.0 + ShynBui trong raw; short answer chỉ dùng UIT sau bước lọc)
+python scripts/load_comprehension_seed_raw.py
+python scripts/recheck_comprehension_seed_raw.py
+
+# UIT-only slice + export train short answer (metadata.task == comprehension_short_answer)
 python scripts/filter_comprehension_raw_uit.py
-python scripts/prepare_comprehension_mcq_generation.py
-
-# External handoff files
-# - seed_exports/comprehension_mcq_generation_requests.jsonl
-# - seed_exports/comprehension_mcq_generation_outputs_raw.jsonl
-
-# Offline boundary: build candidates -> rule QC -> solver request export
-python scripts/build_comprehension_mcq_candidates.py
-python scripts/qc_comprehension_mcq_seed.py
-python scripts/prepare_comprehension_mcq_solver.py
-
-# External handoff files
-# - seed_exports/comprehension_mcq_solver_requests.jsonl
-# - seed_exports/comprehension_mcq_solver_outputs_raw.jsonl
-
-# Offline boundary: solver QC -> leak check -> finalize -> recheck
-python scripts/apply_comprehension_mcq_solver_qc.py
-python scripts/check_comprehension_mcq_leakage.py --allow-missing-benchmark
-python scripts/finalize_comprehension_mcq_seed.py
-python scripts/recheck_comprehension_mcq_seed.py
+python scripts/load_comprehension_short_answer_seed.py
 ```
+
+Output chính:
+
+- `seed_exports/comprehension_short_answer_seed.jsonl`
+- `seed_exports/comprehension_short_answer_report.json`
 
 Ghi chú file seed cho `wiki_mcq`:
 
@@ -124,7 +121,7 @@ Xem `docs/plan/overview.md` để biết chi tiết 9 giai đoạn:
 
 ## Schema dữ liệu nội bộ
 
-Tất cả seed/train sample đều dùng schema chung:
+Tất cả seed/train sample đều dùng container chung `messages` + `metadata`. Ví dụ **MCQ** (`exams_mcq`, `wiki_mcq`):
 
 ```json
 {
@@ -133,6 +130,18 @@ Tất cả seed/train sample đều dùng schema chung:
     {"role": "assistant", "content": "Đáp án: C"}
   ],
   "metadata": {"task": "exams_mcq", "source": "...", "difficulty": "medium"}
+}
+```
+
+**Đọc hiểu train** (`comprehension_short_answer`) — prompt theo script export (không có A/B/C/D):
+
+```json
+{
+  "messages": [
+    {"role": "user", "content": "Dựa vào đoạn văn sau đây, hãy trả lời câu hỏi ngắn gọn:\n\nĐoạn văn: ...\n\nCâu hỏi: ..."},
+    {"role": "assistant", "content": "...đáp án trích xuất ngắn..."}
+  ],
+  "metadata": {"task": "comprehension_short_answer", "source": "public", "source_dataset": "taidng/UIT-ViQuAD2.0", "difficulty": "medium"}
 }
 ```
 

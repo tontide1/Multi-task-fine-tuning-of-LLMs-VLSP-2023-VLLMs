@@ -64,7 +64,7 @@ def extract_choices_from_user(user_content: str) -> dict:
 # ===========================================================================
 
 def main():
-    jsonl_path = Path(__file__).parent.parent / "seed_exports" / "wiki_mcq_seed.jsonl"
+    jsonl_path = Path(__file__).parent.parent / "seed_exports" / "wiki_mcq_seed_final.jsonl"
     if not jsonl_path.exists():
         raise FileNotFoundError(
             f"{jsonl_path} không tồn tại. Hãy chạy load_wiki_mcq_seed.py trước."

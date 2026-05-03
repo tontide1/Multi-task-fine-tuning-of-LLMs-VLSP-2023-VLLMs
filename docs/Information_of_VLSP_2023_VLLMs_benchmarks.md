@@ -4,6 +4,8 @@ Hub `vlsp-2023-vllm` công khai 4 benchmark dataset mà bạn đang focus là **
 
 Về bản chất, đây là một bộ benchmark **tự động**, không cần human judge như VMLU. Tuy nhiên có hai kiểu task khác nhau: `lambada_vi` là dạng **predict next word**, còn `wikipediaqa_vi`, `exams_vi`, `comprehension` là dạng **multiple-choice** với nhãn đáp án. ([Hugging Face][2])
 
+**Ghi chú train trong repo:** benchmark `comprehension` vẫn là MCQ trên VLSP, nhưng pipeline seed đọc hiểu của project đã chuyển sang **`comprehension_short_answer`** (trả lời ngắn extractive từ UIT-ViQuAD2.0). Đây là lựa chọn thực dụng hiện tại vì chưa có API LLM/distractor generator đủ tin cậy để tạo MCQ sạch: **Better clean extractive QA than noisy generated MCQ.** Khi đọc điểm official `comprehension_vi`, đừng nhầm với format của bucket train đó — xem `README.md` và `docs/plan/overview.md`.
+
 ## 1) Thông tin từng dataset
 
 **`lambada_vi`**

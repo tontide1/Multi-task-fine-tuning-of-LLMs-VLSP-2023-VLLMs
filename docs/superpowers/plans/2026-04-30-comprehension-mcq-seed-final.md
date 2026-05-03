@@ -1,8 +1,10 @@
+> **Trạng thái (2026-05): archive, không còn là đường train mặc định.** Train đọc hiểu hiện dùng **`comprehension_short_answer`**; xem `README.md` và `docs/plan/overview.md`. Hiện chưa có API LLM/distractor generator đáng tin cậy để chuyển short answer thành MCQ sạch, nên hướng thực dụng là **Better clean extractive QA than noisy generated MCQ**. Plan sau đây chỉ là kế hoạch implementation cho pipeline MCQ lịch sử.
+
 # Comprehension MCQ Seed Final Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the offline JSONL pipeline that turns `seed_exports/comprehension_seed_raw.jsonl` into a final UIT-only MCQ seed file with rule QC, solver QC, leakage checks, reports, and rejects.
+**Goal:** Build the archived offline JSONL pipeline that turns `seed_exports/comprehension_seed_raw.jsonl` into a final UIT-only MCQ seed file with rule QC, solver QC, leakage checks, reports, and rejects. This is not the current train path.
 
 **Architecture:** Keep model work outside the repo and use deterministic scripts only. A small shared helper module holds text normalization, JSONL IO, MCQ formatting, and raw-response parsing. Each pipeline stage is a single-purpose script with its own reject/report files so the boundary between deterministic transformation and external model output stays explicit.
 
