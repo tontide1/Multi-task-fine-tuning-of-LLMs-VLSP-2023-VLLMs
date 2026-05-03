@@ -223,7 +223,8 @@ def write_jsonl(records: list[dict], filepath: Path):
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 def main():
-    parser = argparse.add_argument_group("Build Training Splits")
+    parser = argparse.ArgumentParser(description="Build Training Splits")
+
     # For simplicity in this script, we'll hardcode paths, but argparse can be used later if needed.
     
     seed_dir = Path(__file__).resolve().parent.parent / "seed_exports"
