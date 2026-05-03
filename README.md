@@ -8,7 +8,7 @@ trên bộ benchmark **VLSP 2023 VLLMs** gồm 4 task:
 - `exams_vi` — MCQ học đường, **tách thành 7 task con** theo môn (`exams_dialy_vi`,
   `exams_hoahoc_vi`, `exams_lichsu_vi`, `exams_sinhhoc_vi`, `exams_toan_vi`,
   `exams_vatly_vi`, `exams_van_vi`)
-- `comprehension_vi` — MCQ đọc hiểu trên VLSP benchmark (0-shot). **Train seed đọc hiểu trong repo** dùng nhánh **`comprehension_short_answer`** (trả lời ngắn / extractive QA từ UIT-ViQuAD2.0), không dùng bucket MCQ sinh từ comprehension nữa. Đây là lựa chọn thực dụng và ít rủi ro nhất hiện tại: **Better clean extractive QA than noisy generated MCQ**.
+- `comprehension_vi` — MCQ đọc hiểu trên VLSP benchmark (0-shot). **Dữ liệu huấn luyện tập trung hoàn toàn** vào nhánh **`comprehension_short_answer`** (trả lời ngắn / extractive QA từ UIT-ViQuAD2.0). Project loại bỏ hướng huấn luyện bằng MCQ cho đọc hiểu để đảm bảo chất lượng: **Better clean extractive QA than noisy generated MCQ**.
 
 ## Cấu trúc repo
 
@@ -70,9 +70,9 @@ Output ghi vào `seed_exports/`.
 Trạng thái hiện tại:
 
 - `comprehension_seed_raw`: spec/plan trong `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md` và `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`; ETL chạy bằng `scripts/load_comprehension_seed_raw.py` + `scripts/recheck_comprehension_seed_raw.py`.
-- **Định hướng train đọc hiểu:** nhánh **`comprehension_short_answer`** (`seed_exports/comprehension_short_answer_seed.jsonl`), build từ pool UIT đã lọc — xem pipeline dưới đây.
-- Lý do: hiện không có API LLM/distractor generator đáng tin cậy để chuyển short answer sang MCQ sạch; rule-based distractor dễ tạo nhiễu hoặc nhiều đáp án đúng. Vì vậy **clean extractive QA** an toàn hơn **noisy generated MCQ** cho vòng train đầu.
-- Pipeline **comprehension MCQ** (sinh distractor + solver QC, …) chỉ còn trong repo như **tài liệu/script lịch sử** (`docs/superpowers/specs/2026-04-30-comprehension-mcq-seed-final-design.md`); không còn là đường train mặc định.
+- **Định hướng huấn luyện đọc hiểu:** Tập trung hoàn toàn vào nhánh **`comprehension_short_answer`** (`seed_exports/comprehension_short_answer_seed.jsonl`), build từ pool UIT đã lọc.
+- Lý do: Không có API LLM/distractor generator đủ tin cậy để chuyển short answer sang MCQ sạch; **clean extractive QA** mang lại chất lượng dữ liệu tốt hơn hẳn so với **noisy generated MCQ**.
+- Pipeline **comprehension MCQ** (sinh distractor + solver QC, …) chỉ còn trong repo dưới dạng **tài liệu/script lịch sử**; không còn là luồng huấn luyện của project.
 
 ### Comprehension short answer pipeline
 

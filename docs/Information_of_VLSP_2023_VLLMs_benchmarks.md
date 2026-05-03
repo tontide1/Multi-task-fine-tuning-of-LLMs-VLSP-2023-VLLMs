@@ -4,7 +4,7 @@ Hub `vlsp-2023-vllm` công khai 4 benchmark dataset mà bạn đang focus là **
 
 Về bản chất, đây là một bộ benchmark **tự động**, không cần human judge như VMLU. Tuy nhiên có hai kiểu task khác nhau: `lambada_vi` là dạng **predict next word**, còn `wikipediaqa_vi`, `exams_vi`, `comprehension` là dạng **multiple-choice** với nhãn đáp án. ([Hugging Face][2])
 
-**Ghi chú train trong repo:** benchmark `comprehension` vẫn là MCQ trên VLSP, nhưng pipeline seed đọc hiểu của project đã chuyển sang **`comprehension_short_answer`** (trả lời ngắn extractive từ UIT-ViQuAD2.0). Đây là lựa chọn thực dụng hiện tại vì chưa có API LLM/distractor generator đủ tin cậy để tạo MCQ sạch: **Better clean extractive QA than noisy generated MCQ.** Khi đọc điểm official `comprehension_vi`, đừng nhầm với format của bucket train đó — xem `README.md` và `docs/plan/overview.md`.
+**Ghi chú train trong repo:** Benchmark `comprehension` trên VLSP là MCQ, nhưng project **tập trung hoàn toàn vào `comprehension_short_answer`** (trả lời ngắn extractive từ UIT-ViQuAD2.0) cho giai đoạn huấn luyện. Quyết định này nhằm đảm bảo chất lượng dữ liệu: **Better clean extractive QA than noisy generated MCQ.** Project không sử dụng pipeline tạo MCQ cho đọc hiểu do thiếu API LLM/distractor generator đủ tin cậy. Khi đánh giá điểm official `comprehension_vi`, cần lưu ý sự khác biệt format giữa dữ liệu huấn luyện (Short Answer) và benchmark (MCQ).
 
 ## 1) Thông tin từng dataset
 

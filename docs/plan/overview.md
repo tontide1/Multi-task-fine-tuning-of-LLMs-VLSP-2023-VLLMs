@@ -9,7 +9,7 @@
 
 Điểm cần giữ xuyên suốt là: **VLSP 2023 chỉ dùng để đo ở các mốc quan trọng**, vì benchmark này có protocol đánh giá riêng và không đồng nhất giữa các task: `lambada_vi` là next-word prediction, còn `wikipediaqa_vi`, `exams_vi`, `comprehension` là multiple-choice; riêng `exams_vi` còn được tách thành nhiều task con trong repo benchmark chính thức.
 
-**Định hướng train đọc hiểu:** benchmark `comprehension` / `comprehension_vi` trên VLSP vẫn là **MCQ**, nhưng **pipeline seed đọc hiểu trong repo đã chuyển** từ bucket **`comprehension_mcq`** sang **`comprehension_short_answer`** (trả lời ngắn extractive trên UIT-ViQuAD2.0). Đây là lựa chọn thực dụng và ít rủi ro nhất hiện tại vì chưa có API LLM/distractor generator đáng tin cậy để tạo MCQ sạch. **Better clean extractive QA than noisy generated MCQ.** Chi tiết script và file export: `README.md`.
+**Định hướng train đọc hiểu:** Benchmark `comprehension` / `comprehension_vi` trên VLSP là **MCQ**, nhưng **pipeline huấn luyện của project tập trung vào `comprehension_short_answer`** (trả lời ngắn extractive trên UIT-ViQuAD2.0). Đây là lựa chọn chiến lược nhằm đảm bảo độ tin cậy của dữ liệu do chưa có API LLM/distractor generator đủ tốt để tạo MCQ sạch: **Better clean extractive QA than noisy generated MCQ.** Chi tiết script và file export: `README.md`.
 
 ---
 
@@ -56,13 +56,13 @@ Bạn phải trả lời được:
 
 ### Mục tiêu
 
-Chuyển 5 seed export hiện có thành bộ train/dev/shadow/probe đủ sạch cho vòng QLoRA đầu tiên. Trọng tâm không còn là “nở dữ liệu synthetic” ngay, mà là **khóa dữ liệu seed public**, kiểm định chất lượng, chống trùng/leakage, split deterministic, rồi mới chọn mixture để train.
+Chuyển 5 seed export hiện có thành bộ train/dev/shadow/probe đủ sạch cho quá trình huấn luyện. Trọng tâm là **khóa dữ liệu seed public**, kiểm định chất lượng, chống trùng/leakage, split deterministic, rồi mới chọn mixture để train.
 
 Official VLSP vẫn giữ nguyên protocol: `wikipediaqa_vi`, `exams_vi`, `comprehension` là MCQ; riêng train đọc hiểu trong repo dùng **`comprehension_short_answer`** để rèn năng lực đọc hiểu grounded.
 
-### Phạm vi đã chốt
+### Phạm vi dữ liệu
 
-Bộ dữ liệu vòng đầu có 5 nhánh:
+Bộ dữ liệu tập trung vào 5 nhánh chính:
 
 * **`exams_mcq`**
 * **`wiki_mcq`**
@@ -70,13 +70,13 @@ Bộ dữ liệu vòng đầu có 5 nhánh:
 * **`instruction_retention`**
 * **`cloze_lm_retention`**
 
-### Không làm trong vòng đầu
+### Các giới hạn và nguyên tắc loại trừ
 
 * chưa build `lambada_cloze` theo quy mô full dataset ngoài `cloze_lm_retention`
 * không copy, paraphrase, hay dịch lại benchmark VLSP vào train/dev/shadow eval
-* không sinh thêm synthetic bằng LLM trước khi seed hiện có được audit/split rõ ràng
-* không tự chuyển `comprehension_short_answer` sang MCQ bằng rule-based distractor vì dễ tạo noisy generated MCQ
-* không khôi phục pipeline `comprehension_mcq` làm đường train mặc định trong vòng này
+* không sinh thêm synthetic bằng LLM khi chưa có quy trình QC và API tin cậy
+* không tự chuyển `comprehension_short_answer` sang MCQ bằng rule-based distractor vì rủi ro tạo noisy generated MCQ cao
+* loại bỏ hoàn toàn pipeline `comprehension_mcq` khỏi luồng huấn luyện của project
 
 ---
 
@@ -324,7 +324,7 @@ Tạo đánh giá nội bộ đủ nhạy để không phải chạy VLSP hằng
 
 ### Mục tiêu
 
-Chỉ mở rộng dữ liệu khi biết rõ seed hiện tại thiếu gì.
+Chỉ mở rộng dữ liệu khi biết rõ seed hiện tại thiếu gì và có phương án sinh dữ liệu tin cậy.
 
 ### Điều kiện mở rộng
 
@@ -332,13 +332,13 @@ Chỉ sinh thêm bằng LLM sau khi:
 
 * đã có baseline run trên seed-first mix
 * biết task nào yếu qua dev/shadow/VLSP milestone
-* có giả thuyết rõ, ví dụ thiếu MCQ distractor tốt, thiếu passage dài, hoặc thiếu câu hỏi suy luận
+* có giả thuyết rõ, ví dụ thiếu passage dài, hoặc thiếu câu hỏi suy luận phức tạp
 * có QC đủ mạnh cho dạng dữ liệu mới
-* có API LLM hoặc model local đủ tốt để sinh và kiểm tra distractor nhất quán
+* có API LLM hoặc model local đủ tốt để sinh và kiểm tra chất lượng nhất quán
 
 ### Không làm mặc định
 
-* không sinh hàng loạt MCQ comprehension chỉ để khớp format VLSP
+* **Tuyệt đối không sinh MCQ comprehension**: Duy trì định hướng `comprehension_short_answer` để đảm bảo chất lượng grounded.
 * không dùng rule-based distractor để thay thế LLM QC cho `comprehension_short_answer`
 * không tăng instruction/chat tổng quát nếu retention probe đã ổn
 * không mở rộng dữ liệu khi lỗi chính nằm ở train config hoặc eval parser
