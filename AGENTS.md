@@ -29,6 +29,8 @@ alwaysApply: true
   - `python scripts/recheck_comprehension_seed_raw.py`
   - `python scripts/filter_comprehension_raw_uit.py`
   - `python scripts/load_comprehension_short_answer_seed.py`
+- Training split pipeline:
+  - `python scripts/build_training_split.py`
 
 ## Current status
 
@@ -37,6 +39,7 @@ alwaysApply: true
 - Train đọc hiểu tập trung vào **`comprehension_short_answer`**: `scripts/filter_comprehension_raw_uit.py`, `scripts/load_comprehension_short_answer_seed.py` → `seed_exports/comprehension_short_answer_seed.jsonl`
 - Lý do định hướng: Không có API LLM/distractor generator đủ tin cậy để chuyển short answer thành MCQ sạch; **Better clean extractive QA than noisy generated MCQ.**
 - Pipeline **comprehension MCQ** (spec/plan ngày 2026-04-30) loại bỏ hoàn toàn khỏi luồng huấn luyện; các script chỉ được giữ lại để tham chiếu lịch sử.
+- **Training split pipeline**: Đã hoàn thành (`scripts/build_training_split.py`), output tại `seed_exports/splits/`.
 
 ## 5 Seed Files cho Train/Val
 

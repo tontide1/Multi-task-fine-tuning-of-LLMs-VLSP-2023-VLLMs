@@ -24,3 +24,9 @@
 | `instruction_retention_seed.jsonl` | 25M | Instruction retention |
 
 Location: `seed_exports/`
+
+## Training Split Pipeline
+
+- Script: `scripts/build_training_split.py`
+- Output: `seed_exports/splits/`
+- Status: Completed (deterministic 90/5/5 split for benchmarks, 95/5 for retention)
