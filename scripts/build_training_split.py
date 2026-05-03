@@ -29,7 +29,7 @@ def rebucket_records(records: list[dict]) -> dict[str, list[dict]]:
 
 import random
 
-def split_group_a(bucket: list[dict], train_pct: float, val_pct: float, shadow_pct: float) -> tuple[list[dict], list[dict], list[dict]]:
+def split_group_a(bucket: list[dict], train_pct: float, val_pct: float) -> tuple[list[dict], list[dict], list[dict]]:
     """Split benchmark proxy tasks into train, val, and shadow."""
     total = len(bucket)
     train_idx = int(total * train_pct)
@@ -41,7 +41,7 @@ def split_group_a(bucket: list[dict], train_pct: float, val_pct: float, shadow_p
     
     return train_slice, val_slice, shadow_slice
 
-def split_group_b(bucket: list[dict], train_pct: float, probe_pct: float) -> tuple[list[dict], list[dict]]:
+def split_group_b(bucket: list[dict], train_pct: float) -> tuple[list[dict], list[dict]]:
     """Split retention tasks into train and probe."""
     total = len(bucket)
     train_idx = int(total * train_pct)
@@ -122,7 +122,7 @@ def main():
         report["tasks"][task] = {"total_clean": len(bucket)}
         
         if task in ["exams_mcq", "wiki_mcq", "comprehension_short_answer"]:
-            train_slice, val_slice, shadow_slice = split_group_a(bucket, 0.90, 0.05, 0.05)
+            train_slice, val_slice, shadow_slice = split_group_a(bucket, 0.90, 0.05)
             train_all.extend(train_slice)
             val_all.extend(val_slice)
             shadow_eval.extend(shadow_slice)
@@ -130,12 +130,12 @@ def main():
                 "train": len(train_slice), "val": len(val_slice), "shadow": len(shadow_slice)
             })
         elif task == "instruction_retention":
-            train_slice, probe_slice = split_group_b(bucket, 0.95, 0.05)
+            train_slice, probe_slice = split_group_b(bucket, 0.95)
             train_all.extend(train_slice)
             instruction_probe.extend(probe_slice)
             report["tasks"][task].update({"train": len(train_slice), "probe": len(probe_slice)})
         elif task == "cloze_lm_retention":
-            train_slice, probe_slice = split_group_b(bucket, 0.95, 0.05)
+            train_slice, probe_slice = split_group_b(bucket, 0.95)
             train_all.extend(train_slice)
             cloze_probe.extend(probe_slice)
             report["tasks"][task].update({"train": len(train_slice), "probe": len(probe_slice)})
