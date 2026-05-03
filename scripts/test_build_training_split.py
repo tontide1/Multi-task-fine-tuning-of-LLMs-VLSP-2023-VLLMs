@@ -38,5 +38,22 @@ class TestBuildTrainingSplit(unittest.TestCase):
         self.assertEqual(len(buckets["task_a"]), 2)
         self.assertEqual(len(buckets["task_b"]), 1)
 
+    def test_split_group_a(self):
+        from scripts.build_training_split import split_group_a
+        bucket = [{"id": i} for i in range(100)]
+        train, val, shadow = split_group_a(bucket, train_pct=0.90, val_pct=0.05, shadow_pct=0.05)
+        self.assertEqual(len(train), 90)
+        self.assertEqual(len(val), 5)
+        self.assertEqual(len(shadow), 5)
+        self.assertEqual(len(train) + len(val) + len(shadow), 100)
+
+    def test_split_group_b(self):
+        from scripts.build_training_split import split_group_b
+        bucket = [{"id": i} for i in range(100)]
+        train, probe = split_group_b(bucket, train_pct=0.95, probe_pct=0.05)
+        self.assertEqual(len(train), 95)
+        self.assertEqual(len(probe), 5)
+        self.assertEqual(len(train) + len(probe), 100)
+
 if __name__ == '__main__':
     unittest.main()
