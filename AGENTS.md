@@ -34,6 +34,18 @@ alwaysApply: true
 
 - `comprehension_seed_raw` spec: `docs/superpowers/specs/2026-04-29-comprehension-seed-raw-design.md`
 - `comprehension_seed_raw` plan: `docs/superpowers/plans/2026-04-29-comprehension-seed-raw.md`
-- Train đọc hiểu dùng **`comprehension_short_answer`**: `scripts/filter_comprehension_raw_uit.py`, `scripts/load_comprehension_short_answer_seed.py` → `seed_exports/comprehension_short_answer_seed.jsonl`
-- Lý do định hướng: hiện không có API LLM/distractor generator đáng tin cậy để chuyển short answer thành MCQ sạch; **Better clean extractive QA than noisy generated MCQ.**
-- Pipeline **comprehension MCQ** (spec/plan ngày 2026-04-30) không còn là đường train mặc định; script vẫn trong repo để tham chiếu lịch sử
+- Train đọc hiểu tập trung vào **`comprehension_short_answer`**: `scripts/filter_comprehension_raw_uit.py`, `scripts/load_comprehension_short_answer_seed.py` → `seed_exports/comprehension_short_answer_seed.jsonl`
+- Lý do định hướng: Không có API LLM/distractor generator đủ tin cậy để chuyển short answer thành MCQ sạch; **Better clean extractive QA than noisy generated MCQ.**
+- Pipeline **comprehension MCQ** (spec/plan ngày 2026-04-30) loại bỏ hoàn toàn khỏi luồng huấn luyện; các script chỉ được giữ lại để tham chiếu lịch sử.
+
+## 5 Seed Files cho Train/Val
+
+Đây là 5 seed quan trọng để build bộ train và validation:
+
+| Seed File | Size | Mô tả |
+|-----------|------|-------|
+| `comprehension_short_answer_seed.jsonl` | 35M | Short answer đọc hiểu (UIT) |
+| `exams_mcq_seed.jsonl` | 7.2M | MCQ từ đề thi |
+| `wiki_mcq_seed_final.jsonl` | 7.1M | MCQ từ Wikipedia |
+| `cloze_lm_retention_seed.jsonl` | 8.2M | Cloze task (language modeling) |
+| `instruction_retention_seed.jsonl` | 25M | Instruction retention |

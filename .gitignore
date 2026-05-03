@@ -220,3 +220,4 @@ notebooks/seed_exports/
 # Data artifacts
 seed_exports/*.jsonl
 seed_exports/*_report.json
+seed_exports/splits/
