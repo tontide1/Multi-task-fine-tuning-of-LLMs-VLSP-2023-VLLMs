@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Create a complete Jupyter Notebook (`.ipynb` format) intended to run on Kaggle with a Tesla T4 GPU to fine-tune `unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit` using QLoRA.
+**Goal:** Create a complete Jupyter Notebook (`.ipynb` format) intended to run on Kaggle with a Tesla T4 GPU to fine-tune `unsloth/Qwen2.5-1.5B-Instruct-unsloth-bnb-4bit` using QLoRA.
 
 **Architecture:** We will generate a single Python script that can be converted or copied directly into a Kaggle Notebook. The script will handle dependencies, heterogeneous JSONL data loading from Hugging Face, deterministic chat template formatting, balanced task mixing, model configuration, and SFTTrainer execution according to the 3-stage strategy outlined in the spec.
 
@@ -133,7 +133,7 @@ def configure_model():
     max_seq_length = 4096 
     
     model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name = "unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit",
+        model_name = "unsloth/Qwen2.5-1.5B-Instruct-unsloth-bnb-4bit",
         max_seq_length = max_seq_length,
         dtype = torch.float16, # Or None
         load_in_4bit = True,
@@ -221,5 +221,5 @@ if __name__ == "__main__":
     tokenizer.save_pretrained("qwen25_3b_vlsp_lora")
     
     # Push to hub (requires HF_TOKEN)
-    # trained_model.push_to_hub("tontide1/Qwen2.5-3B-VLSP-Adapter")
+    # trained_model.push_to_hub("tontide1/Qwen2.5-1.5B-VLSP-Adapter")
 ```

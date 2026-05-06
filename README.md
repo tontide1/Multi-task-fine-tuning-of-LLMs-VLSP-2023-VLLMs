@@ -1,6 +1,6 @@
 # Multi-task Fine-tuning of LLMs — VLSP 2023 VLLMs
 
-Pipeline benchmark + fine-tune (QLoRA) cho Vietnamese LLM (`unsloth/Qwen2.5-3B-Instruct-unsloth-bnb-4bit`)
+Pipeline benchmark + fine-tune (QLoRA) cho Vietnamese LLM (`unsloth/Qwen2.5-1.5B-Instruct-unsloth-bnb-4bit`)
 trên bộ benchmark **VLSP 2023 VLLMs** gồm 4 task:
 
 - `lambada_vi` — next-word prediction
