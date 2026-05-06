@@ -1,6 +1,16 @@
 # my
 mcp.json
 assistant
+unsloth_scripts/
+result/fine-tune-Qwen2.5-1.5B/huggingface_tokenizers_cache
+result/fine-tune-Qwen2.5-1.5B/qwen25_artifacts/hf_cache
+result/fine-tune-Qwen2.5-1.5B/qwen25_artifacts/lora_model
+result/fine-tune-Qwen2.5-1.5B/qwen25_artifacts/wandb
+result/fine-tune-Qwen2.5-1.5B/unsloth_compiled_cache
+result/fine-tune-Qwen2.5-1.5B/__huggingface_repos__.json
+result/fine-tune-Qwen2.5-1.5B/.part
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
