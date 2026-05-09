@@ -32,7 +32,7 @@ def validate_record_schema(record: dict):
 
 def check_mcq_contamination(user_content, assistant_content):
     has_choices = bool(re.search(r"[A-D]\.\s+.*?\n[A-D]\.\s+.*?\n[A-D]\.\s+.*?\n[A-D]\.\s+", user_content))
-    is_short_answer = bool(re.match(r"^\s*(Đáp án|Answer|Kết quả)\s*:?\s*[A-D]\s*$", assistant_content, re.IGNORECASE))
+    is_short_answer = bool(re.match(r"^\s*(Đáp án|Answer|Kết quả)\s*:?\s*[A-D]\s*$", assistant_content, re.IGNORECASE)) or bool(re.match(r"^\s*[A-D]\s*$", assistant_content, re.IGNORECASE))
     return has_choices or is_short_answer
 
 def check_leftover_markers(text):

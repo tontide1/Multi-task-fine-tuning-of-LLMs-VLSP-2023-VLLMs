@@ -145,7 +145,7 @@ def main():
     # ===========================================================================
 
     valid_answers = {"A", "B", "C", "D"}
-    answer_format_ok = df["assistant_content"].str.match(r"^Đáp án: [ABCD]$", na=False)
+    answer_format_ok = df["assistant_content"].str.match(r"^[ABCD]$", na=False)
     invalid_mask = ~answer_format_ok
     print(f"=== [5] Invalid assistant answer format rows: {invalid_mask.sum()} ===\n")
     if invalid_mask.sum() > 0:

@@ -33,7 +33,7 @@ BANNED_OPTION_TEXTS = {
     "cả a và b",
 }
 
-_ASSISTANT_RE = re.compile(r"^Đáp án: ([ABCD])$")
+_ASSISTANT_RE = re.compile(r"^([ABCD])$")
 
 
 def read_jsonl(path):

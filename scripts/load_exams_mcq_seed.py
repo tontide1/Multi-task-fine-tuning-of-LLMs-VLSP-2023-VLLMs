@@ -152,7 +152,7 @@ def build_record(row):
     return {
         "messages": [
             {"role": "user", "content": build_user_content(row)},
-            {"role": "assistant", "content": f"Đáp án: {row['answer_letter']}"},
+            {"role": "assistant", "content": row['answer_letter']},
         ],
         "metadata": {
             "task": "exams_mcq",

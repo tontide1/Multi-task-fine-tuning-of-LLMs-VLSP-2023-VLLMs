@@ -38,7 +38,7 @@ REQUIRED_METADATA_FIELDS = [
     "source_id", "subject", "answer", "dedup_hash",
 ]
 
-ANSWER_FORMAT_RE = re.compile(r"^Đáp án: [ABCD]$")
+ANSWER_FORMAT_RE = re.compile(r"^[ABCD]$")
 CHOICE_LINE_RE = re.compile(r"^\s*[A-D]\s*[\.\):\-]\s*.+$")
 CHOICE_PREFIX_RE = re.compile(r"^\s*[A-Da-d]\s*[\.\):\-]\s*", re.IGNORECASE)
 
@@ -166,7 +166,7 @@ def main():
     # [5] Answer format check
     # ===========================================================================
 
-    answer_format_ok = df["assistant_content"].str.match(r"^Đáp án: [ABCD]$", na=False)
+    answer_format_ok = df["assistant_content"].str.match(ANSWER_FORMAT_RE.pattern, na=False)
     bad_answer_count = (~answer_format_ok).sum()
     print(f"=== [5] Invalid answer format rows: {bad_answer_count} ===")
     if bad_answer_count > 0:

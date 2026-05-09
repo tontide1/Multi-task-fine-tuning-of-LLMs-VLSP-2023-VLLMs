@@ -16,7 +16,7 @@ DEFAULT_INPUT_JSONL = _REPO_ROOT / "seed_exports" / "comprehension_mcq_seed_fina
 VALID_TASK = "comprehension_mcq"
 VALID_SOURCE = "synthetic"
 VALID_SOURCE_DATASET = "taidng/UIT-ViQuAD2.0"
-VALID_ASSISTANT_RE = re.compile(r"^Đáp án: [ABCD]$")
+VALID_ASSISTANT_RE = re.compile(r"^[ABCD]$")
 
 
 def read_jsonl(path):

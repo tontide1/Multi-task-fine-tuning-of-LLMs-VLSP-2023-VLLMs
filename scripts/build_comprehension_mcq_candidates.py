@@ -164,7 +164,7 @@ def build_candidate_record(raw_record, distractors):
     return {
         "messages": [
             {"role": "user", "content": build_mcq_user_content(context, question, choice_list)},
-            {"role": "assistant", "content": f"Đáp án: {answer_label}"},
+            {"role": "assistant", "content": answer_label},
         ],
         "metadata": {
             "task": TASK_NAME,

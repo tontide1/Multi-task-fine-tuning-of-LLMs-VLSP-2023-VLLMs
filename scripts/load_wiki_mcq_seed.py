@@ -181,7 +181,7 @@ def convert_row(row):
     item = {
         "messages": [
             {"role": "user", "content": user_content},
-            {"role": "assistant", "content": f"Đáp án: {answer}"},
+            {"role": "assistant", "content": answer},
         ],
         "metadata": {
             "task": TASK_NAME,
@@ -315,7 +315,7 @@ def main():
 
     for item in deduped:
         content = item["messages"][1]["content"]
-        m = re.match(r"^Đáp án:\s*([ABCD])$", content)
+        m = re.match(r"^([ABCD])$", content)
         if m is None:
             bad_assistant_format += 1
         else:

@@ -46,7 +46,7 @@ def clean_markers(text: str) -> str:
 
 def is_mcq_like(user_content: str, assistant_content: str) -> bool:
     has_choices = bool(re.search(r"[A-D]\.\s+.*?\n[A-D]\.\s+.*?\n[A-D]\.\s+.*?\n[A-D]\.\s+", user_content))
-    is_short_answer = bool(re.match(r"^\s*(Đáp án|Answer|Kết quả)\s*:?\s*[A-D]\s*$", assistant_content, re.IGNORECASE))
+    is_short_answer = bool(re.match(r"^\s*(Đáp án|Answer|Kết quả)\s*:?\s*[A-D]\s*$", assistant_content, re.IGNORECASE)) or bool(re.match(r"^\s*[A-D]\s*$", assistant_content, re.IGNORECASE))
     
     if is_short_answer:
         return True
