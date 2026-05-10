@@ -15,6 +15,7 @@ result/fine-tune-Qwen2.5-1.5B-1/qwen25_artifacts/hf_cache
 result/fine-tune-Qwen2.5-1.5B-1/qwen25_artifacts/lora_model
 result/fine-tune-Qwen2.5-1.5B-1/__huggingface_repos__.json
 unsloth_compiled_cache/
+result/fine-tune-Qwen2.5-1.5B-1-smoke
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

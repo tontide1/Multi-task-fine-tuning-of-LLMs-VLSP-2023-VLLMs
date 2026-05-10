@@ -1,0 +1,13 @@
+unsloth
+wandb
+rouge_score
+triton
+bitsandbytes
+trl
+peft
+accelerate
+transformers
+datasets
+huggingface_hub
+tqdm
+torch
