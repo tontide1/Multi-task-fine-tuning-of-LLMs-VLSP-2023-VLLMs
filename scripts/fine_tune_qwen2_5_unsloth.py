@@ -6,7 +6,6 @@ import json
 import os
 import random
 import re
-import subprocess
 import sys
 import warnings
 from collections import Counter, defaultdict
@@ -17,11 +16,11 @@ from typing import Any
 import torch
 from datasets import Dataset
 from huggingface_hub import hf_hub_download
-from tqdm.auto import tqdm
-from transformers import AutoTokenizer, TrainingArguments
+from transformers import logging as hf_logging
 
 # Filter warnings
 warnings.filterwarnings("ignore", category=FutureWarning, module="transformers")
+hf_logging.set_verbosity_error()
 
 # Attempt to import specialized libraries
 try:
@@ -484,16 +483,16 @@ def main():
 
     # Caps
     smoke_caps = {
-        "comprehension_short_answer": 100,
-        "exams_mcq": 100,
-        "wiki_mcq": 100,
-        "instruction_retention": 100,
-        "cloze_lm_retention": 100,
+        "comprehension_short_answer": 10,
+        "exams_mcq": 10,
+        "wiki_mcq": 10,
+        "instruction_retention": 10,
+        "cloze_lm_retention": 10,
     }
     full_caps = {
-        "comprehension_short_answer": 20_000,
-        "exams_mcq": 10_760,
-        "wiki_mcq": 7_136,
+        "comprehension_short_answer": 10_000,
+        "exams_mcq": 50_000,
+        "wiki_mcq": 50_000,
         "instruction_retention": 8_000,
         "cloze_lm_retention": 4_000,
     }
@@ -517,7 +516,6 @@ def main():
     shadow_rows = [normalize_row(r) for r in read_jsonl(data_paths["shadow"])]
     instruction_probe_rows = [normalize_row(r) for r in read_jsonl(data_paths["instruction_probe"])]
     cloze_probe_rows = [normalize_row(r) for r in read_jsonl(data_paths["cloze_probe"])]
-    split_report = json.loads(data_paths["split_report"].read_text(encoding="utf-8"))
 
     print(f"Loaded {len(train_rows)} train, {len(val_rows)} val rows.")
 
@@ -599,7 +597,7 @@ def main():
     sft_config = SFTConfig(
         output_dir=str(output_model_dir),
         per_device_train_batch_size=8,
-        gradient_accumulation_steps=1,
+        gradient_accumulation_steps=4,
         learning_rate=2e-4,
         lr_scheduler_type="linear",
         warmup_steps=5 if smoke_run else (int(0.03 * 1000)),
@@ -614,7 +612,7 @@ def main():
         eval_steps=10 if smoke_run else 1000,
         save_strategy="steps",
         max_steps=20 if smoke_run else -1,
-        num_train_epochs=2 if not smoke_run else 1,
+        num_train_epochs=1,
         report_to="wandb" if wandb_run else "none",
         seed=args.seed,
         load_best_model_at_end=True,
@@ -688,10 +686,16 @@ def main():
 
     # W&B Log Artifacts
     if wandb_run:
+        type_map = {
+            "mix_report.json": "mix-report",
+            "token_length_report.json": "token-length-report",
+            "eval_report.json": "eval-report",
+        }
         for f in ["mix_report.json", "token_length_report.json", "eval_report.json"]:
             p = report_dir / f
             if p.exists():
-                artifact = wandb.Artifact(p.stem, type="dataset")
+                artifact_type = type_map.get(f, "report")
+                artifact = wandb.Artifact(p.stem, type=artifact_type)
                 artifact.add_file(str(p))
                 wandb_run.log_artifact(artifact)
         wandb.finish()
