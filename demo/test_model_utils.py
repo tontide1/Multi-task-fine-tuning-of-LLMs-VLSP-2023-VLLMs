@@ -1,7 +1,7 @@
 """Unit tests for demo/model_utils.py."""
 
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import ANY, MagicMock, patch
 
 from demo.model_utils import predict_mcq, predict_next_word
 
@@ -24,7 +24,7 @@ class TestPredictMCQ(unittest.TestCase):
 
         predict_mcq(tokenizer, model, question, choices)
 
-        mock_generate.assert_called_once()
+        mock_generate.assert_called_once_with(tokenizer, model, ANY, max_new_tokens=5)
         prompt = mock_generate.call_args[0][2]  # (tokenizer, model, prompt, max_new_tokens)
         self.assertIn(question, prompt)
         for label, text in choices.items():
@@ -60,19 +60,47 @@ class TestPredictMCQ(unittest.TestCase):
             predict_mcq(tokenizer, model, "Q", choices)
         self.assertIn("missing keys", str(ctx.exception))
 
+    def test_normalizes_lowercase_keys(self):
+        """predict_mcq should normalize lowercase choice keys to uppercase."""
+        tokenizer, model = self._make_mocks()
+        choices = {"a": "Paris", "b": "London", "c": "Berlin", "d": "Madrid"}
+
+        with patch("demo.model_utils._generate", return_value="B"):
+            result = predict_mcq(tokenizer, model, "Q", choices)
+        self.assertEqual(result, "B")
+
+    def test_rejects_unexpected_choice_keys(self):
+        """predict_mcq should raise ValueError for unexpected choice keys."""
+        tokenizer, model = self._make_mocks()
+        choices = {"A": "Paris", "B": "London", "C": "Berlin", "D": "Madrid", "E": "Lisbon"}
+
+        with self.assertRaises(ValueError) as ctx:
+            predict_mcq(tokenizer, model, "Q", choices)
+        self.assertIn("unexpected keys", str(ctx.exception))
+
+    @patch("demo.model_utils._generate")
+    def test_extracts_letter_from_noisy_output(self, mock_generate):
+        """predict_mcq should extract the first A/B/C/D from noisy model output."""
+        mock_generate.return_value = "\n A"
+        tokenizer, model = self._make_mocks()
+        choices = {"A": "Paris", "B": "London", "C": "Berlin", "D": "Madrid"}
+
+        result = predict_mcq(tokenizer, model, "Q", choices)
+        self.assertEqual(result, "A")
+
 
 class TestPredictNextWord(unittest.TestCase):
     """Tests for predict_next_word."""
 
     @patch("demo.model_utils._generate")
     def test_delegates_with_correct_max_new_tokens(self, mock_generate):
-        """predict_next_word should call _generate with num_tokens as max_new_tokens."""
+        """predict_next_word should call _generate with max_new_tokens."""
         mock_generate.return_value = "continuation"
         tokenizer = MagicMock()
         model = MagicMock()
         text = "Hôm nay thứ "
 
-        result = predict_next_word(tokenizer, model, text, num_tokens=3)
+        result = predict_next_word(tokenizer, model, text, max_new_tokens=3)
 
         mock_generate.assert_called_once_with(tokenizer, model, text, max_new_tokens=3)
         self.assertEqual(result, "continuation")

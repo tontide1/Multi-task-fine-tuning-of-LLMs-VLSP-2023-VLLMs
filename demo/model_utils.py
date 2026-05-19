@@ -1,4 +1,5 @@
 import os
+import re
 import torch
 from transformers import (
     AutoTokenizer,
@@ -47,6 +48,8 @@ def load_model() -> tuple[PreTrainedTokenizer, PreTrainedModel]:
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
+    model.eval()
+
     return tokenizer, model
 
 
@@ -57,7 +60,12 @@ def _generate(
     max_new_tokens: int,
 ) -> str:
     """Shared generation logic."""
-    inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True)
+    max_length = getattr(model.config, "max_position_embeddings", None)
+    tokenizer_kwargs = {"return_tensors": "pt", "padding": True, "truncation": True}
+    if max_length is not None:
+        tokenizer_kwargs["max_length"] = max_length
+
+    inputs = tokenizer(prompt, **tokenizer_kwargs)
     inputs = inputs.to(model.device)
 
     with torch.inference_mode():
@@ -84,22 +92,27 @@ def predict_mcq(
     Predict the MCQ answer (A/B/C/D).
     choices: {"A": "...", "B": "...", "C": "...", "D": "..."}
     """
-    missing = {"A", "B", "C", "D"} - set(choices.keys())
+    # Normalize keys to uppercase
+    normalized_choices = {k.upper(): v for k, v in choices.items()}
+    missing = {"A", "B", "C", "D"} - set(normalized_choices.keys())
     if missing:
         raise ValueError(f"choices missing keys: {missing}")
+    unexpected = set(normalized_choices.keys()) - {"A", "B", "C", "D"}
+    if unexpected:
+        raise ValueError(f"choices has unexpected keys: {unexpected}")
 
     prompt = (
         f"Câu hỏi: {question}\n"
-        f"A. {choices['A']}\n"
-        f"B. {choices['B']}\n"
-        f"C. {choices['C']}\n"
-        f"D. {choices['D']}\n"
+        f"A. {normalized_choices['A']}\n"
+        f"B. {normalized_choices['B']}\n"
+        f"C. {normalized_choices['C']}\n"
+        f"D. {normalized_choices['D']}\n"
         f"Đáp án:"
     )
-    result = _generate(tokenizer, model, prompt, max_new_tokens=1)
-    result = result.upper()
-    if result and result[0] in "ABCD":
-        return result[0]
+    result = _generate(tokenizer, model, prompt, max_new_tokens=5)
+    match = re.search(r"[ABCD]", result.upper())
+    if match:
+        return match.group(0)
     raise ValueError(f"Model returned unexpected MCQ token: {result!r}")
 
 
@@ -107,7 +120,7 @@ def predict_next_word(
     tokenizer: PreTrainedTokenizer,
     model: PreTrainedModel,
     text: str,
-    num_tokens: int = 1,
+    max_new_tokens: int = 1,
 ) -> str:
     """Predict the next word(s) and return the continuation."""
-    return _generate(tokenizer, model, text, max_new_tokens=num_tokens)
+    return _generate(tokenizer, model, text, max_new_tokens=max_new_tokens)
