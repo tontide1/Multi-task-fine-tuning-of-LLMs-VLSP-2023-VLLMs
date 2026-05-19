@@ -1,6 +1,9 @@
+import html
+
 import streamlit as st
 from model_utils import load_model, predict_mcq, predict_next_word
-from typing import Any, Tuple
+from typing import Tuple
+from transformers import PreTrainedModel, PreTrainedTokenizer
 
 # Page config
 st.set_page_config(
@@ -29,7 +32,7 @@ st.markdown(
 )
 
 @st.cache_resource(show_spinner=False)
-def _cached_load_model() -> Tuple[Any, Any]:
+def _cached_load_model() -> Tuple[PreTrainedTokenizer, PreTrainedModel]:
     return load_model()
 
 # Load model with spinner
@@ -44,7 +47,9 @@ if not st.session_state.model_ready:
         st.session_state.model = model
         st.session_state.model_ready = True
         st.rerun()
-    except Exception:
+    except Exception as e:
+        if isinstance(e, (KeyboardInterrupt, SystemExit)):
+            raise
         st.error("Không thể tải mô hình. Vui lòng kiểm tra kết nối internet.")
         st.stop()
 
@@ -89,10 +94,12 @@ if mode == "Trắc nghiệm (MCQ)":
                     answer: str = predict_mcq(tokenizer, model, question, choices)
                 st.markdown("#### Kết quả")
                 st.markdown(
-                    f'<div class="answer-box"><span class="big-font">Đáp án: {answer}</span></div>',
+                    f'<div class="answer-box"><span class="big-font">Đáp án: {html.escape(answer)}</span></div>',
                     unsafe_allow_html=True,
                 )
-            except Exception:
+            except Exception as e:
+                if isinstance(e, (KeyboardInterrupt, SystemExit)):
+                    raise
                 st.error("Đã xảy ra lỗi khi sinh kết quả. Vui lòng thử lại.")
 
 else:
@@ -111,11 +118,13 @@ else:
                     )
                 st.markdown("#### Kết quả")
                 st.markdown(
-                    f'<div class="answer-box"><span class="big-font">{text_input}<span style="color:#ff4b4b; font-weight:bold;">{continuation}</span></span></div>',
+                    f'<div class="answer-box"><span class="big-font">{html.escape(text_input)}<span style="color:#ff4b4b; font-weight:bold;">{html.escape(continuation)}</span></span></div>',
                     unsafe_allow_html=True,
                 )
-                st.markdown(f"**Từ được dự đoán thêm:** `{continuation}`")
-            except Exception:
+                st.markdown(f"**Từ được dự đoán thêm:** `{html.escape(continuation)}`")
+            except Exception as e:
+                if isinstance(e, (KeyboardInterrupt, SystemExit)):
+                    raise
                 st.error("Đã xảy ra lỗi khi sinh kết quả. Vui lòng thử lại.")
 
 st.markdown("---")
