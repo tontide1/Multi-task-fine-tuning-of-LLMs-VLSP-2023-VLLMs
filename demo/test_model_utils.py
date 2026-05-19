@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from model_utils import predict_mcq
+from demo.model_utils import predict_mcq
 
 
 class TestPredictMCQ(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestPredictMCQ(unittest.TestCase):
         model = MagicMock()
         return tokenizer, model
 
-    @patch("model_utils._generate")
+    @patch("demo.model_utils._generate")
     def test_prompt_contains_question_and_choices(self, mock_generate):
         """predict_mcq should build a prompt containing the question and all choices."""
         mock_generate.return_value = "A"
@@ -30,7 +30,7 @@ class TestPredictMCQ(unittest.TestCase):
         for label, text in choices.items():
             self.assertIn(f"{label}. {text}", prompt)
 
-    @patch("model_utils._generate")
+    @patch("demo.model_utils._generate")
     def test_returns_correct_letter(self, mock_generate):
         """predict_mcq should return the uppercase letter when _generate returns it."""
         mock_generate.return_value = "A"
@@ -40,7 +40,7 @@ class TestPredictMCQ(unittest.TestCase):
         result = predict_mcq(tokenizer, model, "Q", choices)
         self.assertEqual(result, "A")
 
-    @patch("model_utils._generate")
+    @patch("demo.model_utils._generate")
     def test_raises_on_unexpected_token(self, mock_generate):
         """predict_mcq should raise ValueError when the model returns an unexpected token."""
         mock_generate.return_value = "X"

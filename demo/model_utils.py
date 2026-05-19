@@ -11,7 +11,7 @@ MODEL_NAME = "VietAI/gpt-neo-1.3B-vietnamese-news"
 LOCAL_CACHE_DIR = os.path.join(os.path.dirname(__file__), "models", "vietai-gpt-neo-1.3b-vietnamese-news")
 
 
-def load_model():
+def load_model() -> tuple[PreTrainedTokenizer, PreTrainedModel]:
     """Load tokenizer and model from HuggingFace, cache locally."""
     os.makedirs(LOCAL_CACHE_DIR, exist_ok=True)
 
@@ -92,6 +92,11 @@ def predict_mcq(
     raise ValueError(f"Model returned unexpected MCQ token: {result!r}")
 
 
-def predict_next_word(tokenizer, model, text: str, num_tokens: int = 1) -> str:
+def predict_next_word(
+    tokenizer: PreTrainedTokenizer,
+    model: PreTrainedModel,
+    text: str,
+    num_tokens: int = 1,
+) -> str:
     """Predict the next word(s) and return the continuation."""
     return _generate(tokenizer, model, text, max_new_tokens=num_tokens)
