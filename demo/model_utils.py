@@ -8,8 +8,8 @@ from transformers import (
     PreTrainedModel,
 )
 
-MODEL_NAME = "VietAI/gpt-neo-1.3B-vietnamese-news"
-LOCAL_CACHE_DIR = os.path.join(os.path.dirname(__file__), "models", "vietai-gpt-neo-1.3b-vietnamese-news")
+MODEL_NAME = "vlsp-2023-vllm/hoa-7b"
+LOCAL_CACHE_DIR = os.path.join(os.path.dirname(__file__), "models", "vlsp-2023-vllm-hoa-7b")
 
 
 def load_model() -> tuple[PreTrainedTokenizer, PreTrainedModel]:

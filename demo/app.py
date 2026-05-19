@@ -7,7 +7,7 @@ from transformers import PreTrainedModel, PreTrainedTokenizer
 
 # Page config
 st.set_page_config(
-    page_title="Demo VietAI GPT-Neo 1.3B",
+    page_title="Demo Hoa 7B",
     page_icon="🇻🇳",
     layout="centered",
 )
@@ -63,7 +63,7 @@ mode: str = st.sidebar.radio(
     ["Trắc nghiệm (MCQ)", "Dự đoán từ tiếp theo"],
 )
 
-st.title("🇻🇳 Demo VietAI GPT-Neo 1.3B Vietnamese News")
+st.title("🇻🇳 Demo Hoa 7B (BLOOM) - VLSP 2023 VLLMs")
 st.markdown("---")
 
 if mode == "Trắc nghiệm (MCQ)":
@@ -128,4 +128,4 @@ else:
                 st.error("Đã xảy ra lỗi khi sinh kết quả. Vui lòng thử lại.")
 
 st.markdown("---")
-st.caption("Powered by VietAI/gpt-neo-1.3B-vietnamese-news via HuggingFace Transformers")
+st.caption("Powered by vlsp-2023-vllm/hoa-7b via HuggingFace Transformers")

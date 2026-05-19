@@ -1,4 +1,4 @@
-# Streamlit Demo — VietAI GPT-Neo 1.3B Vietnamese News
+# Streamlit Demo — Hoa 7B (VLSP 2023 VLLMs)
 
 ## Cài đặt
 
@@ -13,7 +13,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Ứng dụng sẽ tự động tải model từ HuggingFace về thư mục `demo/models/` nếu chưa có.
+Ứng dụng sẽ tự động tải model từ HuggingFace về thư mục `demo/models/` nếu chưa có.\nLưu ý: Model Hoa 7B có kích thước ~14GB (float16) và yêu cầu VRAM/GPU tương ứng. Nếu chạy trên CPU sẽ rất chậm và có thể OOM.
 
 ## Chức năng
 
