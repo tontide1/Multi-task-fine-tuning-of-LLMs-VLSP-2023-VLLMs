@@ -16,22 +16,32 @@ def load_model() -> tuple[PreTrainedTokenizer, PreTrainedModel]:
     os.makedirs(LOCAL_CACHE_DIR, exist_ok=True)
 
     # Try local-only first; fallback to remote if not cached
-    local_only = os.path.exists(
-        os.path.join(LOCAL_CACHE_DIR, "models--VietAI--gpt-neo-1.3B-vietnamese-news")
-    )
-
-    tokenizer = AutoTokenizer.from_pretrained(
-        MODEL_NAME,
-        cache_dir=LOCAL_CACHE_DIR,
-        local_files_only=local_only,
-    )
-    model = AutoModelForCausalLM.from_pretrained(
-        MODEL_NAME,
-        cache_dir=LOCAL_CACHE_DIR,
-        local_files_only=local_only,
-        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto" if torch.cuda.is_available() else None,
-    )
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(
+            MODEL_NAME,
+            cache_dir=LOCAL_CACHE_DIR,
+            local_files_only=True,
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            MODEL_NAME,
+            cache_dir=LOCAL_CACHE_DIR,
+            local_files_only=True,
+            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+            device_map="auto" if torch.cuda.is_available() else None,
+        )
+    except (OSError, ValueError):
+        tokenizer = AutoTokenizer.from_pretrained(
+            MODEL_NAME,
+            cache_dir=LOCAL_CACHE_DIR,
+            local_files_only=False,
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            MODEL_NAME,
+            cache_dir=LOCAL_CACHE_DIR,
+            local_files_only=False,
+            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+            device_map="auto" if torch.cuda.is_available() else None,
+        )
 
     # Ensure pad_token exists
     if tokenizer.pad_token is None:
@@ -48,6 +58,7 @@ def _generate(
 ) -> str:
     """Shared generation logic."""
     inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True)
+    inputs = inputs.to(model.device)
 
     with torch.inference_mode():
         outputs = model.generate(
@@ -67,7 +78,7 @@ def predict_mcq(
     tokenizer: PreTrainedTokenizer,
     model: PreTrainedModel,
     question: str,
-    choices: dict,
+    choices: dict[str, str],
 ) -> str:
     """
     Predict the MCQ answer (A/B/C/D).

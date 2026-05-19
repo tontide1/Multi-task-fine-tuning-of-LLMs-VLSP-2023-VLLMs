@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from demo.model_utils import predict_mcq
+from demo.model_utils import predict_mcq, predict_next_word
 
 
 class TestPredictMCQ(unittest.TestCase):
@@ -59,6 +59,23 @@ class TestPredictMCQ(unittest.TestCase):
         with self.assertRaises(ValueError) as ctx:
             predict_mcq(tokenizer, model, "Q", choices)
         self.assertIn("missing keys", str(ctx.exception))
+
+
+class TestPredictNextWord(unittest.TestCase):
+    """Tests for predict_next_word."""
+
+    @patch("demo.model_utils._generate")
+    def test_delegates_with_correct_max_new_tokens(self, mock_generate):
+        """predict_next_word should call _generate with num_tokens as max_new_tokens."""
+        mock_generate.return_value = "continuation"
+        tokenizer = MagicMock()
+        model = MagicMock()
+        text = "Hôm nay thứ "
+
+        result = predict_next_word(tokenizer, model, text, num_tokens=3)
+
+        mock_generate.assert_called_once_with(tokenizer, model, text, max_new_tokens=3)
+        self.assertEqual(result, "continuation")
 
 
 if __name__ == "__main__":
