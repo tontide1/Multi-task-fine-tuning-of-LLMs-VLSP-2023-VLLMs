@@ -3,6 +3,7 @@ mcp.json
 assistant
 unsloth_scripts/
 result/
+demo/models/
 result/fine-tune-Qwen2.5-1.5B/huggingface_tokenizers_cache
 result/fine-tune-Qwen2.5-1.5B/qwen25_artifacts/hf_cache
 result/fine-tune-Qwen2.5-1.5B/qwen25_artifacts/lora_model
