@@ -1,5 +1,6 @@
 import streamlit as st
 from model_utils import load_model, predict_mcq, predict_next_word
+from typing import Any, Tuple
 
 # Page config
 st.set_page_config(
@@ -28,7 +29,7 @@ st.markdown(
 )
 
 @st.cache_resource(show_spinner=False)
-def _cached_load_model():
+def _cached_load_model() -> Tuple[Any, Any]:
     return load_model()
 
 # Load model with spinner
@@ -36,19 +37,23 @@ if "model_ready" not in st.session_state:
     st.session_state.model_ready = False
 
 if not st.session_state.model_ready:
-    with st.spinner("Đang tải mô hình, vui lòng đợi..."):
-        tokenizer, model = _cached_load_model()
-    st.session_state.tokenizer = tokenizer
-    st.session_state.model = model
-    st.session_state.model_ready = True
-    st.rerun()
+    try:
+        with st.spinner("Đang tải mô hình, vui lòng đợi..."):
+            tokenizer, model = _cached_load_model()
+        st.session_state.tokenizer = tokenizer
+        st.session_state.model = model
+        st.session_state.model_ready = True
+        st.rerun()
+    except Exception:
+        st.error("Không thể tải mô hình. Vui lòng kiểm tra kết nối internet.")
+        st.stop()
 
 tokenizer = st.session_state.tokenizer
 model = st.session_state.model
 
 # Sidebar
 st.sidebar.title("Chế độ")
-mode = st.sidebar.radio(
+mode: str = st.sidebar.radio(
     "Chọn chức năng:",
     ["Trắc nghiệm (MCQ)", "Dự đoán từ tiếp theo"],
 )
@@ -57,54 +62,61 @@ st.title("🇻🇳 Demo VietAI GPT-Neo 1.3B Vietnamese News")
 st.markdown("---")
 
 if mode == "Trắc nghiệm (MCQ)":
-    st.header("📝 Trả lờit câu hỏi trắc nghiệm")
+    st.header("📝 Trả lời câu hỏi trắc nghiệm")
     with st.form("mcq_form"):
-        question = st.text_area("Câu hỏi", height=100)
+        question: str = st.text_area("Câu hỏi", height=100)
         col1, col2 = st.columns(2)
         with col1:
-            choice_a = st.text_input("Đáp án A")
-            choice_b = st.text_input("Đáp án B")
+            choice_a: str = st.text_input("Đáp án A")
+            choice_b: str = st.text_input("Đáp án B")
         with col2:
-            choice_c = st.text_input("Đáp án C")
-            choice_d = st.text_input("Đáp án D")
-        submitted = st.form_submit_button("Trả lờit")
+            choice_c: str = st.text_input("Đáp án C")
+            choice_d: str = st.text_input("Đáp án D")
+        submitted = st.form_submit_button("Trả lời")
 
     if submitted:
         if not question or not all([choice_a, choice_b, choice_c, choice_d]):
             st.warning("Vui lòng nhập đầy đủ câu hỏi và 4 đáp án.")
         else:
-            with st.spinner("Mô hình đang suy nghĩ..."):
-                choices = {
-                    "A": choice_a,
-                    "B": choice_b,
-                    "C": choice_c,
-                    "D": choice_d,
-                }
-                answer = predict_mcq(tokenizer, model, question, choices)
-            st.markdown("#### Kết quả")
-            st.markdown(
-                f'<div class="answer-box"><span class="big-font">Đáp án: {answer}</span></div>',
-                unsafe_allow_html=True,
-            )
+            try:
+                with st.spinner("Mô hình đang suy nghĩ..."):
+                    choices: dict[str, str] = {
+                        "A": choice_a,
+                        "B": choice_b,
+                        "C": choice_c,
+                        "D": choice_d,
+                    }
+                    answer: str = predict_mcq(tokenizer, model, question, choices)
+                st.markdown("#### Kết quả")
+                st.markdown(
+                    f'<div class="answer-box"><span class="big-font">Đáp án: {answer}</span></div>',
+                    unsafe_allow_html=True,
+                )
+            except Exception:
+                st.error("Đã xảy ra lỗi khi sinh kết quả. Vui lòng thử lại.")
 
 else:
     st.header("✍️ Dự đoán từ tiếp theo")
-    text_input = st.text_area("Nhập đoạn văn", height=150)
-    num_tokens = st.slider("Số từ cần dự đoán", min_value=1, max_value=10, value=1)
+    text_input: str = st.text_area("Nhập đoạn văn", height=150)
+    num_tokens: int = st.slider("Số từ cần dự đoán", min_value=1, max_value=10, value=1)
 
     if st.button("Dự đoán"):
         if not text_input.strip():
             st.warning("Vui lòng nhập đoạn văn.")
         else:
-            with st.spinner("Mô hình đang suy nghĩ..."):
-                continuation = predict_next_word(tokenizer, model, text_input, max_new_tokens=num_tokens)
-            st.markdown("#### Kết quả")
-            full_text = text_input + continuation
-            st.markdown(
-                f'<div class="answer-box"><span class="big-font">{full_text}</span></div>',
-                unsafe_allow_html=True,
-            )
-            st.markdown(f"**Từ được dự đoán thêm:** `{continuation}`")
+            try:
+                with st.spinner("Mô hình đang suy nghĩ..."):
+                    continuation: str = predict_next_word(
+                        tokenizer, model, text_input, max_new_tokens=num_tokens
+                    )
+                st.markdown("#### Kết quả")
+                st.markdown(
+                    f'<div class="answer-box"><span class="big-font">{text_input}<span style="color:#ff4b4b; font-weight:bold;">{continuation}</span></span></div>',
+                    unsafe_allow_html=True,
+                )
+                st.markdown(f"**Từ được dự đoán thêm:** `{continuation}`")
+            except Exception:
+                st.error("Đã xảy ra lỗi khi sinh kết quả. Vui lòng thử lại.")
 
 st.markdown("---")
 st.caption("Powered by VietAI/gpt-neo-1.3B-vietnamese-news via HuggingFace Transformers")
